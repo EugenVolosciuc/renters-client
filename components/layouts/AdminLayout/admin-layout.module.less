@@ -1,0 +1,71 @@
+@import '~antd/lib/style/themes/default.less';
+
+@sider-open-width: 200px;
+@layout-background-color: transparent;
+
+.layout-container {
+    background: @layout-background-color;
+    min-height: 100vh;
+}
+
+.sider {
+    background-color: @primary-color;
+    overflow: auto;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+}
+
+.content-layout {
+    transition: all 0.2s;
+    margin-left: @sider-open-width;
+    background: @layout-background-color;
+
+    &.sider-hidden {
+        margin-left: @menu-collapsed-width;
+    }
+
+    .header {
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .icon {
+        font-size: 16px;
+        margin-right: 16px;
+        margin-left: 16px;
+    }
+    
+    .title {
+        margin-bottom: 0;
+    }
+}
+
+.logo-container {
+    height: @layout-header-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu {
+    background-color: @primary-color !important;
+    
+    .menu-item {
+        &:hover {
+           background-color: @highlight-color !important;
+        }
+
+        &.selected {
+            background-color: @highlight-color !important;
+        }
+    }
+
+    & > * {
+        color: white !important;
+    }
+}
+
+.content-container {
+    padding: 16px;
+}
