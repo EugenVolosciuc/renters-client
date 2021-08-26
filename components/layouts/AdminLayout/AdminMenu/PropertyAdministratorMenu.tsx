@@ -7,7 +7,7 @@ import {
     HomeOutlined,
   } from '@ant-design/icons'
 
-import styles from '../admin-layout.module.less'
+import styles from 'components/layouts/AdminLayout/AdminLayout.module.less'
 
 const { Link: AntLink } = Typography
 

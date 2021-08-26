@@ -2,11 +2,14 @@ import type { NextPage } from 'next'
 import { Row, Col, Typography } from 'antd'
 
 import LoginForm from 'components/forms/Login'
+import { useAuthRedirect } from 'store/auth/useAuthRedirect'
 import styles from 'styles/pages/login.module.less'
 
 const { Title } = Typography
 
 const Login: NextPage = () => {
+    useAuthRedirect(false)
+
     return (
         <Row className={styles.container}>
             <Col xs={24} lg={12} className={styles['form-container']}>

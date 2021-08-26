@@ -8,7 +8,7 @@ const customColors = {
 
 /** @type {import('next').NextConfig} */
 module.exports = withAntdLess({
-    reactStrictMode: true,
+    reactStrictMode: false,
 
     // optional
     modifyVars: {
