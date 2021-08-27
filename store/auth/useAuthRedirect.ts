@@ -20,10 +20,10 @@ export const useAuthRedirect = (authRule: AuthRule ) => {
         const user = useAppSelector(selectAuthedUser)
 
         switch (authRule) {
-            case true: // all good here
+            case true:
                 redirectIfNotAuthed(user)
                 break
-            case false: // should be good here
+            case false:
                 redirectUserBasedOnRole(user)
                 break
             default:

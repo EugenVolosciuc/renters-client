@@ -1,19 +1,26 @@
-import React, { FC, useState } from 'react'
-import { Layout, Row, Col } from 'antd'
+import React, { FC, ReactNode, useState } from 'react'
+import { Layout, Row, Col, Typography } from 'antd'
 
 import { SiderContext } from 'components/layouts/SiderContext'
-import LayoutTitle from 'components/layouts/AdminLayout/LayoutTitle'
 import AdminMenu from 'components/layouts/AdminLayout/AdminMenu'
+import AdminHeader from 'components/layouts/AdminLayout/AdminHeader'
 import styles from 'components/layouts/AdminLayout/AdminLayout.module.less'
 import Logo from 'components/misc/Logo'
 import PageLoader from 'components/misc/loaders/PageLoader'
 
-const { Header, Content, Sider } = Layout
+const { Content, Sider } = Layout
+const { Title } = Typography
 
-const AdminLayout: FC = ({ children }) => {
+type Props = {
+    header: {
+        title: string,
+        extra?: ReactNode[]
+    }
+}
+
+const AdminLayout: FC<Props> = ({ children, header }) => {
     const [siderIsOpen, setSiderIsOpen] = useState(true)
 
-    const siderStyles = `${styles.sider}`
     const layoutStyles = `${styles['content-layout']} ${siderIsOpen ? '' : styles['sider-hidden']}`
 
     return (
@@ -21,7 +28,7 @@ const AdminLayout: FC = ({ children }) => {
             <PageLoader />
             <Layout className={styles['layout-container']}>
                 <SiderContext.Provider value={{ siderIsOpen, setSiderIsOpen }}>
-                    <Sider className={siderStyles} trigger={null} collapsed={!siderIsOpen} collapsible>
+                    <Sider className={styles.sider} trigger={null} collapsed={!siderIsOpen} collapsible>
                         <Row>
                             <Col span={24} className={styles['logo-container']}>
                                 <Logo shortLogo={!siderIsOpen} />
@@ -32,17 +39,22 @@ const AdminLayout: FC = ({ children }) => {
                         </Row>
                     </Sider>
                     <Layout className={layoutStyles}>
-                        <Header className={styles.header}>
-                            <LayoutTitle />
-                        </Header>
+                        <AdminHeader />
                         <Content className={styles['content-container']}>
+                            <div className={styles['content-header']}>
+                                <Title className={styles.title} level={4}>{header.title}</Title>
+                                {header.extra && header.extra.map((node, index) => (
+                                    <span key={`content-header-extra-${index}`} className={styles['extra-container']}>
+                                        {node}
+                                    </span>
+                                ))}
+                            </div>
                             {children}
                         </Content>
                     </Layout>
                 </SiderContext.Provider>
             </Layout>
         </>
-
     )
 }
 

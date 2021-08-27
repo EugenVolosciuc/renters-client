@@ -16,8 +16,10 @@ module.exports = withAntdLess({
         '@processing-color': customColors.primaryColor,
         '@highlight-color': customColors.highlightColor,
         '@body-background': customColors.ghostWhite,
-        '@border-radius-base': '24px',
-        '@font-family': "'Karla'"
+        '@link-color': customColors.highlightColor,
+        '@border-radius-base': '16px',
+        '@form-item-margin-bottom': '20px',
+        '@font-family': 'Karla'
     },
     // optional
     // lessVarsFilePath: './src/styles/variables.less',

@@ -12,6 +12,6 @@ export const useCheckAuthCookie = () => {
 
     useEffect(() => {
         if (user) dispatch(setUser({ user: user as User }))
-        redirectUserBasedOnRole(user as User | null)
+        // redirectUserBasedOnRole(user as User | null)
     }, [user])
 }

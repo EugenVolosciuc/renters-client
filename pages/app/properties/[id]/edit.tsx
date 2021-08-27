@@ -1,17 +1,18 @@
 import type { NextPage } from 'next'
 
 import { USER_ROLES } from 'types/User'
-import AdminLayout from 'components/layouts/AdminLayout'
 import { useAuthRedirect } from 'store/auth/useAuthRedirect'
+import AdminLayout from 'components/layouts/AdminLayout'
 
-const Renters: NextPage = () => {
+// TODO: get the property id
+const EditProperty = () => {
     useAuthRedirect([USER_ROLES.PROPERTY_ADMIN])
 
     return (
-        <AdminLayout header={{ title: 'Renters' }}>
-            <p>Renters page</p>
+        <AdminLayout header={{ title: "Add property" }}>
+            <p>Test</p>
         </AdminLayout>
     )
 }
 
-export default Renters
+export default EditProperty

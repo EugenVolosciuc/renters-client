@@ -23,7 +23,7 @@ const LayoutTitle = () => {
             </Col>
             <Col>
                 <UserLoader>
-                    <Title className={styles.title} level={3}>Hello, {user?.firstName}</Title>
+                    <Title className={styles.title} level={4}>Hello, {user?.firstName}</Title>
                 </UserLoader>
             </Col>
         </Row>

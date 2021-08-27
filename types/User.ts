@@ -15,7 +15,15 @@ export interface User {
     updatedAt: string;
 }
 
-export interface LoginData {
+export interface LoginFormData {
     email: string;
     password: string;
+}
+
+export interface SignupFormData {
+    name: string;
+    email: string;
+    phone: string;
+    password: string;
+    confirmPassword: string;
 }
