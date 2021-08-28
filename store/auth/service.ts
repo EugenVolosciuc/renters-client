@@ -3,6 +3,7 @@ import { API_BASE_URL } from 'constants/API_BASE_URL'
 import { User, LoginFormData } from 'types/User'
 
 export const authApi = createApi({
+    reducerPath: 'authApi',
     baseQuery: fetchBaseQuery({ baseUrl: `${API_BASE_URL}/users`}),
     endpoints: builder => ({
         signup: builder.mutation<User, Partial<User>>({

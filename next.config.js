@@ -17,7 +17,7 @@ module.exports = withAntdLess({
         '@highlight-color': customColors.highlightColor,
         '@body-background': customColors.ghostWhite,
         '@link-color': customColors.highlightColor,
-        '@border-radius-base': '16px',
+        '@border-radius-base': '8px',
         '@form-item-margin-bottom': '20px',
         '@font-family': 'Karla'
     },

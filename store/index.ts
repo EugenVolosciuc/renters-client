@@ -8,17 +8,20 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import authReducer from 'store/auth/slice'
 
 import { authApi } from 'store/auth/service'
+import { photoApi } from 'store/photos/service'
 import { errorHandlerMiddleware } from 'store/middleware/errorHandlerMiddleware'
 
 export const store = configureStore({
     reducer: {
+        [photoApi.reducerPath]: photoApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
         auth: authReducer
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat([
+            photoApi.middleware,
             authApi.middleware,
-            errorHandlerMiddleware
+            errorHandlerMiddleware,
         ])
     }
 })

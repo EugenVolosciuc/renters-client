@@ -50,6 +50,7 @@ const SignupForm: FC<Props> = ({ userRole }) => {
             form={form}
             onFinish={handleSubmit}
             size="middle"
+            requiredMark="optional"
         >
             <Form.Item
                 label="Name/surname"
@@ -121,7 +122,7 @@ const SignupForm: FC<Props> = ({ userRole }) => {
                 </Checkbox>
             </Form.Item>
             <Form.Item>
-                <Button type="primary" htmlType="submit" loading={isLoading || redirecting}>
+                <Button type="primary" htmlType="submit" loading={isLoading || redirecting} style={{ width: '100%' }}>
                     Submit
                 </Button>
             </Form.Item>

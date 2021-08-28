@@ -7,8 +7,27 @@
     border-radius: 8px !important;
 }
 
-.ant-menu-dark.ant-menu-inline .ant-menu-item {
+.ant-menu-dark.ant-menu-inline .ant-menu-item,
+.ant-menu-dark.ant-menu-inline-collapsed .ant-menu-item {
     &:first-of-type {
-        margin-top: 0;
+        margin-top: 0 !important;
+    }
+}
+
+// === Add / Edit Property Form ===
+
+.add-edit-property-form {
+    .title-section {
+        .ant-form-item-control-input {
+            // flex: 1;
+
+            &-content {
+                // height: 100%;
+
+                textarea {
+                    // height: 100%;
+                }
+            }
+        }
     }
 }

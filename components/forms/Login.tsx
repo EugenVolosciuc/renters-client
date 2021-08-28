@@ -33,6 +33,7 @@ const LoginForm = () => {
             form={form}
             onFinish={handleSubmit}
             size="middle"
+            requiredMark="optional"
         >
             <Form.Item
                 label="Email"
