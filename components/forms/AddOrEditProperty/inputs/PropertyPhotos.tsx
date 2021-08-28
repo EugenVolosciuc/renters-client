@@ -75,7 +75,7 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
             const currentPhotos: Photo[] = JSON.parse(form.getFieldValue('photos'))
             currentPhotos.push(result)
 
-            form.setFieldsValue({ photos: JSON.stringify(currentPhotos) })
+            form.setFieldsValue({ jsonPhotos: JSON.stringify(currentPhotos) })
 
             onSuccess()
         } catch (error) {
@@ -90,7 +90,7 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
 
             const { public_id } = currentPhotos.find(photo => photo.title === file.name) as Photo
             const filteredPhotos = currentPhotos.filter(photo => photo.title !== file.name)
-            form.setFieldsValue({ photos: JSON.stringify(filteredPhotos) })
+            form.setFieldsValue({ jsonPhotos: JSON.stringify(filteredPhotos) })
 
             await deletePhoto({ public_id })
         } catch (error) {
@@ -101,7 +101,7 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
     return (
         <>
             <Form.Item
-                name="upload-photos"
+                name="uploadPhotos"
                 label={`Property photos (max ${maxCount})`}
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
@@ -118,7 +118,7 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
                     <Button type="link">Upload</Button>
                 </Upload>
             </Form.Item>
-            <Form.Item name="photos" hidden>
+            <Form.Item name="jsonPhotos" hidden>
                 <Input />
             </Form.Item>
             <Modal

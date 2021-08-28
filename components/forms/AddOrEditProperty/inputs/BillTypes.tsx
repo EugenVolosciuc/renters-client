@@ -9,7 +9,7 @@ const BillTypes = () => {
 
     return (
         <Form.Item
-            name="bills"
+            name="billTypes"
             label="Bill types"
         >
             <Select mode="multiple">

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { Form, FormInstance, Row, Col, Button } from 'antd'
+import { useRouter } from 'next/router'
+import { Form, FormInstance, Row, Col, Button, message } from 'antd'
 
-import { Property, PropertyFormData } from 'types/Property'
 import {
     Title,
     Address,
@@ -16,6 +16,10 @@ import {
     AddRenter,
     PropertyPhotos
 } from 'components/forms/AddOrEditProperty/inputs'
+import { useCreateMutation } from 'store/property/service'
+import { Property, PropertyFormData } from 'types/Property'
+import { handleError } from 'utils/handleError'
+import { propertyFormDataToReqData } from 'utils/propertyFormDataToReqData'
 import styles from 'components/forms/AddOrEditProperty/AddOrEditProperty.module.less'
 
 type Props = {
@@ -24,22 +28,37 @@ type Props = {
 }
 
 const AddOrEditProperty: FC<Props> = ({ form, property }) => {
-    const isUpdatePropertyForm = !!property
+    const router = useRouter()
+    const [createProperty, { isLoading: creatingProperty }] = useCreateMutation()
 
-    const handleAddProperty = (values: PropertyFormData) => {
-        console.log("ADDING", values)
+    const handleAddProperty = async (values: PropertyFormData) => {
+        try {
+            const dataToSend = propertyFormDataToReqData(values)
+            const property = await createProperty(dataToSend).unwrap()
+
+            console.log("property", property)
+
+            // TODO: if renter added, send invitation
+
+            message.success('Property created')
+            router.push('/app/properties/[id]', `/app/properties/${property.id}`)
+        } catch (error) {
+            handleError(error)
+        }
     }
 
     const handleUpdateProperty = (values: PropertyFormData) => {
         console.log("UPDATING", values)
     }
 
+    const isUpdatePropertyForm = !!property
     const formClassName = `${styles['add-edit-property-form']} add-edit-property-form`
 
     const initialValues = isUpdatePropertyForm 
         ? {} 
         : {
-            photos: '[]'
+            photos: '[]',
+            addRenter: false
         }
 
     return (
@@ -69,7 +88,11 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
                     <AddRenter />
 
                     <Form.Item>
-                        <Button type="primary" htmlType="submit">
+                        <Button 
+                            type="primary" 
+                            htmlType="submit"
+                            loading={creatingProperty}
+                        >
                             Submit
                         </Button>
                     </Form.Item>

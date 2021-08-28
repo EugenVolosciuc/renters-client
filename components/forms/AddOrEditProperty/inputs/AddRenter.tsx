@@ -11,11 +11,11 @@ const AddRenter = () => {
 
     return (
         <>
-            <Form.Item name="add-renter" valuePropName="checked">
+            <Form.Item name="addRenter" valuePropName="checked">
                 <Checkbox onChange={toggleShowRenterInputs}>Add a renter profile</Checkbox>
             </Form.Item>
             <Form.Item
-                name="renter-name"
+                name="renterName"
                 label="Name"
                 className={renterInputsClassName}
                 rules={showRenterInputs 
@@ -29,7 +29,7 @@ const AddRenter = () => {
                 <Input />
             </Form.Item>
             <Form.Item
-                name="renter-email"
+                name="renterEmail"
                 label="Email"
                 className={renterInputsClassName}
                 rules={showRenterInputs 

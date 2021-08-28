@@ -23,23 +23,32 @@ export const getPropertyTypeValueAndLabel = (type: PROPERTY_TYPES): PropertyValu
     return { value: type, label: PROPERTY_LABELS[type] }
 }
 
-export interface PropertyFormData {
+export interface PropertyBaseData {
     title: string;
-    description: string | null;
-    rooms: number | null;
+    description?: string | null;
+    rooms?: number | null;
     address: string;
+    floor?: number | null;
     floors: number | null;
     floorArea: number | null;
     rentPrice: number;
     type: PROPERTY_TYPES;
-    billTypes: BILL_TYPES[];
+    billTypes?: BILL_TYPES[];
 }
 
-export interface Property extends PropertyFormData {
+export interface PropertyFormData extends PropertyBaseData {
+    uploadPhotos: any;
+    jsonPhotos: string;
+    addRenter: boolean;
+    renterName?: string;
+    renterEmail?: string;
+}
+
+export interface Property extends PropertyBaseData {
     id: number;
     administrator: User;
     administratorId: number;
     renter: User | null;
     renterId: number | null;
-    photos: Photo[] | null;
+    photos?: Photo[] | null;
 }
