@@ -10,6 +10,12 @@ const customColors = {
 module.exports = withAntdLess({
     reactStrictMode: false,
 
+    images: {
+        domains: [
+            'res.cloudinary.com'
+        ]
+    },
+
     // optional
     modifyVars: {
         '@primary-color': customColors.primaryColor,

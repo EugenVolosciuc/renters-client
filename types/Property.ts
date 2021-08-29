@@ -59,3 +59,8 @@ export interface Property extends PropertyBaseData {
 export interface PaginatedProperties extends Pagination {
     data: Property[];
 }
+
+export interface PropertyQueryOptions {
+    page: number;
+    type?: PropertyTabType;
+}

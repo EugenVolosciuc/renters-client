@@ -57,7 +57,7 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
     const initialValues = isUpdatePropertyForm 
         ? {} 
         : {
-            photos: '[]',
+            jsonPhotos: '[]',
             addRenter: false
         }
 

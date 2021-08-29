@@ -5,16 +5,12 @@ import { PlusOutlined } from '@ant-design/icons'
 
 import { USER_ROLES } from 'types/User'
 import { useAuthRedirect } from 'store/auth/useAuthRedirect'
-import { useGetPropertiesQuery } from 'store/property/service'
 import AdminLayout from 'components/layouts/AdminLayout'
 import PropertiesContainer from 'components/Properties'
 import { PropertyTabType } from 'types/Property'
 
 const Properties = ({ page, type }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     useAuthRedirect([USER_ROLES.PROPERTY_ADMIN])
-    const { data: properties } = useGetPropertiesQuery({ page }, {
-        refetchOnMountOrArgChange: false
-    })
 
     const addPropertyButton = (
         <Link href="/app/properties/add" passHref>
@@ -30,8 +26,8 @@ const Properties = ({ page, type }: InferGetServerSidePropsType<typeof getServer
     return (
         <AdminLayout header={{ title: "Properties", extra: [addPropertyButton] }}>
             <PropertiesContainer 
-                pagination={{ page, total: properties?.total || 1 }}
-                type={type}
+                page={page}
+                initialType={type}
             />
         </AdminLayout>
     )

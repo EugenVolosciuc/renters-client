@@ -72,7 +72,7 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
 
             const result = await uploadPhoto(formData).unwrap()
 
-            const currentPhotos: Photo[] = JSON.parse(form.getFieldValue('photos'))
+            const currentPhotos: Photo[] = JSON.parse(form.getFieldValue('jsonPhotos'))
             currentPhotos.push(result)
 
             form.setFieldsValue({ jsonPhotos: JSON.stringify(currentPhotos) })
@@ -86,7 +86,7 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
 
     const handleRemovePhoto = async (file: any) => {
         try {
-            const currentPhotos: Photo[] = JSON.parse(form.getFieldValue('photos'))
+            const currentPhotos: Photo[] = JSON.parse(form.getFieldValue('jsonPhotos'))
 
             const { public_id } = currentPhotos.find(photo => photo.title === file.name) as Photo
             const filteredPhotos = currentPhotos.filter(photo => photo.title !== file.name)
