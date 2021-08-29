@@ -7,14 +7,9 @@ import { usePageLoading } from 'components/misc/loaders/PageLoader/usePageLoadin
 const PageLoader = () => {
     const loading = usePageLoading()
 
-    if (!loading) return null
+    const loaderStyles = `white-spinner ${styles.loader} ${loading ? styles.show : ''}`
 
-    return (
-        <div className={styles['loader-container']}>
-            <div className={styles.background} />
-            <Spin size="large" className={styles.spinner} />
-        </div>
-    )
+    return <Spin size="small" className={loaderStyles} />
 }
 
 export default PageLoader
