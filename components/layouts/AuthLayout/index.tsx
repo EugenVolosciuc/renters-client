@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react'
-import { Row, Col, Typography } from 'antd'
+import { Row, Col } from 'antd'
 
 import styles from 'components/layouts/AuthLayout/AuthLayout.module.less'
 

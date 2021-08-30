@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
+import { appWithTranslation } from 'next-i18next'
 
 import AuthChecker from 'store/auth/AuthChecker'
 import { store } from 'store'
@@ -15,4 +16,4 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Provider>
     )
 }
-export default MyApp
+export default appWithTranslation(MyApp)

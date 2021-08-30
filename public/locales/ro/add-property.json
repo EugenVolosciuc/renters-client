@@ -1,0 +1,12 @@
+{
+    "property-added": "Imobil adaugat",
+    "add-property": "Adauga imobil",
+    "add-renter": "Adauga un chirias",
+    "name-surname": "Nume/prenume",
+    "name-required": "Numele chiriasului este obligatoriu",
+    "email": "Email",
+    "email-required": "Email-ul chiriasului este obligatoriu",
+    "property-photos": "Imagini imobil (max {{maxCount}})",
+    "images-must-have-max": "Imaginile pot avea maxim {{maxFileSize}} MB",
+    "upload": "Upload"
+}

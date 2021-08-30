@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Row, Col, Empty } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 import { Property } from 'types/Property'
 import ListLoader from 'components/misc/loaders/ListLoader'
@@ -12,10 +13,12 @@ type Props = {
 }
 
 const PropertiesList: FC<Props> = ({ properties, isLoading }) => {
+    const { t } = useTranslation()
+
     if (isLoading) return <ListLoader />
 
     if (!properties || properties.length === 0) return (
-        <Empty description="No properties found" />
+        <Empty description={t('properties:no-properties')} />
     )
 
     return (

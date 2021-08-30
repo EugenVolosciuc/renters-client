@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react'
 import Link from 'next/link'
 import { Form, Input, Button, Checkbox, Typography, message } from 'antd'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { useSignupMutation } from 'store/auth/service'
 import { SignupFormData, USER_ROLES } from 'types/User'
@@ -17,6 +18,7 @@ const { Link: AntLink } = Typography
 const SignupForm: FC<Props> = ({ userRole }) => {
     const [form] = Form.useForm()
     const router = useRouter()
+    const { t } = useTranslation()
     const [signupUser, { isLoading }] = useSignupMutation()
     const [redirecting, setRedirecting] = useState(false)
 
@@ -36,7 +38,7 @@ const SignupForm: FC<Props> = ({ userRole }) => {
             await signupUser(dataToSend)
 
             setRedirecting(true)
-            message.success('Account created successfully, please log in')
+            message.success(t('auth:account-created-successfully'))
             router.push('/auth/login')
         } catch (error) {
             handleError(error)
@@ -53,52 +55,52 @@ const SignupForm: FC<Props> = ({ userRole }) => {
             requiredMark="optional"
         >
             <Form.Item
-                label="Name/surname"
+                label={t('auth:name-surname')}
                 name="name"
-                rules={[{ required: true, message: "Please input your name" }]}
+                rules={[{ required: true, message: t('auth:name-surname-required') }]}
             >
                 <Input />
             </Form.Item>
             <Form.Item
-                label="Email"
+                label={t('auth:email')}
                 name="email"
                 rules={[
-                    { required: true, message: 'Please input your email' },
-                    { type: 'email', message: 'Please input a valid email' }
+                    { required: true, message: t('auth:email-required') },
+                    { type: 'email', message: t('auth:email-type') }
                 ]}
             >
                 <Input />
             </Form.Item>
             <Form.Item
                 name="phone"
-                label="Phone number"
-                rules={[{ required: true, message: 'Please input your phone number' }]}
+                label={t('auth:phone')}
+                rules={[{ required: true, message: t('auth:phone-required') }]}
             >
                 <Input />
             </Form.Item>
             <Form.Item
-                label="Password"
+                label={t('auth:password')}
                 name="password"
-                rules={[{ required: true, message: "Please input a password" }]}
+                rules={[{ required: true, message: t('auth:password-required') }]}
             >
                 <Input.Password autoComplete="current-password" />
             </Form.Item>
             <Form.Item
                 name="confirmPassword"
-                label="Confirm Password"
+                label={t('auth:confirm-password')}
                 dependencies={['password']}
                 hasFeedback
                 rules={[
                     {
                         required: true,
-                        message: 'Please confirm your password',
+                        message: t('auth:confirm-password-required'),
                     },
                     ({ getFieldValue }) => ({
                         validator(_, value) {
                             if (!value || getFieldValue('password') === value) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject(new Error('The two passwords that you entered do not match'));
+                            return Promise.reject(new Error(t('auth:passwords-dont-match')));
                         }
                     })
                 ]}
@@ -111,19 +113,21 @@ const SignupForm: FC<Props> = ({ userRole }) => {
                 rules={[
                     {
                         validator: (_, value) =>
-                            value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+                            value ? Promise.resolve() : Promise.reject(new Error(t('auth:accept-agreement'))),
                     },
                 ]}
             >
                 <Checkbox>
-                    I have read the 
-                    <Link href="/docs/terms-and-conditions" passHref><AntLink> Terms and Conditions</AntLink></Link> and 
-                    <Link href="/docs/privacy-policy" passHref><AntLink> Privacy Policy</AntLink></Link>
+                    {t('auth:i-read')} 
+                    <Link href="/docs/terms-and-conditions" passHref><AntLink> {t('auth:terms-and-conditions')}</AntLink></Link>
+                    {' '}
+                    {t('auth:and')} 
+                    <Link href="/docs/privacy-policy" passHref><AntLink>{t('auth:privacy-policy')}</AntLink></Link>
                 </Checkbox>
             </Form.Item>
             <Form.Item>
                 <Button type="primary" htmlType="submit" loading={isLoading || redirecting} style={{ width: '100%' }}>
-                    Submit
+                    {t('auth:submit')}
                 </Button>
             </Form.Item>
         </Form>

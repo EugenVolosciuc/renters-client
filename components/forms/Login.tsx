@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Input, Button } from 'antd'
+import { useTranslation } from 'next-i18next'
 
 import { useLoginMutation } from 'store/auth/service'
 import { LoginFormData } from 'types/User'
@@ -11,6 +12,7 @@ import { setUser } from 'store/auth/slice'
 const LoginForm = () => {
     const [form] = Form.useForm()
     const dispatch = useAppDispatch()
+    const { t } = useTranslation()
     const [loginUser, { isLoading }] = useLoginMutation()
     const [redirecting, setRedirecting] = useState(false)
 
@@ -36,11 +38,11 @@ const LoginForm = () => {
             requiredMark="optional"
         >
             <Form.Item
-                label="Email"
+                label={t('auth:email')}
                 name="email"
                 rules={[
-                    { required: true, message: "Please input your email" },
-                    { type: 'email', message: 'Please input a valid email' }
+                    { required: true, message: t('auth:email-required') },
+                    { type: 'email', message: t('auth:email-type') }
                 ]}
             >
                 <Input autoComplete="username" />
@@ -48,13 +50,13 @@ const LoginForm = () => {
             <Form.Item
                 label="Password"
                 name="password"
-                rules={[{ required: true, message: "Please input your password" }]}
+                rules={[{ required: true, message: t('auth:password-required') }]}
             >
                 <Input.Password autoComplete="current-password" />
             </Form.Item>
             <Form.Item>
                 <Button type="primary" htmlType="submit" loading={isLoading || redirecting}>
-                    Submit
+                    {t('auth:submit')}
                 </Button>
             </Form.Item>
         </Form>

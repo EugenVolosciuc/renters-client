@@ -1,0 +1,12 @@
+{
+    "property-added": "Property added",
+    "add-property": "Add property",
+    "add-renter": "Add a renter",
+    "name-surname": "Name/surname",
+    "name-required": "Renter's name is required",
+    "email": "Email",
+    "email-required": "Renter's email is required",
+    "property-photos": "Property photos (max {{maxCount}})",
+    "images-must-have-max": "Images must have max {{maxFileSize}} MB",
+    "upload": "Upload"
+}

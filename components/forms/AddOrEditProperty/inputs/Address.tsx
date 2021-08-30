@@ -1,13 +1,17 @@
 import React from 'react'
 import { Form, Input } from 'antd'
+import { useTranslation } from 'react-i18next'
+import { capitalize } from 'utils/string-manipulation'
 
 const Address = () => {
+    const { t } = useTranslation()
+
     return (
         <Form.Item
             name="address"
-            label="Address"
+            label={capitalize(t('properties-common:address'))}
             rules={[
-                { required: true, message: 'Address is required' }
+                { required: true, message: t('properties-common:address-required') }
             ]}
         >
             <Input />

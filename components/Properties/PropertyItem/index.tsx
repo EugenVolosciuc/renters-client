@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Card, Typography, Tooltip, Row, Col } from 'antd'
+import { Card, Typography, Tooltip } from 'antd'
 import { EyeOutlined, EditOutlined, NotificationOutlined } from '@ant-design/icons'
+import { useTranslation } from 'react-i18next'
 
 import { Property } from 'types/Property'
 import { Photo } from 'types/Photo'
@@ -18,11 +19,13 @@ const { Meta } = Card
 const { Link: AntLink } = Typography
 
 const PropertyItem: FC<Props> = ({ property }) => {
+    const { t } = useTranslation()
+
     const { photos, title, id } = property
 
     const hasPhotos = photos && photos.length > 0
     const coverImage = hasPhotos ? (photos as Photo[])[0].url : emptyCover
-    const altText = hasPhotos ? (photos as Photo[])[0].title : 'No photo available'
+    const altText = hasPhotos ? (photos as Photo[])[0].title : t('properties:no-photo-available')
 
     const viewPropertyAction = (
         <Link
@@ -30,7 +33,7 @@ const PropertyItem: FC<Props> = ({ property }) => {
             href="/app/properties/[id]"
             as={`/app/properties/${id}`}
         >
-            <Tooltip title="View property">
+            <Tooltip title={t('properties:view-property')}>
                 <AntLink>
                     <EyeOutlined />
                 </AntLink>
@@ -44,7 +47,7 @@ const PropertyItem: FC<Props> = ({ property }) => {
             href="/app/properties/[id]/edit"
             as={`/app/properties/${id}/edit`}
         >
-            <Tooltip title="Edit property">
+            <Tooltip title={t('properties:edit-property')}>
                 <AntLink>
                     <EditOutlined />
                 </AntLink>
@@ -58,7 +61,7 @@ const PropertyItem: FC<Props> = ({ property }) => {
             href="/app/properties/[id]/bill-notification"
             as={`/app/properties/${id}/bill-notification`}
         >
-            <Tooltip title="Send bill notification to renter">
+            <Tooltip title={t('properties:send-bill-notification')}>
                 <AntLink>
                     <NotificationOutlined />
                 </AntLink>

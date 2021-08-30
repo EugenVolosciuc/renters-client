@@ -1,0 +1,16 @@
+{
+    "property": "imobil",
+    "property_1": "imobile",
+    "property_2": "imobile",
+    "renter": "chirias",
+    "renter_1": "chiriasi",
+    "renter_2": "chiriasi",
+    "greetings": {
+        "1": "Salutare {{name}}"
+    },
+    "languages": {
+        "english": "Engleza",
+        "romanian": "Romana"
+    },
+    "change-language": "Schimba limba"
+}

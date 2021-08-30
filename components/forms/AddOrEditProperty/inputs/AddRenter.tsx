@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
-import { Row, Col, Form, Input, Checkbox } from 'antd'
+import { Form, Input, Checkbox } from 'antd'
+import { useTranslation } from 'react-i18next'
 
+import { capitalize } from 'utils/string-manipulation'
 import styles from 'components/forms/AddOrEditProperty/AddOrEditProperty.module.less'
 
 const AddRenter = () => {
     const [showRenterInputs, setShowRenterInputs] = useState(false)
+    const { t } = useTranslation()
+
     const renterInputsClassName = `${styles['renter-input']} ${showRenterInputs ? styles.show : ''}`
 
     const toggleShowRenterInputs = () => setShowRenterInputs(!showRenterInputs)
@@ -12,16 +16,16 @@ const AddRenter = () => {
     return (
         <>
             <Form.Item name="addRenter" valuePropName="checked">
-                <Checkbox onChange={toggleShowRenterInputs}>Add a renter profile</Checkbox>
+                <Checkbox onChange={toggleShowRenterInputs}>{t('add-property:add-renter')}</Checkbox>
             </Form.Item>
             <Form.Item
                 name="renterName"
-                label="Name"
+                label={t('add-property:name-surname')}
                 className={renterInputsClassName}
                 rules={showRenterInputs 
                     ? [{
                         required: true, 
-                        message: "Renter's name is required"
+                        message: t('add-property:name-required')
                     }] 
                     : undefined
                 }
@@ -30,12 +34,12 @@ const AddRenter = () => {
             </Form.Item>
             <Form.Item
                 name="renterEmail"
-                label="Email"
+                label={t('add-property:email')}
                 className={renterInputsClassName}
                 rules={showRenterInputs 
                     ? [{
                         required: true, 
-                        message: "Renter's email is required"
+                        message: t('add-property:email-required')
                     }] 
                     : undefined
                 }

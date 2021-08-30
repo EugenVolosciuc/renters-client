@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { useRouter } from 'next/router'
 import { Form, FormInstance, Row, Col, Button, message } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 import {
     Title,
@@ -29,6 +30,7 @@ type Props = {
 
 const AddOrEditProperty: FC<Props> = ({ form, property }) => {
     const router = useRouter()
+    const { t } = useTranslation()
     const [createProperty, { isLoading: creatingProperty }] = useCreateMutation()
 
     const handleAddProperty = async (values: PropertyFormData) => {
@@ -38,7 +40,7 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
 
             // TODO: if renter added, send invitation
 
-            message.success('Property created')
+            message.success(t('add-property:property-added'))
             router.push('/app/properties/[id]', `/app/properties/${property.id}`)
         } catch (error) {
             handleError(error)
@@ -91,7 +93,7 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
                             htmlType="submit"
                             loading={creatingProperty}
                         >
-                            Submit
+                            {t('add-property:add-property')}
                         </Button>
                     </Form.Item>
                 </Col>

@@ -10,9 +10,9 @@ export enum PROPERTY_TYPES {
 }
 
 export enum PROPERTY_LABELS {
-    HOUSE = "House",
-    APARTMENT = "Apartment",
-    OFFICE = "Office"
+    HOUSE = "house",
+    APARTMENT = "apartment",
+    OFFICE = "office"
 }
 
 export interface PropertyValueAndLabel {

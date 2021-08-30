@@ -2,26 +2,29 @@ import React from 'react'
 import { Menu, Typography } from 'antd'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 import {
     TeamOutlined,
     HomeOutlined,
   } from '@ant-design/icons'
 
+import { capitalize } from 'utils/string-manipulation'
 import styles from 'components/layouts/AdminLayout/AdminLayout.module.less'
 
 const { Link: AntLink } = Typography
 
 const AdminMenu = () => {
     const router = useRouter()
+    const { t } = useTranslation()
 
     const menuItems = [
         {
-            title: 'Properties',
+            title: capitalize(t('common:property', { count: 0 })),
             icon: HomeOutlined,
             url: '/app/properties'
         },
         {
-            title: 'Renters',
+            title: capitalize(t('common:renter', { count: 0 })),
             icon: TeamOutlined,
             url: '/app/renters'
         },

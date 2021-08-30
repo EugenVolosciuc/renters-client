@@ -10,14 +10,14 @@ export enum BILL_TYPES {
 }
 
 export enum BILL_TYPE_LABELS {
-    RENT = "Rent",
-    ELECTRICITY = "Electricity",
-    WATER = "Water",
-    GAS = "Gas",
-    TRASH = "Trash",
-    INTERNET = "Internet",
-    SECURITY = "Security",
-    ASSOCIATION = "Association"
+    RENT = "rent",
+    ELECTRICITY = "electricity",
+    WATER = "water",
+    GAS = "gas",
+    TRASH = "trash",
+    INTERNET = "internet",
+    SECURITY = "security",
+    ASSOCIATION = "association"
 }
 
 export interface BillTypeValueAndLabel {

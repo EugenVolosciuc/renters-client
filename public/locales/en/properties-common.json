@@ -1,0 +1,40 @@
+{
+    "property-types": {
+        "all": "All",
+        "house": "house",
+        "house_plural": "houses",
+        "apartment": "apartment",
+        "apartment_plural": "apartments",
+        "office": "office",
+        "office_plural": "offices"
+    },
+    "bill-types": {
+        "rent": "rent",
+        "electricity": "electricity",
+        "water": "water",
+        "gas": "gas",
+        "trash": "trash",
+        "internet": "internet",
+        "security": "security",
+        "association": "association"
+    },
+    "room": "room",
+    "room_plural": "rooms",
+    "room-with-count": "{{count}} room",
+    "room-with-count_plural": "{{count}} rooms",
+    "rent_price": "rent price",
+    "address": "Address",
+    "address-required": "Address is required",
+    "title": "title",
+    "title-required": "Title is required",
+    "description": "description",
+    "property-type": "Property type",
+    "property-type-required": "Property type is required",
+    "total-floors": "Floors (total)",
+    "floor-area": "Floor area",
+    "floor": "floor",
+    "monthly-rent-price": "Monthly rent price",
+    "rent-price-required": "Rent price is required",
+    "bill-type": "bill type",
+    "bill-type_plural": "bill types"
+}

@@ -1,11 +1,13 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Row, Col, Pagination, Tabs } from 'antd'
+import { useTranslation } from 'react-i18next'
 import qs from 'qs'
 
 import { PROPERTY_TYPES, PropertyTabType, getPropertyTypeValueAndLabel } from 'types/Property'
 import PropertiesList from 'components/Properties/PropertiesList'
 import { useGetPropertiesQuery } from 'store/property/service'
+import { capitalize } from 'utils/string-manipulation'
 
 type Props = {
     query: {
@@ -19,6 +21,7 @@ const { TabPane } = Tabs
 
 const PropertiesContainer: FC<Props> = ({ query: initialQuery }) => {
     const [query, setQuery] = useState(initialQuery)
+    const { t } = useTranslation()
     const router = useRouter()
 
     const { data: properties, isLoading } = useGetPropertiesQuery(
@@ -56,15 +59,20 @@ const PropertiesContainer: FC<Props> = ({ query: initialQuery }) => {
         <Row justify="end">
             <Col span={24}>
                 <Tabs defaultActiveKey={query.type} onChange={handleTabChange}>
-                    <TabPane tab="All" key="ALL">
+                    <TabPane tab={capitalize(t('properties-common:property-types.all'))} key="ALL">
                         {propertiesList}
                     </TabPane>
                     {typesArray.map(type => {
                         const typeValueAndLabel = getPropertyTypeValueAndLabel(type as PROPERTY_TYPES)
 
-                        return <TabPane tab={typeValueAndLabel.label} key={typeValueAndLabel.value}>
-                            {propertiesList}
-                        </TabPane>
+                        return (
+                            <TabPane 
+                                tab={capitalize(t(`properties-common:property-types.${typeValueAndLabel.label}`, { count: 0 }))} 
+                                key={typeValueAndLabel.value}
+                            >
+                                {propertiesList}
+                            </TabPane>
+                        )
                     })}
                 </Tabs>
             </Col>

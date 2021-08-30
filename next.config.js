@@ -1,4 +1,5 @@
 const withAntdLess = require('next-plugin-antd-less');
+const { i18n } = require('./next-i18next.config');
 
 const customColors = {
     primaryColor: '#0F123F',
@@ -8,6 +9,8 @@ const customColors = {
 
 /** @type {import('next').NextConfig} */
 module.exports = withAntdLess({
+    i18n,
+
     reactStrictMode: false,
 
     images: {
@@ -16,7 +19,6 @@ module.exports = withAntdLess({
         ]
     },
 
-    // optional
     modifyVars: {
         '@primary-color': customColors.primaryColor,
         '@processing-color': customColors.primaryColor,
@@ -27,13 +29,6 @@ module.exports = withAntdLess({
         '@form-item-margin-bottom': '20px',
         '@font-family': 'Karla'
     },
-    // optional
-    // lessVarsFilePath: './src/styles/variables.less',
-    // optional
-    // lessVarsFilePathAppendToEndOfContent: false,
-    // optional https://github.com/webpack-contrib/css-loader#object
-    // cssLoaderOptions: { },
-
     // webpack(config) {
     //     return config
     // }

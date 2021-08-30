@@ -1,0 +1,14 @@
+{
+    "property": "property",
+    "property_plural": "properties",
+    "renter": "renter",
+    "renter_plural": "renters",
+    "greetings": {
+        "1": "Hello {{name}}"
+    },
+    "languages": {
+        "english": "English",
+        "romanian": "Romanian"
+    },
+    "change-language": "Change language"
+}

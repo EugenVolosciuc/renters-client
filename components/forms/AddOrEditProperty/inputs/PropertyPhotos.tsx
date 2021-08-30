@@ -1,6 +1,7 @@
 // https://codesandbox.io/s/bw813?file=/App.tsx
 import React, { FC, useState } from 'react'
 import { Form, Upload, Button, Modal, FormInstance, Input, message } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 import { useUploadMutation, useDeleteMutation } from 'store/photos/service'
 import { Photo, PHOTO_TYPE } from 'types/Photo'
@@ -30,6 +31,7 @@ const maxFileSize = 1 * 1024 * 1024 // 8MB
 
 const PropertyPhotos: FC<Props> = ({ form }) => {
     const [preview, setPreview] = useState(defaultPreview)
+    const { t } = useTranslation()
     const [uploadPhoto] = useUploadMutation()
     const [deletePhoto] = useDeleteMutation()
 
@@ -55,9 +57,9 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
     const handleClosePreview = () => setPreview(defaultPreview)
 
     // This doesn't work :/
-    const handleFileSizeLimit = (file: any) => {
+    const handleFileSizeLimit = (file: any) => {        
         if (file.size > maxFileSize) {
-            message.error('Images must have max 8 MB')
+            message.error(t('add-property:images-must-have-max', { maxFileSize }))
             return false
         }
 
@@ -102,7 +104,7 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
         <>
             <Form.Item
                 name="uploadPhotos"
-                label={`Property photos (max ${maxCount})`}
+                label={t('add-property:property-photos', { maxCount })}
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
             >
@@ -115,7 +117,7 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
                     maxCount={maxCount}
                 // beforeUpload={handleFileSizeLimit} // will probably delete, as it doesn't work
                 >
-                    <Button type="link">Upload</Button>
+                    <Button type="link">{t('add-property:upload')}</Button>
                 </Upload>
             </Form.Item>
             <Form.Item name="jsonPhotos" hidden>
