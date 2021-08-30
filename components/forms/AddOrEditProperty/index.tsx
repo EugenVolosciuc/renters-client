@@ -36,8 +36,6 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
             const dataToSend = propertyFormDataToReqData(values)
             const property = await createProperty(dataToSend).unwrap()
 
-            console.log("property", property)
-
             // TODO: if renter added, send invitation
 
             message.success('Property created')

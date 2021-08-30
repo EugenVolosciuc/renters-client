@@ -4,6 +4,7 @@ import qs from 'qs'
 import { API_BASE_URL } from 'constants/API_BASE_URL'
 import { Property, PaginatedProperties, PropertyQueryOptions } from 'types/Property'
 import { removeProp } from 'utils/removeProp'
+import { serializePagination } from 'utils/serializePagination'
 
 export const propertyApi = createApi({
     reducerPath: 'propertyApi',
@@ -16,9 +17,11 @@ export const propertyApi = createApi({
                     ? removeProp('type', params)
                     : params
 
+                const serializedParams = serializePagination(filteredParams)
+
                 return {
                     url: ``,
-                    params: filteredParams,
+                    params: serializedParams,
                     credentials: "include",
                 }
             },

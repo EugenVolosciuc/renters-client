@@ -1,4 +1,3 @@
-import Router from 'next/router'
 import {
     MiddlewareAPI,
     isRejectedWithValue,
@@ -18,8 +17,6 @@ export const errorHandlerMiddleware: Middleware = (api: MiddlewareAPI) => next =
         )
 
         if (isDevel) console.error("Caught in redux middleware", action)
-
-        // if (action.payload.status === 401) Router.push('/auth/login')
 
         if (
             typeof errorMessage === "string" &&
