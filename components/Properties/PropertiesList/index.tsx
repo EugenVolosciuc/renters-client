@@ -19,7 +19,7 @@ const PropertiesList: FC<Props> = ({ properties, isLoading }) => {
     )
 
     return (
-        <Row gutter={[16, 16]} justify="space-between" className={styles.list}>
+        <Row gutter={[20, 20]} className={styles.list}>
             {properties.map(property => (
                 <Col key={`property-${property.id}`}>
                     <PropertyItem property={property} />
