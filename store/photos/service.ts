@@ -14,7 +14,7 @@ export const photoApi = createApi({
                 body: photoData
             })
         }),
-        delete: builder.mutation<null, Pick<Photo, 'public_id'>>({
+        delete: builder.mutation<void, Pick<Photo, 'public_id'>>({
             query: ({ public_id }) => ({
                 url: `/${public_id}`,
                 method: 'DELETE',

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Button } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 
+import { capitalize } from 'utils/string-manipulation'
 import { USER_ROLES } from 'types/User'
 import { useAuthRedirect } from 'store/auth/useAuthRedirect'
 import AdminLayout from 'components/layouts/AdminLayout'
@@ -27,7 +28,12 @@ const Properties = ({ query }: InferGetServerSidePropsType<typeof getServerSideP
     )
 
     return (
-        <AdminLayout header={{ title: t('common:property', { count: 2 }), extra: [addPropertyButton] }}>
+        <AdminLayout 
+            header={{ 
+                title: capitalize(t('common:property', { count: 2 })), 
+                extra: [addPropertyButton] 
+            }}
+        >
             <PropertiesContainer query={query} />
         </AdminLayout>
     )

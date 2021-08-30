@@ -6,6 +6,7 @@ import {
     redirectUserBasedOnRole, 
     redirectUserBasedOnRequiredRole 
 } from 'utils/userRedirects'
+import { useCheckAuthQuery } from 'store/auth/service'
 
 type AuthRule = USER_ROLES[] | boolean
 
@@ -14,11 +15,15 @@ type AuthRule = USER_ROLES[] | boolean
 // USER_ROLES[]: user has to be of specified role to see this page, 
 // if logged in but not specified role = redirect to page specific to user role, if not logged in = redirect to login page
 export const useAuthRedirect = (authRule: AuthRule ) => {
+    const { data, isLoading, isSuccess, isError, isUninitialized } = useCheckAuthQuery()
+    const user = useAppSelector(selectAuthedUser)
+
     const isServer = typeof window === 'undefined'
+    const authWasChecked = !isLoading && (isSuccess || isError)
+    const userNotAuthed = !data
 
-    if (!isServer) {
-        const user = useAppSelector(selectAuthedUser)
-
+    if (!isServer && authWasChecked && userNotAuthed) {
+        console.log('got to redirect')
         switch (authRule) {
             case true:
                 redirectIfNotAuthed(user)

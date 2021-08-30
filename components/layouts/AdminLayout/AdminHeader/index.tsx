@@ -4,7 +4,6 @@ import { Layout } from 'antd'
 import LayoutTitle from 'components/layouts/AdminLayout/LayoutTitle'
 import styles from 'components/layouts/AdminLayout/AdminLayout.module.less'
 import HeaderMenu from 'components/layouts/AdminLayout/AdminHeader/HeaderMenu'
-import LanguageChanger from 'components/layouts/AdminLayout/AdminHeader/LanguageChanger'
 
 const { Header } = Layout
 
@@ -13,7 +12,6 @@ const AdminHeader = () => {
         <Header className={styles.header}>
             <LayoutTitle />
             <div>
-                <LanguageChanger />
                 <HeaderMenu />
             </div>
         </Header>

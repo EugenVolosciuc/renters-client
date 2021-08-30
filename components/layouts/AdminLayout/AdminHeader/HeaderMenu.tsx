@@ -1,38 +1,47 @@
-import React, { useState } from 'react'
-import router, { useRouter } from 'next/router'
-import { Menu, Dropdown, Typography, Button } from 'antd'
+import React from 'react'
+import { useRouter } from 'next/router'
+import { Menu, Dropdown, Typography } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
+import { useTranslation } from 'react-i18next'
 
 import { useLogoutMutation } from 'store/auth/service'
 import styles from 'components/layouts/AdminLayout/AdminLayout.module.less'
 import { useAppDispatch } from 'store'
 import { setUser } from 'store/auth/slice'
+import { locales } from 'next-i18next.config'
 
 const { Link: AntLink } = Typography
 
 const HeaderMenu = () => {
-    const [redirecting, setRedirecting] = useState(false)
-    const [logout, { isLoading }] = useLogoutMutation()
+    const [logout] = useLogoutMutation()
     const dispatch = useAppDispatch()
+    const router = useRouter()
+    const { t } = useTranslation()
 
     const handleLogout = async () => {
-        await logout(null)
+        await logout()
         dispatch(setUser({ user: null }))
 
-        setRedirecting(true)
         router.push('/')
     }
-    
+
+    const handleChangeLanguage = (e: any) => {
+        router.replace(router.pathname, router.asPath, { locale: e.key })
+    }
+
     const menu = (
-        <Menu>
+        <Menu className="header-menu">
+            <Menu.SubMenu title={t('common:change-language')} icon={<></>}>
+                {Object.values(locales).map(locale => {
+                    return <Menu.Item key={locale.tag} onClick={handleChangeLanguage}>
+                        {t(`common:languages.${locale.label}`)}
+                    </Menu.Item>
+                })}
+            </Menu.SubMenu>
             <Menu.Item>
-                <Button 
-                    loading={isLoading || redirecting} 
-                    onClick={handleLogout} 
-                    type="link"
-                >
-                    Logout
-                </Button>
+                <AntLink onClick={handleLogout}>
+                    {t('common:logout')}
+                </AntLink>
             </Menu.Item>
         </Menu>
     )

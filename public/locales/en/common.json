@@ -10,5 +10,6 @@
         "english": "English",
         "romanian": "Romanian"
     },
-    "change-language": "Change language"
+    "change-language": "Change language",
+    "logout": "Logout"
 }

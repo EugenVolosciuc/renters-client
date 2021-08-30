@@ -1,6 +1,7 @@
 import type { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Form } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 import { USER_ROLES } from 'types/User'
 import { useAuthRedirect } from 'store/auth/useAuthRedirect'
@@ -9,10 +10,11 @@ import AddOrEditProperty from 'components/forms/AddOrEditProperty'
 
 const AddProperty = (_props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     useAuthRedirect([USER_ROLES.PROPERTY_ADMIN])
+    const { t } = useTranslation()
     const [form] = Form.useForm()
 
     return (
-        <AdminLayout header={{ title: "Add property" }}>
+        <AdminLayout header={{ title: t('add-property:add-property') }}>
             <AddOrEditProperty form={form} />
         </AdminLayout>
     )

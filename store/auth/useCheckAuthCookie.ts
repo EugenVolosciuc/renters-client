@@ -8,7 +8,7 @@ import { setUser } from 'store/auth/slice'
 
 export const useCheckAuthCookie = () => {
     const dispatch = useAppDispatch()
-    const { data: user } = useCheckAuthQuery(null)
+    const { data: user } = useCheckAuthQuery()
 
     useEffect(() => {
         if (user) dispatch(setUser({ user: user as User }))

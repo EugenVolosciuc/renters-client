@@ -32,6 +32,7 @@ const PropertyItem: FC<Props> = ({ property }) => {
             key={`view-${id}`}
             href="/app/properties/[id]"
             as={`/app/properties/${id}`}
+            passHref
         >
             <Tooltip title={t('properties:view-property')}>
                 <AntLink>
@@ -46,6 +47,7 @@ const PropertyItem: FC<Props> = ({ property }) => {
             key={`edit-${id}`}
             href="/app/properties/[id]/edit"
             as={`/app/properties/${id}/edit`}
+            passHref
         >
             <Tooltip title={t('properties:edit-property')}>
                 <AntLink>
@@ -60,6 +62,7 @@ const PropertyItem: FC<Props> = ({ property }) => {
             key={`send-notification-to-renter-${id}`}
             href="/app/properties/[id]/bill-notification"
             as={`/app/properties/${id}/bill-notification`}
+            passHref
         >
             <Tooltip title={t('properties:send-bill-notification')}>
                 <AntLink>

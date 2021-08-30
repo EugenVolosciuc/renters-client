@@ -21,14 +21,14 @@ export const authApi = createApi({
                 body: { email, password }
             })
         }),
-        logout: builder.mutation({
+        logout: builder.mutation<void, void>({
             query: () => ({
                 url: '/logout',
                 method: 'POST',
                 credentials: "include"
             })
         }),
-        checkAuth: builder.query<User, unknown>({
+        checkAuth: builder.query<User, void>({
             query: () => ({ 
                 url: '/me',
                 credentials: "include"
