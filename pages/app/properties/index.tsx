@@ -9,8 +9,8 @@ import { capitalize } from 'utils/string-manipulation'
 import { USER_ROLES } from 'types/User'
 import { useAuthRedirect } from 'store/auth/useAuthRedirect'
 import AdminLayout from 'components/layouts/AdminLayout'
-import PropertiesContainer from 'components/Properties'
-import { PropertyTabType } from 'types/Property'
+import PropertiesContainer from 'components/Properties/PropertiesContainer'
+import { PropertiesPageTabType } from 'types/Property'
 
 const Properties = ({ query }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const { t } = useTranslation()
@@ -47,7 +47,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
             query: {
                 page: parseInt(query.page as string || "1", 10),
                 pageSize: parseInt(query.pageSize as string || "10", 10),
-                type: (query.type || "ALL") as PropertyTabType
+                type: (query.type || "ALL") as PropertiesPageTabType
             },
             ...(await serverSideTranslations(
                 locale as string,

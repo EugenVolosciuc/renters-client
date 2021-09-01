@@ -3,14 +3,14 @@ import { useRouter } from 'next/router'
 import { Pagination, PaginationProps } from 'antd'
 import qs from 'qs'
 
-import { Pagination as PaginationInterface, PageQuery } from 'types/misc'
+import { Pagination as PaginationInterface, PaginatedPageQuery } from 'types/misc'
 
 interface PaginatedData extends PaginationInterface {
     data: any;
 }
 
 type Props = {
-    query: PageQuery,
+    query: PaginatedPageQuery,
     paginatedData?: PaginatedData,
     paginationProps?: PaginationProps
 }

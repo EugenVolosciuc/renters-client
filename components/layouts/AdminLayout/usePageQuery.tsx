@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import qs from 'qs'
 
-import { PageQuery } from 'types/misc'
+import { PageQuery, PaginatedPageQuery } from 'types/misc'
 
-export const usePageQuery = (initialQuery: PageQuery) => {
+export const usePageQuery = (initialQuery: PageQuery | PaginatedPageQuery) => {
     const [query, setQuery] = useState(initialQuery)
     const router = useRouter()
+
+    const isPaginatedQuery = !!initialQuery.page
 
     useEffect(() => {
         const parsedQuery = qs.parse(router.asPath.split('?')[1])
@@ -15,8 +17,8 @@ export const usePageQuery = (initialQuery: PageQuery) => {
 
         setQuery({
             ...query,
+            ...(isPaginatedQuery && { page: updatedPage || query.page }),
             type: (updatedTypeQuery as string | undefined) || query.type,
-            page: updatedPage || query.page
         })
     }, [router.asPath])
 

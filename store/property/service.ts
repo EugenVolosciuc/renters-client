@@ -20,7 +20,7 @@ export const propertyApi = createApi({
                 const serializedParams = serializePagination(filteredParams)
 
                 return {
-                    url: ``,
+                    url: '',
                     params: serializedParams,
                     credentials: "include",
                 }
@@ -31,6 +31,13 @@ export const propertyApi = createApi({
                     { type: 'Properties', id: 'LIST' }
                 ]
                 : [{ type: 'Properties', id: 'LIST' }]
+        }),
+        getProperty: builder.query<Property, number>({
+            query: (id) => ({
+                url: `/${id}`,
+                credentials: "include"
+            }),
+            providesTags: (_result, _error, id) => [{ type: 'Properties', id }]
         }),
         create: builder.mutation<Property, Partial<Property>>({
             query: property => ({
@@ -46,5 +53,6 @@ export const propertyApi = createApi({
 
 export const {
     useCreateMutation,
-    useGetPropertiesQuery
+    useGetPropertiesQuery,
+    useGetPropertyQuery
 } = propertyApi

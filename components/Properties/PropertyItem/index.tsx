@@ -30,8 +30,10 @@ const PropertyItem: FC<Props> = ({ property }) => {
     const viewPropertyAction = (
         <Link
             key={`view-${id}`}
-            href="/app/properties/[id]"
-            as={`/app/properties/${id}`}
+            href={{
+                pathname: "/app/properties/[id]",
+                query: { id }
+            }}
             passHref
         >
             <Tooltip title={t('properties:view-property')}>
@@ -45,8 +47,10 @@ const PropertyItem: FC<Props> = ({ property }) => {
     const editPropertyAction = (
         <Link
             key={`edit-${id}`}
-            href="/app/properties/[id]/edit"
-            as={`/app/properties/${id}/edit`}
+            href={{
+                pathname: "/app/properties/[id]/edit",
+                query: { id }
+            }}
             passHref
         >
             <Tooltip title={t('properties:edit-property')}>
@@ -60,8 +64,10 @@ const PropertyItem: FC<Props> = ({ property }) => {
     const sendNotificationToRenterAction = (
         <Link
             key={`send-notification-to-renter-${id}`}
-            href="/app/properties/[id]/bill-notification"
-            as={`/app/properties/${id}/bill-notification`}
+            href={{
+                pathname: "/app/properties/[id]/bill-notification",
+                query: { id }
+            }}
             passHref
         >
             <Tooltip title={t('properties:send-bill-notification')}>

@@ -16,10 +16,8 @@ const { TabPane } = Tabs
 const PageTabs: FC<Props> = ({ tabsData, defaultActiveTabKey }) => {
     const router = useRouter()
 
-    console.log('router', router)
-
     const handleTabChange = (key: string) => {
-        router.push(`${router.pathname}`, `${router.pathname}?type=${key}`)
+        router.push(`${router.pathname}`, `${router.asPath.split('?')[0]}?type=${key}`)
     }
 
     return (

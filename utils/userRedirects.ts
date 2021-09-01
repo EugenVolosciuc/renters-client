@@ -1,5 +1,8 @@
+import { useEffect } from 'react'
 import Router from 'next/router'
+
 import { User, USER_ROLES } from "types/User"
+import { EntityTypes } from 'types/misc'
 
 export const redirectIfNotAuthed = (user: User | null): boolean => {
     let shouldBeRedirected = false
@@ -35,4 +38,17 @@ export const redirectUserBasedOnRequiredRole = (user: User | null, roles: USER_R
     if (!roles.includes((user as User).role)) {
         redirectUserBasedOnRole(user)
     }
+}
+
+export const useNotFoundRedirect = (isError: boolean, type?: EntityTypes) => {
+    useEffect(() => {
+        if (isError) {
+            const baseUrl = '/404'
+            const url = type 
+                ? baseUrl 
+                : `${baseUrl}?type=${type}`
+
+            Router.push(url)
+        }
+    }, [isError])
 }

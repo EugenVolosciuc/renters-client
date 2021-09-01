@@ -13,13 +13,20 @@ export interface PaginationOptions {
     page: number;
 }
 
-export type PageQuery = {
-    page: number,
-    pageSize: number,
-    [key: string]: unknown
+export interface PageQuery {
+    [key: string]: unknown;
+}
+
+export interface PaginatedPageQuery extends PageQuery {
+    page: number;
+    pageSize: number;
 }
 
 export interface ALL_TAB {
     key: "ALL",
     label: "All"
+}
+
+export enum EntityTypes {
+    PROPERTY = "PROPERTY"
 }

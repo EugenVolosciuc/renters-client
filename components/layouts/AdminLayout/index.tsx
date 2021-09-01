@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useState } from 'react'
-import { Layout, Row, Col, Typography } from 'antd'
+import { Layout, Row, Col, Typography, Skeleton } from 'antd'
 
 import { SiderContext } from 'components/layouts/SiderContext'
 import AdminMenu from 'components/layouts/AdminLayout/AdminMenu'
@@ -12,7 +12,7 @@ const { Title } = Typography
 
 type Props = {
     header: {
-        title: string,
+        title: string | undefined,
         extra?: ReactNode[]
     }
 }
@@ -39,7 +39,11 @@ const AdminLayout: FC<Props> = ({ children, header }) => {
                     <AdminHeader />
                     <Content className={styles['content-container']}>
                         <div className={styles['content-header']}>
-                            <Title className={styles.title} level={4}>{header.title}</Title>
+                            {header.title
+                                ? <Title className={styles.title} level={4}>{header.title}</Title>
+                                : <Skeleton title={{ width: 150 }} paragraph={{ rows: 0 }} active />
+                            }
+                            
                             {header.extra && header.extra.map((node, index) => (
                                 <span key={`content-header-extra-${index}`} className={styles['extra-container']}>
                                     {node}

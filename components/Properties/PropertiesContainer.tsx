@@ -2,25 +2,26 @@ import React, { FC } from 'react'
 import { Row, Col } from 'antd'
 import { useTranslation } from 'react-i18next'
 
-import { PROPERTY_TYPES, PropertyTabType, getPropertyTypeValueAndLabel } from 'types/Property'
+import { PROPERTY_TYPES, PropertiesPageTabType, getPropertyTypeValueAndLabel } from 'types/Property'
 import PropertiesList from 'components/Properties/PropertiesList'
 import { useGetPropertiesQuery } from 'store/property/service'
 import { capitalize } from 'utils/string-manipulation'
 import Pagination from 'components/layouts/AdminLayout/Pagination'
 import Tabs from 'components/layouts/AdminLayout/Tabs'
 import { usePageQuery } from 'components/layouts/AdminLayout/usePageQuery'
+import { PaginatedPageQuery } from 'types/misc'
 
 type Props = {
     query: {
         page: number,
         pageSize: number,
-        type: PropertyTabType,
+        type: PropertiesPageTabType
     }
 }
 
 const PropertiesContainer: FC<Props> = ({ query: initialQuery }) => {
     const { t } = useTranslation()
-    const query = usePageQuery(initialQuery)
+    const query = usePageQuery(initialQuery) as PaginatedPageQuery
 
     const { data: properties, isLoading } = useGetPropertiesQuery(
         query,

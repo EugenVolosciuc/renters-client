@@ -20,7 +20,7 @@ export interface PropertyValueAndLabel {
     label: PROPERTY_LABELS;
 }
 
-export type PropertyTabType = PROPERTY_TYPES | ALL_TAB["key"]
+export type PropertiesPageTabType = PROPERTY_TYPES | ALL_TAB["key"]
 
 export const getPropertyTypeValueAndLabel = (type: PROPERTY_TYPES): PropertyValueAndLabel => {
     return { value: type, label: PROPERTY_LABELS[type] }
@@ -62,5 +62,6 @@ export interface PaginatedProperties extends Pagination {
 
 export interface PropertyQueryOptions {
     page: number;
-    type?: PropertyTabType;
+    pageSize: number;
+    type?: PropertiesPageTabType;
 }
