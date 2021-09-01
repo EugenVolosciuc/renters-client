@@ -13,6 +13,12 @@ export interface PaginationOptions {
     page: number;
 }
 
+export type PageQuery = {
+    page: number,
+    pageSize: number,
+    [key: string]: unknown
+}
+
 export interface ALL_TAB {
     key: "ALL",
     label: "All"
