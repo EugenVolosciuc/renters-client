@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Menu, Dropdown, Typography } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
@@ -31,6 +32,13 @@ const HeaderMenu = () => {
 
     const menu = (
         <Menu className="header-menu">
+            <Menu.Item>
+                <Link href="/app/profile" passHref>
+                    <AntLink>
+                        {t('common:my-profile')}
+                    </AntLink>
+                </Link>
+            </Menu.Item>
             <Menu.SubMenu title={t('common:change-language')} icon={<></>}>
                 {Object.values(locales).map(locale => {
                     return <Menu.Item key={locale.tag} onClick={handleChangeLanguage}>
