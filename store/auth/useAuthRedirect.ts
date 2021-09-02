@@ -23,7 +23,6 @@ export const useAuthRedirect = (authRule: AuthRule ) => {
     const userNotAuthed = !data
 
     if (!isServer && authWasChecked && userNotAuthed) {
-        console.log('got to redirect')
         switch (authRule) {
             case true:
                 redirectIfNotAuthed(user)
