@@ -121,7 +121,8 @@ const SignupForm: FC<Props> = ({ userRole }) => {
                     {t('auth:i-read')} 
                     <Link href="/docs/terms-and-conditions" passHref><AntLink> {t('auth:terms-and-conditions')}</AntLink></Link>
                     {' '}
-                    {t('auth:and')} 
+                    {t('auth:and')}
+                    {' '} 
                     <Link href="/docs/privacy-policy" passHref><AntLink>{t('auth:privacy-policy')}</AntLink></Link>
                 </Checkbox>
             </Form.Item>

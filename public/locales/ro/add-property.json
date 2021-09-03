@@ -8,5 +8,6 @@
     "email-required": "Email-ul chiriasului este obligatoriu",
     "property-photos": "Imagini imobil (max {{maxCount}})",
     "images-must-have-max": "Imaginile pot avea maxim {{maxFileSize}} MB",
-    "upload": "Upload"
+    "upload": "Upload",
+    "ground-floor": "parter"
 }

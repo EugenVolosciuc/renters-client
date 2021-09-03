@@ -3,6 +3,7 @@ import { Form, Select } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { PROPERTY_TYPES, getPropertyTypeValueAndLabel } from 'types/Property'
+import { capitalize } from 'utils/string-manipulation'
 
 const PropertyType = () => {
     const { t } = useTranslation()
@@ -22,7 +23,7 @@ const PropertyType = () => {
                     const typeValueAndLabel = getPropertyTypeValueAndLabel(type as PROPERTY_TYPES)
 
                     return <Select.Option key={`type-${type}-option`} value={type}>
-                        {t(`properties-common:property-types.${typeValueAndLabel.label}`)}
+                        {capitalize(t(`properties-common:property-types.${typeValueAndLabel.label}`))}
                     </Select.Option>
                 })}
             </Select>

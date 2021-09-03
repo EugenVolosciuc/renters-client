@@ -8,5 +8,6 @@
     "email-required": "Renter's email is required",
     "property-photos": "Property photos (max {{maxCount}})",
     "images-must-have-max": "Images must have max {{maxFileSize}} MB",
-    "upload": "Upload"
+    "upload": "Upload",
+    "ground-floor": "ground floor"
 }
