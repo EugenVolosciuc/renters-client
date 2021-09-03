@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Row, Col, Spin } from 'antd'
 
 import styles from 'components/misc/loaders/ListLoader/ListLoader.module.less'
 
-const ListLoader = () => {
+type Props = {
+    size?: "small" | "large" | "default"
+}
+
+const ListLoader: FC<Props> = ({ size = 'large'}) => {
     return (
         <Row justify="center">
             <Col>
-                <Spin size="large" className={styles.loader} />
+                <Spin size={size} className={styles.loader} />
             </Col>
         </Row>
     )

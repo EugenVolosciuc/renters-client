@@ -18,7 +18,7 @@ const Property = ({ id, query }: InferGetServerSidePropsType<typeof getServerSid
 
     return (
         <AdminLayout header={{ title: property?.title }}>
-            <PropertyContainer query={query} />
+            <PropertyContainer query={query} property={property} />
         </AdminLayout>
     )
 }

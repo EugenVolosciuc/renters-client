@@ -6,14 +6,22 @@ import { capitalize } from 'utils/string-manipulation'
 import Tabs from 'components/layouts/AdminLayout/Tabs'
 import { usePageQuery } from 'components/layouts/AdminLayout/usePageQuery'
 import { PageQuery } from 'types/misc'
+import { Property } from 'types/Property'
+import {
+    DetailsTab,
+    RenterTab,
+    BillsTab
+} from 'components/Properties/Property/tabs'
+import ListLoader from 'components/misc/loaders/ListLoader'
 
 type Props = {
     query: {
-        type: string;
-    };
+        type: string
+    },
+    property: Property | undefined
 }
 
-const PropertyContainer: FC<Props> = ({ query: initialQuery }) => {
+const PropertyContainer: FC<Props> = ({ query: initialQuery, property }) => {
     const { t } = useTranslation()
     const query = usePageQuery(initialQuery) as PageQuery
 
@@ -21,17 +29,24 @@ const PropertyContainer: FC<Props> = ({ query: initialQuery }) => {
         {
             tab: t('property:details'),
             key: 'DETAILS',
-            content: 'Details'
+            content: (
+                <>
+                    {property
+                        ? <DetailsTab property={property} />
+                        : <ListLoader />
+                    }
+                </>
+            )
         },
         {
             tab: capitalize(t('common:renter')),
             key: 'RENTER',
-            content: 'Renter'
+            content: <RenterTab />
         },
         {
             tab: t('property:bills'),
             key: 'BILLS',
-            content: 'Bills'
+            content: <BillsTab />
         }
     ]
 
