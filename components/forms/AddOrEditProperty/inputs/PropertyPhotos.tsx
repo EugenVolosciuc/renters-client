@@ -94,7 +94,7 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
             const filteredPhotos = currentPhotos.filter(photo => photo.title !== file.name)
             form.setFieldsValue({ jsonPhotos: JSON.stringify(filteredPhotos) })
 
-            await deletePhoto({ public_id })
+            await deletePhoto(public_id)
         } catch (error) {
             handleError(error)
         }
