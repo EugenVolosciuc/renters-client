@@ -10,12 +10,14 @@ type Props = {
     property: Property
 }
 
+type RenderFunc = (value: unknown) => string | number | ReactNode
+
 type PropertyInfoStructure = {
     key: string,
     label: string | number | ReactNode,
     direction?: 'horizontal' | 'vertical',
     valueAsLabel?: boolean
-    render?: (value: unknown) => string | number | ReactNode
+    render?: RenderFunc
 }
 
 const { Title } = Typography
@@ -55,7 +57,7 @@ const PropertyInfo: FC<Props> = ({ property }) => {
             direction: 'vertical',
             render: (value) => {
                 const parsedBillTypesArray = parseDBArray(value as string)
-                
+
                 return parsedBillTypesArray.map(billType => (
                     <Tag style={{ marginBottom: '4px' }} key={`${billType}-billType`}>
                         {capitalize(t(`properties-common:bill-types.${billType.toLowerCase()}`))}
@@ -86,7 +88,7 @@ const PropertyInfo: FC<Props> = ({ property }) => {
                 const initValue = (property as Record<string, any>)[key]
 
                 const value = hasCustomRender
-                    ? render(initValue)
+                    ? (render as RenderFunc)(initValue)
                     : initValue
 
                 return <Col span={24} key={`${key}-${label}`}>

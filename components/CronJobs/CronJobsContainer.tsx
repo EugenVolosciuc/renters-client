@@ -82,6 +82,7 @@ const CronJobsContainer = () => {
             title: <Text className={styles.bold}>Title</Text>,
             dataIndex: 'title',
             key: 'title',
+            // eslint-disable-next-line react/display-name
             render: (title: CronJob['title'], cronJob: CronJob) => (
                 <Tooltip title={cronJob.description}>
                     <Text>{title}</Text>
@@ -92,6 +93,7 @@ const CronJobsContainer = () => {
             title: <Text className={styles.bold}>Interval</Text>,
             dataIndex: 'interval',
             key: 'interval',
+            // eslint-disable-next-line react/display-name
             render: (interval: CronJob['interval']) => (
                 <AntLink href={`${cronTextWebsite}${interval.replace(' ', '_')}`} target="_blank">
                     <Text>{interval}</Text>
@@ -102,6 +104,7 @@ const CronJobsContainer = () => {
             title: <Text className={styles.bold}>Is running</Text>,
             dataIndex: 'isRunning',
             key: 'isRunning',
+            // eslint-disable-next-line react/display-name
             render: (isRunning: CronJob['isRunning']) => {
                 return isRunning ? <CheckOutlined style={{ color: 'green' }} /> : <CloseOutlined style={{ color: 'red' }} />
             }
@@ -110,6 +113,7 @@ const CronJobsContainer = () => {
             title: <Text className={styles.bold}>Next invocation</Text>,
             dataIndex: 'nextInvocation',
             key: 'nextInvocation',
+            // eslint-disable-next-line react/display-name
             render: (nextInvocation: CronJob['nextInvocation']) => {
                 if (!nextInvocation) return '-'
 
@@ -120,6 +124,7 @@ const CronJobsContainer = () => {
             title: <Text className={styles.bold}>Actions</Text>,
             dataIndex: 'actions',
             key: 'actions',
+            // eslint-disable-next-line react/display-name
             render: (_: unknown, cronJob: CronJob) => {
                 const handleToggleCronJobButtonClick = () => {
                     if (cronJob.isRunning) return showStopCronJobConfirmation(cronJob)
