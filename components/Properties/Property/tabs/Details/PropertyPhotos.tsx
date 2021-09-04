@@ -1,15 +1,14 @@
 import React, { FC } from 'react'
 import Image from 'next/image'
-import { Carousel } from 'antd'
 
 import { Photo } from 'types/Photo'
+import Carousel from 'components/misc/Carousel'
 
 type Props = {
     photos: Photo[]
 }
 
 const PropertyPhotos: FC<Props> = ({ photos }) => {
-    console.log('photos', photos)
     return (
         <Carousel>
             {photos.map(photo => (

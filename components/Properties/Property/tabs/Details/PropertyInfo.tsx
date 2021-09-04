@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react'
-import { Row, Col, Tag } from 'antd'
+import { Row, Col, Tag, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { Property } from 'types/Property'
@@ -18,6 +18,8 @@ type PropertyInfoStructure = {
     render?: (value: unknown) => string | number | ReactNode
 }
 
+const { Title } = Typography
+
 const PropertyInfo: FC<Props> = ({ property }) => {
     const { t } = useTranslation()
 
@@ -30,14 +32,6 @@ const PropertyInfo: FC<Props> = ({ property }) => {
                     t(`properties-common:property-types.${(value as string).toLowerCase()}`)
                 )
             )
-        },
-        {
-            key: 'title',
-            label: capitalize(t('properties-common:title'))
-        },
-        {
-            key: 'address',
-            label: capitalize(t('properties-common:address'))
         },
         {
             key: 'floor',
@@ -70,6 +64,11 @@ const PropertyInfo: FC<Props> = ({ property }) => {
             }
         },
         {
+            key: 'address',
+            label: capitalize(t('properties-common:address')),
+            direction: 'vertical'
+        },
+        {
             key: 'description',
             label: capitalize(t('properties-common:description')),
             direction: 'vertical'
@@ -78,6 +77,9 @@ const PropertyInfo: FC<Props> = ({ property }) => {
 
     return (
         <Row gutter={[8, 8]}>
+            <Col>
+                <Title level={4}>{property.title}</Title>
+            </Col>
             {propertyInfoStructureList.map(({ key, label, render, direction, valueAsLabel }) => {
                 const hasCustomRender = !!render
 
