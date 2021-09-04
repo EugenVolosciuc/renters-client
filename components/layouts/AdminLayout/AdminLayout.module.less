@@ -25,6 +25,10 @@
 
     &.sider-hidden {
         margin-left: @menu-collapsed-width;
+
+        .header {
+            width: calc(100% - @menu-collapsed-width);
+        }
     }
 
     .header {
@@ -37,23 +41,19 @@
         background-color: white;
         display: flex;
         justify-content: space-between;
-        // border-bottom: 1px solid rgb(224, 224, 224);
         box-shadow: @box-shadow-base;
+        position: fixed;
+        z-index: 1;
+        width: calc(100% - @sider-open-width);
 
         .menu-icon {
             font-size: 16px;
-            // margin-left: 16px;
-            // margin-right: 16px;
         }
     }
 
     .icon {
         font-size: 16px;
-        margin-right: @container-padding;
-
-        @media (min-width: @screen-md) {
-            margin-right: (@container-padding + 8px);
-        }
+        margin-right: 16px;
         // margin-left: 16px;
     }
     
@@ -88,6 +88,7 @@
 }
 
 .content-container {
+    margin-top: @layout-header-height;
     padding: @container-padding;
 
     @media (min-width: @screen-md) {
