@@ -1,3 +1,5 @@
+@import '~antd/lib/style/themes/default.less';
+
 // Input label height for large forms
 .ant-form.ant-form-large .ant-form-item-label > label {
     height: 24px;
@@ -48,4 +50,26 @@
 
 .ant-checkbox-inner {
     border-radius: 4px;
+}
+
+.property-photos-container {
+    .ant-carousel {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+
+        .slick-dots {
+            li {
+                &, button {
+                    background: darkgrey;
+                }
+
+                &.slick-active {
+                    button {
+                        background: @highlight-color;
+                    }
+                }
+            }
+        }
+    }
 }

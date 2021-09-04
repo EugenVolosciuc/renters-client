@@ -13,7 +13,7 @@ const BillTypes = () => {
     return (
         <Form.Item
             name="billTypes"
-            label={t('properties-common:bill-type', { count: 0 })}
+            label={capitalize(t('properties-common:bill-type', { count: 0 }))}
         >
             <Select mode="multiple">
                 {billTypesArray.map(type => {

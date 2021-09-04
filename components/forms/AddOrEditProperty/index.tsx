@@ -82,6 +82,8 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
                     <Description />
                     <FloorArea />
                     <Floor />
+                    {/* TODO: Remove Rent component from here, it should be set in the "Add a renter" section, */}
+                    {/* as that's where the contract will be instantiated. */}
                     <Rent />
                     <BillTypes />
                     <PropertyPhotos form={form} />
