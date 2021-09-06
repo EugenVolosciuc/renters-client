@@ -5,26 +5,30 @@ import { useTranslation } from 'react-i18next'
 import { USER_ROLES } from 'types/User'
 import AdminLayout from 'components/layouts/AdminLayout'
 import { useAuthRedirect } from 'store/auth/useAuthRedirect'
+import SettingsContainer from 'components/Settings/SettingsContainer'
 
-const Profile = (_props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Profile = ({ query }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     useAuthRedirect([USER_ROLES.PROPERTY_ADMIN])
     const { t } = useTranslation()
 
     return (
-        <AdminLayout header={{ title: t('common:my-profile') }}>
-            <p>User profile page</p>
+        <AdminLayout header={{ title: t('settings:account-settings') }}>
+            <SettingsContainer query={query} />
         </AdminLayout>
     )
 }
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-    const { locale } = context
+    const { query, locale } = context
 
     return {
         props: {
+            query: {
+                type: (query.type || "PROFILE") as string
+            },
             ...(await serverSideTranslations(
                 locale as string,
-                ['common', 'profile']
+                ['common', 'settings']
             ))
         }
     }

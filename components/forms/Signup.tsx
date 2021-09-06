@@ -35,7 +35,7 @@ const SignupForm: FC<Props> = ({ userRole }) => {
                 role: userRole
             }
 
-            await signupUser(dataToSend)
+            await signupUser(dataToSend).unwrap()
 
             setRedirecting(true)
             message.success(t('auth:account-created-successfully'))

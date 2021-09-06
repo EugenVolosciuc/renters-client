@@ -32,13 +32,6 @@ const HeaderMenu = () => {
 
     const menu = (
         <Menu className="header-menu">
-            <Menu.Item>
-                <Link href="/app/profile" passHref>
-                    <AntLink>
-                        {t('common:my-profile')}
-                    </AntLink>
-                </Link>
-            </Menu.Item>
             <Menu.SubMenu title={t('common:change-language')} icon={<></>}>
                 {Object.values(locales).map(locale => {
                     return <Menu.Item key={locale.tag} onClick={handleChangeLanguage}>
@@ -46,6 +39,13 @@ const HeaderMenu = () => {
                     </Menu.Item>
                 })}
             </Menu.SubMenu>
+            <Menu.Item>
+                <Link href="/app/settings" passHref>
+                    <AntLink>
+                        {t('common:settings')}
+                    </AntLink>
+                </Link>
+            </Menu.Item>
             <Menu.Item>
                 <AntLink onClick={handleLogout}>
                     {t('common:logout')}
