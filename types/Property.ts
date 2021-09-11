@@ -36,7 +36,7 @@ export interface PropertyBaseData {
     floorArea: number | null;
     rentPrice: number;
     type: PROPERTY_TYPES;
-    billTypes?: BILL_TYPES[];
+    billTypes?: BILL_TYPES[] | string;
 }
 
 export interface PropertyFormData extends PropertyBaseData {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Select } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { capitalize } from 'utils/string-manipulation'
+import { capitalize } from 'utils/parsers/string-manipulation'
 
 const Floor = () => {
     const { t } = useTranslation()
@@ -18,7 +18,7 @@ const Floor = () => {
                 <Select.Option key={`floor-${option}-option`} value={option}>
                     {
                         option === 0
-                            ? capitalize(t('add-property:ground-floor'))
+                            ? capitalize(t('add-edit-property:ground-floor'))
                             : option
                     }
                 </Select.Option>

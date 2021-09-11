@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Row, Col } from 'antd'
 import { useTranslation } from 'react-i18next'
 
-import { capitalize } from 'utils/string-manipulation'
+import { capitalize } from 'utils/parsers/string-manipulation'
 import Tabs from 'components/layouts/AdminLayout/Tabs'
 import { usePageQuery } from 'components/layouts/AdminLayout/usePageQuery'
 import { PageQuery } from 'types/misc'

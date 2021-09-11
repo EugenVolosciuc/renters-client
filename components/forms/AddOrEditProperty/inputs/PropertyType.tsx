@@ -3,7 +3,7 @@ import { Form, Select } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { PROPERTY_TYPES, getPropertyTypeValueAndLabel } from 'types/Property'
-import { capitalize } from 'utils/string-manipulation'
+import { capitalize } from 'utils/parsers/string-manipulation'
 
 const PropertyType = () => {
     const { t } = useTranslation()

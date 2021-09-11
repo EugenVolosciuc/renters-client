@@ -1,8 +1,8 @@
 {
     "property-added": "Imobil adaugat",
-    "add-property": "Adauga imobil",
+    "property-modified": "Imobil modificat",
     "add-renter": "Adauga un chirias",
-    "name-surname": "Nume/prenume",
+    "name-surname": "Prenume/nume",
     "name-required": "Numele chiriasului este obligatoriu",
     "email": "Email",
     "email-required": "Email-ul chiriasului este obligatoriu",

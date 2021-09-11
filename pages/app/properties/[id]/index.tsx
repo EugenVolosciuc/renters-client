@@ -1,5 +1,9 @@
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import type { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next'
+import { Button } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
+import { useTranslation } from 'react-i18next'
 
 import { USER_ROLES } from 'types/User'
 import { PropertiesPageTabType } from 'types/Property'
@@ -13,11 +17,29 @@ import { useNotFoundRedirect } from 'utils/userRedirects'
 
 const Property = ({ id, query }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const { data: property, isError } = useGetPropertyQuery(id)
+    const { t } = useTranslation()
+
     useAuthRedirect([USER_ROLES.PROPERTY_ADMIN])
     useNotFoundRedirect(isError, EntityTypes.PROPERTY)
 
+    const editPropertyButton = (
+        <Link href="/app/properties/[id]/edit" as={`/app/properties/${id}/edit`} passHref>
+            <Button
+                type="primary"
+                icon={<EditOutlined />}
+            >
+                {t('properties-common:edit-property')}
+            </Button>
+        </Link>
+    )
+
     return (
-        <AdminLayout header={{ title: property?.title }}>
+        <AdminLayout 
+            header={{ 
+                title: property?.title,
+                extra: [editPropertyButton]
+            }}
+        >
             <PropertyContainer query={query} property={property} />
         </AdminLayout>
     )

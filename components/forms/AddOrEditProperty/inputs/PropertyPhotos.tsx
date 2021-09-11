@@ -1,6 +1,6 @@
 // https://codesandbox.io/s/bw813?file=/App.tsx
-import React, { FC, useState } from 'react'
-import { Form, Upload, Button, Modal, FormInstance, Input, message } from 'antd'
+import React, { FC } from 'react'
+import { Form, Upload, Button, FormInstance, Input, message } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { useUploadMutation, useDeleteMutation } from 'store/photos/service'
@@ -11,26 +11,10 @@ type Props = {
     form: FormInstance
 }
 
-function getBase64(file: Blob) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = () => resolve(reader.result)
-        reader.onerror = error => reject(error)
-    })
-}
-
-const defaultPreview = {
-    visible: false,
-    image: '',
-    title: ''
-}
-
 const maxCount = 6
 const maxFileSize = 1 * 1024 * 1024 // 8MB
 
 const PropertyPhotos: FC<Props> = ({ form }) => {
-    const [preview, setPreview] = useState(defaultPreview)
     const { t } = useTranslation()
     const [uploadPhoto] = useUploadMutation()
     const [deletePhoto] = useDeleteMutation()
@@ -42,24 +26,10 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
         return e && e.fileList
     }
 
-    const handlePreview = async (file: any) => {
-        if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj)
-        }
-
-        setPreview({
-            visible: true,
-            image: file.url || file.preview,
-            title: file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
-        })
-    }
-
-    const handleClosePreview = () => setPreview(defaultPreview)
-
     // This doesn't work :/
     const handleFileSizeLimit = (file: any) => {        
         if (file.size > maxFileSize) {
-            message.error(t('add-property:images-must-have-max', { maxFileSize }))
+            message.error(t('add-edit-property:images-must-have-max', { maxFileSize }))
             return false
         }
 
@@ -104,7 +74,7 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
         <>
             <Form.Item
                 name="uploadPhotos"
-                label={t('add-property:property-photos', { maxCount })}
+                label={t('add-edit-property:property-photos', { maxCount })}
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
             >
@@ -112,27 +82,17 @@ const PropertyPhotos: FC<Props> = ({ form }) => {
                     accept="image/*"
                     customRequest={handleUploadChanges}
                     listType="picture-card"
-                    onPreview={handlePreview}
                     onRemove={handleRemovePhoto}
                     maxCount={maxCount}
                 // beforeUpload={handleFileSizeLimit} // will probably delete, as it doesn't work
                 >
-                    <Button type="link">{t('add-property:upload')}</Button>
+                    <Button type="link">{t('add-edit-property:upload')}</Button>
                 </Upload>
             </Form.Item>
             <Form.Item name="jsonPhotos" hidden>
                 <Input />
             </Form.Item>
-            <Modal
-                visible={preview.visible}
-                title={preview.title}
-                footer={null}
-                onCancel={handleClosePreview}
-            >
-                <img alt={preview.title} style={{ width: '100%' }} src={preview.image} />
-            </Modal>
         </>
-
     )
 }
 

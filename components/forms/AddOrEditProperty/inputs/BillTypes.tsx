@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Select } from 'antd'
 import { useTranslation } from 'react-i18next'
 
-import { capitalize } from 'utils/string-manipulation'
+import { capitalize } from 'utils/parsers/string-manipulation'
 import { BILL_TYPES, getBillTypeValueAndLabel } from 'types/Bill'
 
 const BillTypes = () => {

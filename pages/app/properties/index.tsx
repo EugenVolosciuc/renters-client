@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Button } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 
-import { capitalize } from 'utils/string-manipulation'
+import { capitalize } from 'utils/parsers/string-manipulation'
 import { USER_ROLES } from 'types/User'
 import { useAuthRedirect } from 'store/auth/useAuthRedirect'
 import AdminLayout from 'components/layouts/AdminLayout'
@@ -22,7 +22,7 @@ const Properties = ({ query }: InferGetServerSidePropsType<typeof getServerSideP
                 type="primary"
                 icon={<PlusOutlined />}
             >
-                {t('properties:add-property')}
+                {t('properties-common:add-property')}
             </Button>
         </Link>
     )

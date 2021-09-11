@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, InputNumber } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { capitalize } from 'utils/string-manipulation'
+import { capitalize } from 'utils/parsers/string-manipulation'
 
 const Rent = () => {
     const { t } = useTranslation()

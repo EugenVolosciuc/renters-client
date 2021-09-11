@@ -36,5 +36,7 @@
     "monthly-rent-price": "Monthly rent price",
     "rent-price-required": "Rent price is required",
     "bill-type": "bill type",
-    "bill-type_plural": "bill types"
+    "bill-type_plural": "bill types",
+    "add-property": "Add property",
+    "edit-property": "Edit property"
 }

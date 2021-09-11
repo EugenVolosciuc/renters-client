@@ -42,5 +42,7 @@
     "rent-price-required": "Pretul chiriei este obligatoriu",
     "bill-type": "Tip factura",
     "bill-type_1": "Tipuri de factura",
-    "bill-type_2": "Tipuri de factura"
+    "bill-type_2": "Tipuri de factura",
+    "add-property": "Adauga imobil",
+    "edit-property": "Modifica imobil"
 }

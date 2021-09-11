@@ -6,7 +6,7 @@ import {
   } from '@ant-design/icons'
 
 import Menu from 'components/layouts/AdminLayout/AdminMenu/Menu'
-import { capitalize } from 'utils/string-manipulation'
+import { capitalize } from 'utils/parsers/string-manipulation'
 
 
 const AdminMenu = () => {

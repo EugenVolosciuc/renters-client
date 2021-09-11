@@ -39,7 +39,7 @@ export const propertyApi = createApi({
             }),
             providesTags: (_result, _error, id) => [{ type: 'Properties', id }]
         }),
-        create: builder.mutation<Property, Partial<Property>>({
+        createProperty: builder.mutation<Property, Partial<Property>>({
             query: property => ({
                 url: '/',
                 method: 'POST',
@@ -47,12 +47,22 @@ export const propertyApi = createApi({
                 body: property
             }),
             invalidatesTags: [{ type: 'Properties', id: 'LIST' }]
+        }),
+        modifyProperty: builder.mutation<Property, { property: Partial<Property>, id: Property['id'] }>({
+            query: ({ property, id }) => ({
+                url: `/${id}`,
+                method: 'PATCH',
+                credentials: "include",
+                body: property
+            }),
+            invalidatesTags: ['Properties']
         })
     })
 })
 
 export const {
-    useCreateMutation,
+    useCreatePropertyMutation,
+    useModifyPropertyMutation,
     useGetPropertiesQuery,
     useGetPropertyQuery
 } = propertyApi

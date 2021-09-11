@@ -3,7 +3,7 @@ import { Tag } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { Property } from 'types/Property'
-import { capitalize, parseDBArray } from 'utils/string-manipulation'
+import { capitalize, parseDBArray } from 'utils/parsers/string-manipulation'
 import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityInfoDisplay'
 
 type Props = {

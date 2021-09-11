@@ -14,7 +14,7 @@ import {
     useModifyCronJobMutation
 } from 'store/cron/service'
 import styles from 'styles/pages/CronJobs.module.less'
-import { capitalize } from 'utils/string-manipulation'
+import { capitalize } from 'utils/parsers/string-manipulation'
 import { handleError } from 'utils/handleError'
 
 const cronTextWebsite = "https://crontab.guru/#"

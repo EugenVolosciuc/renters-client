@@ -14,7 +14,7 @@ const AddProperty = (_props: InferGetServerSidePropsType<typeof getServerSidePro
     const [form] = Form.useForm()
 
     return (
-        <AdminLayout header={{ title: t('add-property:add-property') }}>
+        <AdminLayout header={{ title: t('properties-common:add-property') }}>
             <AddOrEditProperty form={form} />
         </AdminLayout>
     )
@@ -27,7 +27,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         props: {
             ...(await serverSideTranslations(
                 locale as string,
-                ['common', 'properties-common', 'add-property']
+                ['common', 'properties-common', 'add-edit-property']
             ))
         }
     }

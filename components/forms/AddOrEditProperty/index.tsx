@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import { Form, FormInstance, Row, Col, Button, message } from 'antd'
 import { useTranslation } from 'react-i18next'
 
+import { dbPhotoToAntdPhoto } from 'utils/parsers/dbPhotoToAntdPhoto'
+
 import {
     Title,
     Address,
@@ -17,11 +19,13 @@ import {
     AddRenter,
     PropertyPhotos
 } from 'components/forms/AddOrEditProperty/inputs'
-import { useCreateMutation } from 'store/property/service'
+import { useCreatePropertyMutation, useModifyPropertyMutation } from 'store/property/service'
 import { Property, PropertyFormData } from 'types/Property'
 import { handleError } from 'utils/handleError'
-import { propertyFormDataToReqData } from 'utils/propertyFormDataToReqData'
+import { propertyFormDataToReqData } from 'utils/parsers/propertyFormDataToReqData'
+import { parseDBArray } from 'utils/parsers/string-manipulation'
 import styles from 'components/forms/AddOrEditProperty/AddOrEditProperty.module.less'
+import { BILL_TYPES } from 'types/Bill'
 
 type Props = {
     form: FormInstance,
@@ -31,7 +35,8 @@ type Props = {
 const AddOrEditProperty: FC<Props> = ({ form, property }) => {
     const router = useRouter()
     const { t } = useTranslation()
-    const [createProperty, { isLoading: creatingProperty }] = useCreateMutation()
+    const [createProperty, { isLoading: creatingProperty }] = useCreatePropertyMutation()
+    const [modifyProperty, { isLoading: modifyingProperty }] = useModifyPropertyMutation()
 
     const handleAddProperty = async (values: PropertyFormData) => {
         try {
@@ -40,22 +45,45 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
 
             // TODO: if renter added, send invitation
 
-            message.success(t('add-property:property-added'))
+            message.success(t('add-edit-property:property-added'))
             router.push('/app/properties/[id]', `/app/properties/${property.id}`)
         } catch (error) {
             handleError(error)
         }
     }
 
-    const handleUpdateProperty = (values: PropertyFormData) => {
-        console.log("UPDATING", values)
+    const handleUpdateProperty = async (values: PropertyFormData) => {
+        try {
+            const dataToSend = propertyFormDataToReqData(values)
+            const modifiedProperty = await modifyProperty({ property: dataToSend, id: (property as Property).id }).unwrap()
+
+            message.success(t('add-edit-property:property-modified'))
+            router.push('/app/properties/[id]', `/app/properties/${modifiedProperty.id}`)
+        } catch (error) {
+            handleError(error)
+        }
     }
 
     const isUpdatePropertyForm = !!property
     const formClassName = `${styles['add-edit-property-form']} add-edit-property-form`
 
-    const initialValues = isUpdatePropertyForm 
-        ? {} 
+    const initialValues = isUpdatePropertyForm
+        ? {
+            title: property.title,
+            address: property.address,
+            billTypes: parseDBArray(property.billTypes as string).filter(billType => billType !== BILL_TYPES.RENT),
+            description: property.description,
+            floor: property.floor,
+            floors: property.floors,
+            floorArea: property.floorArea,
+            type: property.type,
+            rooms: property.rooms,
+            rentPrice: property.rentPrice,
+            ...(property.photos && {
+                uploadPhotos: property.photos.map(dbPhotoToAntdPhoto),
+                jsonPhotos: JSON.stringify(property.photos)
+            })
+        }
         : {
             jsonPhotos: '[]',
             addRenter: false
@@ -87,15 +115,17 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
                     <Rent />
                     <BillTypes />
                     <PropertyPhotos form={form} />
-                    <AddRenter />
-
+                    {!isUpdatePropertyForm && <AddRenter />}
                     <Form.Item>
-                        <Button 
-                            type="primary" 
+                        <Button
+                            type="primary"
                             htmlType="submit"
-                            loading={creatingProperty}
+                            loading={creatingProperty || modifyingProperty}
                         >
-                            {t('add-property:add-property')}
+                            {isUpdatePropertyForm
+                                ? t('properties-common:edit-property')
+                                : t('properties-common:add-property')
+                            }
                         </Button>
                     </Form.Item>
                 </Col>
