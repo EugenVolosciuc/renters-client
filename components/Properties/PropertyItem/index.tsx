@@ -53,7 +53,7 @@ const PropertyItem: FC<Props> = ({ property }) => {
             }}
             passHref
         >
-            <Tooltip title={t('properties:edit-property')}>
+            <Tooltip title={t('properties-common:edit-property')}>
                 <AntLink>
                     <EditOutlined />
                 </AntLink>
