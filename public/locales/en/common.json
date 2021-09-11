@@ -12,5 +12,6 @@
     },
     "change-language": "Change language",
     "logout": "Logout",
-    "settings": "Settings"
+    "settings": "Settings",
+    "cancel": "Cancel"
 }

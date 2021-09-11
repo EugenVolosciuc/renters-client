@@ -1,8 +1,7 @@
 import React, { FC } from 'react'
 import { Skeleton, SkeletonProps } from 'antd'
 
-import { useAppSelector } from 'store'
-import { selectAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/auth/slice'
 
 type Props = {
     loaderProps?: SkeletonProps
@@ -15,7 +14,7 @@ const defaultLoaderProps: SkeletonProps = {
 }
 
 const UserLoader: FC<Props> = ({ children, loaderProps = defaultLoaderProps }) => {
-    const user = useAppSelector(selectAuthedUser)
+    const user = useAuthedUser()
 
     if (user) return <>{children}</>
 

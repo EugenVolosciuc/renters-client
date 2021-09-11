@@ -2,12 +2,11 @@ import React from 'react'
 
 import PropertyAdministratorMenu from 'components/layouts/AdminLayout/AdminMenu/PropertyAdministratorMenu'
 import SuperAdminMenu from 'components/layouts/AdminLayout/AdminMenu/SuperAdminMenu'
-import { useAppSelector } from 'store'
-import { selectAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/auth/slice'
 import { USER_ROLES } from 'types/User'
 
 const AdminMenu = () => {
-    const user = useAppSelector(selectAuthedUser)
+    const user = useAuthedUser()
 
     const renderMenu = () => {
         switch (user?.role) {

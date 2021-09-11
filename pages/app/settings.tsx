@@ -28,7 +28,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
             },
             ...(await serverSideTranslations(
                 locale as string,
-                ['common', 'settings']
+                ['common', 'settings', 'auth']
             ))
         }
     }

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_BASE_URL } from 'constants/API_BASE_URL'
-import { User, LoginFormData } from 'types/User'
+import { User, LoginFormData, SignupFormData } from 'types/User'
 
 export const authApi = createApi({
     reducerPath: 'authApi',
@@ -33,6 +33,14 @@ export const authApi = createApi({
                 url: '/me',
                 credentials: "include"
             })
+        }),
+        modifyAuthedUser: builder.mutation<User, Partial<SignupFormData>>({
+            query: (body) => ({
+                url: '/me',
+                method: 'PATCH',
+                credentials: "include",
+                body
+            })
         })
     })
 })
@@ -41,5 +49,6 @@ export const {
     useLoginMutation,
     useLogoutMutation,
     useSignupMutation,
-    useCheckAuthQuery
+    useCheckAuthQuery,
+    useModifyAuthedUserMutation
 } = authApi

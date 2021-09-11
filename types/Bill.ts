@@ -28,3 +28,7 @@ export interface BillTypeValueAndLabel {
 export const getBillTypeValueAndLabel = (type: BILL_TYPES): BillTypeValueAndLabel => {
     return { value: type, label: BILL_TYPE_LABELS[type] }
 }
+
+export interface Bill {
+    
+}

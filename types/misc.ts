@@ -1,3 +1,8 @@
+import { User } from "types/User"
+import { Property } from "types/Property"
+import { Photo } from "types/Photo"
+import { Bill } from "types/Bill"
+
 export interface Pagination {
     current_page: number;
     from: number;
@@ -30,3 +35,5 @@ export interface ALL_TAB {
 export enum EntityTypes {
     PROPERTY = "PROPERTY"
 }
+
+export type AnyEntity = User | Property | Photo | Bill

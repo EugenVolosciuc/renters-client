@@ -1,6 +1,5 @@
-import { useAppSelector } from 'store'
 import { USER_ROLES } from 'types/User'
-import { selectAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/auth/slice'
 import { 
     redirectIfNotAuthed, 
     redirectUserBasedOnRole, 
@@ -16,7 +15,7 @@ type AuthRule = USER_ROLES[] | boolean
 // if logged in but not specified role = redirect to page specific to user role, if not logged in = redirect to login page
 export const useAuthRedirect = (authRule: AuthRule ) => {
     const { data, isLoading, isSuccess, isError, isUninitialized } = useCheckAuthQuery()
-    const user = useAppSelector(selectAuthedUser)
+    const user = useAuthedUser()
 
     const isServer = typeof window === 'undefined'
     const authWasChecked = !isLoading && (isSuccess || isError)

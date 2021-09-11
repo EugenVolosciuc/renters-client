@@ -12,5 +12,6 @@
     },
     "change-language": "Schimba limba",
     "logout": "Delogare",
-    "settings": "Setari"
+    "settings": "Setari",
+    "cancel": "Anuleaza"
 }

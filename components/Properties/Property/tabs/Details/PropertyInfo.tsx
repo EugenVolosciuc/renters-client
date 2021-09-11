@@ -1,31 +1,19 @@
-import React, { FC, ReactNode } from 'react'
-import { Row, Col, Tag, Typography } from 'antd'
+import { FC } from 'react'
+import { Tag } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { Property } from 'types/Property'
 import { capitalize, parseDBArray } from 'utils/string-manipulation'
-import LabelValuePresentation from 'components/misc/info-presentation/LabelValuePresentation'
+import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityInfoDisplay'
 
 type Props = {
     property: Property
 }
 
-type RenderFunc = (value: unknown) => string | number | ReactNode
-
-type PropertyInfoStructure = {
-    key: string,
-    label: string | number | ReactNode,
-    direction?: 'horizontal' | 'vertical',
-    valueAsLabel?: boolean
-    render?: RenderFunc
-}
-
-const { Title } = Typography
-
 const PropertyInfo: FC<Props> = ({ property }) => {
     const { t } = useTranslation()
 
-    const propertyInfoStructureList: PropertyInfoStructure[] = [
+    const propertyInfoStructureList: EntityInfoStructure[] = [
         {
             key: 'type',
             label: t('properties-common:property-type'),
@@ -77,30 +65,11 @@ const PropertyInfo: FC<Props> = ({ property }) => {
         }
     ]
 
-    return (
-        <Row gutter={[8, 8]}>
-            <Col>
-                <Title level={4}>{property.title}</Title>
-            </Col>
-            {propertyInfoStructureList.map(({ key, label, render, direction, valueAsLabel }) => {
-                const hasCustomRender = !!render
-
-                const initValue = (property as Record<string, any>)[key]
-
-                const value = hasCustomRender
-                    ? (render as RenderFunc)(initValue)
-                    : initValue
-
-                return <Col span={24} key={`${key}-${label}`}>
-                    <LabelValuePresentation
-                        label={valueAsLabel ? value : label}
-                        value={valueAsLabel ? undefined : value}
-                        direction={direction}
-                    />
-                </Col>
-            })}
-        </Row>
-    )
+    return <EntityInfoDisplay
+        entity={property}
+        entityInfoStructureList={propertyInfoStructureList}
+        title={property.title}
+    />
 }
 
 export default PropertyInfo

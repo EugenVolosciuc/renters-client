@@ -114,7 +114,7 @@ const SignupForm: FC<Props> = ({ userRole }) => {
                     {
                         validator: (_, value) =>
                             value ? Promise.resolve() : Promise.reject(new Error(t('auth:accept-agreement'))),
-                    },
+                    }
                 ]}
             >
                 <Checkbox>
