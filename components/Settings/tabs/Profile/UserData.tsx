@@ -1,6 +1,7 @@
 import React, { FC, MouseEventHandler } from 'react'
 import { Row, Col, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
+import dayjs from 'dayjs'
 
 import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityInfoDisplay'
 import UserLoader from 'components/misc/loaders/UserLoader'
@@ -33,6 +34,12 @@ const UserData: FC<Props> = ({ toggleEditMode }) => {
             key: 'phone',
             label: t('auth:phone'),
             direction: "vertical"
+        },
+        {
+            key: 'createdAt',
+            label: t('auth:sign-up-date'),
+            direction: "vertical",
+            render: (value) => dayjs(value as string).format('DD/MM/YYYY')
         }
     ]
 
