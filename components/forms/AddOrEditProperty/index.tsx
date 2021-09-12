@@ -3,8 +3,6 @@ import { useRouter } from 'next/router'
 import { Form, FormInstance, Row, Col, Button, message } from 'antd'
 import { useTranslation } from 'react-i18next'
 
-import { dbPhotoToAntdPhoto } from 'utils/parsers/dbPhotoToAntdPhoto'
-
 import {
     Title,
     Address,
@@ -20,12 +18,15 @@ import {
     PropertyPhotos
 } from 'components/forms/AddOrEditProperty/inputs'
 import { useCreatePropertyMutation, useModifyPropertyMutation } from 'store/property/service'
-import { Property, PropertyFormData } from 'types/Property'
+import { useSendSignupInvitationToRenterMutation } from 'store/auth/service'
+import { Property, PropertyFormData, PROPERTY_LABELS } from 'types/Property'
 import { handleError } from 'utils/handleError'
 import { propertyFormDataToReqData } from 'utils/parsers/propertyFormDataToReqData'
 import { parseDBArray } from 'utils/parsers/string-manipulation'
+import { dbPhotoToAntdPhoto } from 'utils/parsers/dbPhotoToAntdPhoto'
 import styles from 'components/forms/AddOrEditProperty/AddOrEditProperty.module.less'
 import { BILL_TYPES } from 'types/Bill'
+import { splitName } from 'utils/splitName'
 
 type Props = {
     form: FormInstance,
@@ -37,13 +38,25 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
     const { t } = useTranslation()
     const [createProperty, { isLoading: creatingProperty }] = useCreatePropertyMutation()
     const [modifyProperty, { isLoading: modifyingProperty }] = useModifyPropertyMutation()
+    const [sendSignupInvitationToRenter, { isLoading: sendingInvitation }] = useSendSignupInvitationToRenterMutation()
 
     const handleAddProperty = async (values: PropertyFormData) => {
         try {
             const dataToSend = propertyFormDataToReqData(values)
             const property = await createProperty(dataToSend).unwrap()
 
-            // TODO: if renter added, send invitation
+            if (values.addRenter) {
+                const { renterEmail, renterName } = values
+                const { firstName } = splitName(renterName as string)
+
+                await sendSignupInvitationToRenter({ 
+                    renterEmail: renterEmail as string, 
+                    renterFirstName: firstName, 
+                    propertyId: property.id,
+                    propertyTitle: property.title,
+                    propertyType: PROPERTY_LABELS[property.type]
+                })
+            }
 
             message.success(t('add-edit-property:property-added'))
             router.push('/app/properties/[id]', `/app/properties/${property.id}`)
@@ -120,7 +133,7 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            loading={creatingProperty || modifyingProperty}
+                            loading={creatingProperty || modifyingProperty || sendingInvitation}
                         >
                             {isUpdatePropertyForm
                                 ? t('properties-common:edit-property')

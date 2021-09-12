@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_BASE_URL } from 'constants/API_BASE_URL'
+import { PROPERTY_LABELS } from 'types/Property'
 import { User, LoginFormData, SignupFormData } from 'types/User'
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({ baseUrl: `${API_BASE_URL}/users`}),
+    baseQuery: fetchBaseQuery({ baseUrl: `${API_BASE_URL}/users` }),
     endpoints: builder => ({
         signup: builder.mutation<User, Partial<User>>({
             query: (userData) => ({
@@ -29,7 +30,7 @@ export const authApi = createApi({
             })
         }),
         checkAuth: builder.query<User, void>({
-            query: () => ({ 
+            query: () => ({
                 url: '/me',
                 credentials: "include"
             })
@@ -38,6 +39,23 @@ export const authApi = createApi({
             query: (body) => ({
                 url: '/me',
                 method: 'PATCH',
+                credentials: "include",
+                body
+            })
+        }),
+        sendSignupInvitationToRenter: builder.mutation<
+            void,
+            {
+                renterEmail: string,
+                renterFirstName: string,
+                propertyId: number,
+                propertyTitle: string,
+                propertyType: PROPERTY_LABELS
+            }
+        >({
+            query: (body) => ({
+                url: '/renter-invite',
+                method: 'POST',
                 credentials: "include",
                 body
             })
@@ -50,5 +68,6 @@ export const {
     useLogoutMutation,
     useSignupMutation,
     useCheckAuthQuery,
-    useModifyAuthedUserMutation
+    useModifyAuthedUserMutation,
+    useSendSignupInvitationToRenterMutation
 } = authApi
