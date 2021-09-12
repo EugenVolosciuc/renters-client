@@ -13,5 +13,6 @@
     "change-language": "Change language",
     "logout": "Logout",
     "settings": "Settings",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "not-specified": "Not specified"
 }

@@ -2,10 +2,16 @@
     "property-types": {
         "all": "All",
         "house": "house",
+        "house_a": "a house",
+        "house_the": "the house",
         "house_plural": "houses",
         "apartment": "apartment",
+        "apartment_a": "an apartment",
+        "apartment_the": "the apartment",
         "apartment_plural": "apartments",
         "office": "office",
+        "office_a": "an office",
+        "office_the": "the office",
         "office_plural": "offices"
     },
     "bill-types": {

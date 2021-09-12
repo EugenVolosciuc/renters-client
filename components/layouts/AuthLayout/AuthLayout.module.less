@@ -7,10 +7,33 @@
 
     .info-container {
         display: none;
+
         background-color: @primary-color;
 
         @media (min-width: @screen-lg-min) {
             display: block;
+        }
+    }
+
+    &.with-right-col-on-mobile {
+        height: auto;
+
+        @media (min-width: @screen-lg-min) {
+            height: 100vh;
+        }
+
+        .form-container,
+        .info-container {
+            display: block;
+            padding: 48px 0 8px 0;
+        }
+    }
+
+    &.invert-on-mobile {
+        flex-direction: column-reverse;
+
+        @media (min-width: @screen-lg-min) {
+            flex-direction: row;
         }
     }
 }

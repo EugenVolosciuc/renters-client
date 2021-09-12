@@ -17,12 +17,13 @@ export type EntityInfoStructure = {
 type Props = {
     entityInfoStructureList: EntityInfoStructure[],
     entity: AnyEntity,
-    title?: string
+    title?: string,
+    showUndefinedValues?: boolean
 }
 
 const { Title } = Typography
 
-const EntityInfoDisplay: FC<Props> = ({ entity, entityInfoStructureList, title }) => {
+const EntityInfoDisplay: FC<Props> = ({ entity, entityInfoStructureList, title, showUndefinedValues }) => {
     return (
         <Row gutter={[8, 8]}>
             {title &&
@@ -44,6 +45,7 @@ const EntityInfoDisplay: FC<Props> = ({ entity, entityInfoStructureList, title }
                         label={valueAsLabel ? value : label}
                         value={valueAsLabel ? undefined : value}
                         direction={direction}
+                        showUndefinedValue={showUndefinedValues}
                     />
                 </Col>
             })}

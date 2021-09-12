@@ -2,12 +2,18 @@
     "property-types": {
         "all": "Toate",
         "house": "casa",
+        "house_a": "o casa",
+        "house_the": "casa",
         "house_1": "case",
         "house_2": "case",
         "apartment": "apartament",
+        "apartment_a": "un apartament",
+        "apartment_the": "apartamentul",
         "apartment_1": "apartamente",
         "apartment_2": "apartamente",
         "office": "oficiu",
+        "office_a": "un oficiu",
+        "office_the": "oficiul",
         "office_1": "oficii",
         "office_2": "oficii"
     },

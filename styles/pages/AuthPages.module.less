@@ -2,7 +2,8 @@
 
 @logo-height-offset: 20%;
 
-.form-container-row {
+.form-container-row,
+.property-description-container {
     height: 100%;
     margin-top: -2%;
 
@@ -11,5 +12,22 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    .property-description-col {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        div {
+            color: white;
+            font-size: large;
+            font-weight: 400;
+        }
+
+        @media (min-width: @screen-lg-min) {
+            height: 100%;
+        }
     }
 }

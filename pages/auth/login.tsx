@@ -17,7 +17,7 @@ const Login = (_props: InferGetServerSidePropsType<typeof getServerSideProps>) =
 
     const leftColumnContent = (
         <Row className={styles['form-container-row']} justify="center" align="middle">
-            <Col xs={18} sm={14} md={10} lg={14} xl={10} className={styles['form-container-col']}>
+            <Col xs={20} sm={14} md={10} lg={16} xl={12} xxl={10} className={styles['form-container-col']}>
                 <Title level={3} className={styles['login-text']}>
                     {t('auth:login')}
                 </Title>

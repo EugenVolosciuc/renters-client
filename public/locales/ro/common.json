@@ -13,5 +13,6 @@
     "change-language": "Schimba limba",
     "logout": "Delogare",
     "settings": "Setari",
-    "cancel": "Anuleaza"
+    "cancel": "Anuleaza",
+    "not-specified": "Nespecificat"
 }
