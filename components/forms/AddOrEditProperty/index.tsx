@@ -75,10 +75,9 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
         }
     }
 
-    const isUpdatePropertyForm = !!property
     const formClassName = `${styles['add-edit-property-form']} add-edit-property-form`
 
-    const initialValues = isUpdatePropertyForm
+    const initialValues = !!property
         ? {
             title: property.title,
             address: property.address,
@@ -108,7 +107,7 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
             size="middle"
             requiredMark="optional"
             className={formClassName}
-            onFinish={isUpdatePropertyForm ? handleUpdateProperty : handleAddProperty}
+            onFinish={!!property ? handleUpdateProperty : handleAddProperty}
             initialValues={initialValues}
         >
             <Row gutter={8}>
@@ -126,14 +125,14 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
                     <Rent />
                     <BillTypes />
                     <PropertyPhotos form={form} />
-                    {!isUpdatePropertyForm && <AddRenter />}
+                    {!property && <AddRenter />}
                     <Form.Item>
                         <Button
                             type="primary"
                             htmlType="submit"
                             loading={creatingProperty || modifyingProperty || sendingInvitation}
                         >
-                            {isUpdatePropertyForm
+                            {!!property
                                 ? t('properties-common:edit-property')
                                 : t('properties-common:add-property')
                             }
