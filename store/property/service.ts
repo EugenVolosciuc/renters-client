@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import qs from 'qs'
 
 import { API_BASE_URL } from 'constants/API_BASE_URL'
 import { Property, PaginatedProperties, PropertyQueryOptions } from 'types/Property'

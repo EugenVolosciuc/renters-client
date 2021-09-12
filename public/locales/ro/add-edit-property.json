@@ -9,5 +9,10 @@
     "property-photos": "Imagini imobil (max {{maxCount}})",
     "images-must-have-max": "Imaginile pot avea maxim {{maxFileSize}} MB",
     "upload": "Upload",
-    "ground-floor": "parter"
+    "ground-floor": "parter",
+    "due-date": "Zi plata chirie",
+    "due-date_the": "Ziua de plata a chiriei",
+    "due-date-required": "Ziua de plata a chiriei este obligatorie",
+    "expiration-date": "Data expirare contract",
+    "expiration-date-required": "Data expirarii contractului este obligatorie"
 }

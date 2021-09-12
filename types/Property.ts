@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs"
+
 import { BILL_TYPES } from "types/Bill"
 import { User } from "types/User"
 import { Photo } from "types/Photo"
@@ -45,6 +47,8 @@ export interface PropertyFormData extends PropertyBaseData {
     addRenter: boolean;
     renterName?: string;
     renterEmail?: string;
+    dueDate?: number;
+    expirationDate?: Dayjs
 }
 
 export interface Property extends PropertyBaseData {

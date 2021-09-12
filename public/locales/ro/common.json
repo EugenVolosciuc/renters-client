@@ -14,5 +14,7 @@
     "logout": "Delogare",
     "settings": "Setari",
     "cancel": "Anuleaza",
-    "not-specified": "Nespecificat"
+    "not-specified": "Nespecificat",
+    "cannot-be-less-than": "{{item}} nu poate fi mai mic de {{number}}",
+    "cannot-be-greater-than": "{{item}} nu poate fi mai mare de {{number}}"
 }

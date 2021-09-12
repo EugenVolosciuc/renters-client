@@ -9,5 +9,10 @@
     "property-photos": "Property photos (max {{maxCount}})",
     "images-must-have-max": "Images must have max {{maxFileSize}} MB",
     "upload": "Upload",
-    "ground-floor": "ground floor"
+    "ground-floor": "ground floor",
+    "due-date": "Due date",
+    "due-date_the": "The due date",
+    "due-date-required": "Due date is required",
+    "expiration-date": "Contract expiration date",
+    "expiration-date-required": "Contract expiration date is required"
 }

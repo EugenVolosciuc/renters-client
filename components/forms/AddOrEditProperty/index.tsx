@@ -19,6 +19,7 @@ import {
 } from 'components/forms/AddOrEditProperty/inputs'
 import { useCreatePropertyMutation, useModifyPropertyMutation } from 'store/property/service'
 import { useSendSignupInvitationToRenterMutation } from 'store/auth/service'
+import { useCreateContractMutation } from 'store/contract/service'
 import { Property, PropertyFormData, PROPERTY_LABELS } from 'types/Property'
 import { handleError } from 'utils/handleError'
 import { propertyFormDataToReqData } from 'utils/parsers/propertyFormDataToReqData'
@@ -26,6 +27,7 @@ import { parseDBArray } from 'utils/parsers/string-manipulation'
 import { dbPhotoToAntdPhoto } from 'utils/parsers/dbPhotoToAntdPhoto'
 import styles from 'components/forms/AddOrEditProperty/AddOrEditProperty.module.less'
 import { BILL_TYPES } from 'types/Bill'
+import { Dayjs } from 'dayjs'
 
 type Props = {
     form: FormInstance,
@@ -38,6 +40,7 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
     const [createProperty, { isLoading: creatingProperty }] = useCreatePropertyMutation()
     const [modifyProperty, { isLoading: modifyingProperty }] = useModifyPropertyMutation()
     const [sendSignupInvitationToRenter, { isLoading: sendingInvitation }] = useSendSignupInvitationToRenterMutation()
+    const [createContract, { isLoading: contractLoading }] = useCreateContractMutation()
 
     const handleAddProperty = async (values: PropertyFormData) => {
         try {
@@ -45,7 +48,7 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
             const property = await createProperty(dataToSend).unwrap()
 
             if (values.addRenter) {
-                const { renterEmail, renterName } = values
+                const { renterEmail, renterName, dueDate, expirationDate } = values
 
                 await sendSignupInvitationToRenter({ 
                     renterEmail: renterEmail as string, 
@@ -53,6 +56,12 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
                     propertyId: property.id,
                     propertyTitle: property.title,
                     propertyType: PROPERTY_LABELS[property.type]
+                })
+
+                await createContract({
+                    propertyId: property.id,
+                    dueDate: dueDate as number,
+                    expirationDate: (expirationDate as Dayjs).toDate()
                 })
             }
 
@@ -130,7 +139,12 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            loading={creatingProperty || modifyingProperty || sendingInvitation}
+                            loading={
+                                creatingProperty 
+                                || modifyingProperty
+                                || sendingInvitation
+                                || contractLoading
+                            }
                         >
                             {!!property
                                 ? t('properties-common:edit-property')

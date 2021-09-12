@@ -36,7 +36,11 @@ const SignupForm: FC<Props> = ({ userRole, initialValues }) => {
                 role: userRole
             }
 
-            await signupUser(dataToSend).unwrap()
+            const user = await signupUser(dataToSend).unwrap()
+
+            if (userRole === USER_ROLES.RENTER) {
+                
+            }
 
             setRedirecting(true)
             message.success(t('auth:account-created-successfully'))

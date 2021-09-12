@@ -14,5 +14,7 @@
     "logout": "Logout",
     "settings": "Settings",
     "cancel": "Cancel",
-    "not-specified": "Not specified"
+    "not-specified": "Not specified",
+    "cannot-be-less-than": "{{item}} cannot be less than {{number}}",
+    "cannot-be-greater-than": "{{item}} cannot be greater than {{number}}"
 }

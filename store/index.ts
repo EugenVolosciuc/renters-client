@@ -11,6 +11,7 @@ import { authApi } from 'store/auth/service'
 import { photoApi } from 'store/photos/service'
 import { propertyApi } from 'store/property/service'
 import { cronApi } from 'store/cron/service'
+import { contractApi } from 'store/contract/service'
 import { errorHandlerMiddleware } from 'store/middleware/errorHandlerMiddleware'
 
 export const store = configureStore({
@@ -19,6 +20,7 @@ export const store = configureStore({
         [authApi.reducerPath]: authApi.reducer,
         [propertyApi.reducerPath]: propertyApi.reducer,
         [cronApi.reducerPath]: cronApi.reducer,
+        [contractApi.reducerPath]: contractApi.reducer,
         auth: authReducer
     },
     middleware: (getDefaultMiddleware) => {
@@ -27,6 +29,7 @@ export const store = configureStore({
             authApi.middleware,
             propertyApi.middleware,
             cronApi.middleware,
+            contractApi.middleware,
             errorHandlerMiddleware
         ])
     }
