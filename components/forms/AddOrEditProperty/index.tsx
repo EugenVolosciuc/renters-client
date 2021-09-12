@@ -26,7 +26,6 @@ import { parseDBArray } from 'utils/parsers/string-manipulation'
 import { dbPhotoToAntdPhoto } from 'utils/parsers/dbPhotoToAntdPhoto'
 import styles from 'components/forms/AddOrEditProperty/AddOrEditProperty.module.less'
 import { BILL_TYPES } from 'types/Bill'
-import { splitName } from 'utils/splitName'
 
 type Props = {
     form: FormInstance,
@@ -47,11 +46,10 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
 
             if (values.addRenter) {
                 const { renterEmail, renterName } = values
-                const { firstName } = splitName(renterName as string)
 
                 await sendSignupInvitationToRenter({ 
                     renterEmail: renterEmail as string, 
-                    renterFirstName: firstName, 
+                    renterName: renterName as string, 
                     propertyId: property.id,
                     propertyTitle: property.title,
                     propertyType: PROPERTY_LABELS[property.type]

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_BASE_URL } from 'constants/API_BASE_URL'
-import { PROPERTY_LABELS } from 'types/Property'
+import { Property, PROPERTY_LABELS } from 'types/Property'
 import { User, LoginFormData, SignupFormData } from 'types/User'
 
 export const authApi = createApi({
@@ -47,7 +47,7 @@ export const authApi = createApi({
             void,
             {
                 renterEmail: string,
-                renterFirstName: string,
+                renterName: string,
                 propertyId: number,
                 propertyTitle: string,
                 propertyType: PROPERTY_LABELS
@@ -59,6 +59,11 @@ export const authApi = createApi({
                 credentials: "include",
                 body
             })
+        }),
+        getInvitationData: builder.query<{ property: Property, renterEmail: string, renterName: string }, string>({
+            query: inviteId => ({
+                url: `/invitation-data/${inviteId}`
+            })
         })
     })
 })
@@ -69,5 +74,6 @@ export const {
     useSignupMutation,
     useCheckAuthQuery,
     useModifyAuthedUserMutation,
-    useSendSignupInvitationToRenterMutation
+    useSendSignupInvitationToRenterMutation,
+    useGetInvitationDataQuery
 } = authApi

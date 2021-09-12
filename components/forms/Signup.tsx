@@ -10,12 +10,13 @@ import { splitName } from 'utils/splitName'
 import { handleError } from 'utils/handleError'
 
 type Props = {
-    userRole: USER_ROLES
+    userRole: USER_ROLES,
+    initialValues?: Partial<SignupFormData>
 }
 
 const { Link: AntLink } = Typography
 
-const SignupForm: FC<Props> = ({ userRole }) => {
+const SignupForm: FC<Props> = ({ userRole, initialValues }) => {
     const [form] = Form.useForm()
     const router = useRouter()
     const { t } = useTranslation()
@@ -53,6 +54,7 @@ const SignupForm: FC<Props> = ({ userRole }) => {
             onFinish={handleSubmit}
             size="middle"
             requiredMark="optional"
+            {...(initialValues && { initialValues })}
         >
             <Form.Item
                 label={t('auth:name-surname')}
@@ -69,7 +71,7 @@ const SignupForm: FC<Props> = ({ userRole }) => {
                     { type: 'email', message: t('auth:email-type') }
                 ]}
             >
-                <Input />
+                <Input disabled={!!initialValues?.email} />
             </Form.Item>
             <Form.Item
                 name="phone"
