@@ -56,12 +56,14 @@ const AcceptRenterInvite = ({ inviteId }: InferGetServerSidePropsType<typeof get
         },
     ]
 
+    console.log('data', data)
+
     const propType = t(`properties-common:property-types.${PROPERTY_LABELS[data?.contract.property.type as PROPERTY_TYPES]}`, { context: 'a' })
     const propTitle = data?.contract.property.title
     const propAddress = data?.contract.property.address
-    const propAdmin = gettingInvitationData
-        ? ''
-        : `${data?.contract.property.administrator.firstName} ${data?.contract.property.administrator.lastName}`
+    const propAdmin = data
+        ? `${data?.contract.property?.administrator.firstName} ${data?.contract.property?.administrator.lastName}`
+        : ''
 
     const rightColumnContent = (
         <Row className={styles['property-description-container']} justify="center" align="middle">

@@ -4,7 +4,22 @@
     "renter": "chirias",
     "renter_1": "chiriasi",
     "greetings": {
-        "1": "Salutare {{name}}"
+        "1": "Salutare {{name}}",
+        "2": "Zi cu spor, {{name}}!",
+        "3": "Buna!",
+        "4": "Cum e ziua ta, {{name}}?",
+        "5": "Ziua buna, {{name}}",
+        "6": "Cum sta treaba?",
+        "7": "Bine ai revenit, {{name}}",
+        "8": "Hei!",
+        "9": "Buna ziua, {{name}}",
+        "10": "Servus!",
+        "11": "Toate bune, {{name}}?",
+        "12": "Ciao, {{name}}",
+        "13": "Salut {{name}}",
+        "14": "Ce mai faci, {{name}}?",
+        "15": "Zi faina, {{name}}",
+        "16": "Noroc, {{name}}"
     },
     "languages": {
         "english": "Engleza",

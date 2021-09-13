@@ -4,7 +4,22 @@
     "renter": "renter",
     "renter_plural": "renters",
     "greetings": {
-        "1": "Hello {{name}}"
+        "1": "Hello {{name}}",
+        "2": "How's it going, {{name}}?",
+        "3": "Howdy!",
+        "4": "What's new, {{name}}?",
+        "5": "Hey, {{name}}",
+        "6": "How have you been?",
+        "7": "What's up, {{name}}?",
+        "8": "Nice to see you!",
+        "9": "Hi!",
+        "10": "Good day to you, {{name}}",
+        "11": "What's going on, {{name}}",
+        "12": "Nice day, {{name}}",
+        "13": "Hiya!",
+        "14": "What's the craic, {{name}}?",
+        "15": "How do you do?",
+        "16": "Hey there"
     },
     "languages": {
         "english": "English",
