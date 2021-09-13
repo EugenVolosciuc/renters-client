@@ -22,7 +22,7 @@ export const redirectUserBasedOnRole = (user: User | null) => {
                 Router.push('/app/properties')
                 break
             case USER_ROLES.RENTER:
-                Router.push('/app/properties')
+                Router.push('/app/renter')
                 break
             case USER_ROLES.SUPER_ADMIN:
                 Router.push('/app/admin/dashboard')

@@ -1,3 +1,5 @@
+import { Contract } from "types/Contract"
+
 export enum USER_ROLES {
     SUPER_ADMIN = "SUPER_ADMIN",
     PROPERTY_ADMIN = "PROPERTY_ADMIN",
@@ -13,6 +15,8 @@ export interface User {
     role: USER_ROLES;
     createdAt: string;
     updatedAt: string;
+    rentContract?: Contract;
+    rentContractId?: number;
 }
 
 export interface LoginFormData {

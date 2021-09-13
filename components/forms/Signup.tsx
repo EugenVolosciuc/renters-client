@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next'
 
 import { useSignupMutation } from 'store/auth/service'
 import { useSignContractMutation } from 'store/contract/service'
-import { SignupFormData, USER_ROLES } from 'types/User'
+import { SignupFormData, User, USER_ROLES } from 'types/User'
 import { splitName } from 'utils/splitName'
 import { handleError } from 'utils/handleError'
 
@@ -32,18 +32,21 @@ const SignupForm: FC<Props> = ({ userRole, initialValues, contractId }) => {
         try {
             const { firstName, lastName } = splitName(name)
 
-            const dataToSend = {
+            const shouldSignContract = userRole === USER_ROLES.RENTER
+
+            const dataToSend: Partial<User> & { password: string } = {
                 firstName,
                 lastName,
                 email,
                 phone,
                 password,
-                role: userRole
+                role: userRole,
+                ...(shouldSignContract && { rentContractId: contractId })
             }
 
             const user = await signupUser(dataToSend).unwrap()
 
-            if (userRole === USER_ROLES.RENTER) {
+            if (shouldSignContract) {
                 await signContract({ id: contractId as number, renter: user })
             }
 

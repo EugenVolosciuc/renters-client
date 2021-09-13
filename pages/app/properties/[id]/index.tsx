@@ -1,17 +1,15 @@
-import { useRouter } from 'next/router'
-import Link from 'next/link'
 import type { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next'
+import Link from 'next/link'
 import { Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { USER_ROLES } from 'types/User'
-import { PropertiesPageTabType } from 'types/Property'
 import { EntityTypes } from 'types/misc'
 import { useAuthRedirect } from 'store/auth/useAuthRedirect'
 import { useGetPropertyQuery } from 'store/property/service'
 import AdminLayout from 'components/layouts/AdminLayout'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import PropertyContainer from 'components/Properties/Property/PropertyContainer'
 import { useNotFoundRedirect } from 'utils/userRedirects'
 
@@ -54,7 +52,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         props: { 
             id: parseInt(params.id as string, 10),
             query: {
-                type: (query.type || "ALL") as PropertiesPageTabType
+                type: query.type || "DETAILS"
             },
             ...(await serverSideTranslations(
                 locale as string,
