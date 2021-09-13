@@ -10,13 +10,14 @@ export const contractApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: `${API_BASE_URL}/contracts` }),
     tagTypes: ['Contracts'],
     endpoints: builder => ({
-        createContract: builder.mutation<Contract, { propertyId: Property['id'], dueDate: number, expirationDate: Date }>({
+        createContract: builder.mutation<Contract, { propertyId: Property['id'], dueDate: number, startDate: Date, expirationDate: Date }>({
             query: data => ({
                 url: `/?propertyId=${data.propertyId}`,
                 method: 'POST',
                 credentials: "include",
                 body: {
                     dueDate: data.dueDate,
+                    startDate: data.startDate,
                     expirationDate: data.expirationDate
                 }
             })

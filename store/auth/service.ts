@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_BASE_URL } from 'constants/API_BASE_URL'
-import { Property, PROPERTY_LABELS } from 'types/Property'
+import { Contract } from 'types/Contract'
+import { PROPERTY_LABELS } from 'types/Property'
 import { User, LoginFormData, SignupFormData } from 'types/User'
 
 export const authApi = createApi({
@@ -48,8 +49,8 @@ export const authApi = createApi({
             {
                 renterEmail: string,
                 renterName: string,
-                propertyId: number,
                 propertyTitle: string,
+                contractId: Contract['id'],
                 propertyType: PROPERTY_LABELS
             }
         >({
@@ -60,7 +61,7 @@ export const authApi = createApi({
                 body
             })
         }),
-        getInvitationData: builder.query<{ property: Property, renterEmail: string, renterName: string }, string>({
+        getInvitationData: builder.query<{ contract: Contract, renterEmail: string, renterName: string }, string>({
             query: inviteId => ({
                 url: `/invitation-data/${inviteId}`
             })

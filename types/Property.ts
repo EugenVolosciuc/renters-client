@@ -48,7 +48,8 @@ export interface PropertyFormData extends PropertyBaseData {
     renterName?: string;
     renterEmail?: string;
     dueDate?: number;
-    expirationDate?: Dayjs
+    startDate?: Dayjs;
+    expirationDate?: Dayjs;
 }
 
 export interface Property extends PropertyBaseData {

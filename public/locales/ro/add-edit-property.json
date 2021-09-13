@@ -2,6 +2,7 @@
     "property-added": "Imobil adaugat",
     "property-modified": "Imobil modificat",
     "add-renter": "Adauga un chirias",
+    "add-renter-tooltip": "Selecteaza aceasta optiune pentru a adauga un chirias nou imediat (o poti face mai tarziu, de asemenea). Astfel, va fi trimisa o invitatie prin email, valabila 3 zile. Dupa ce va fi acceptata, noul tau imobil va avea primul sau chirias!",
     "name-surname": "Prenume/nume",
     "name-required": "Numele chiriasului este obligatoriu",
     "email": "Email",
@@ -13,6 +14,8 @@
     "due-date": "Zi plata chirie",
     "due-date_the": "Ziua de plata a chiriei",
     "due-date-required": "Ziua de plata a chiriei este obligatorie",
+    "start-date": "Data incepere contract",
+    "start-date-required": "Data de incepere a contractului este obligatorie",
     "expiration-date": "Data expirare contract",
     "expiration-date-required": "Data expirarii contractului este obligatorie"
 }

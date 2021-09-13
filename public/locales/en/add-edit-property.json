@@ -2,6 +2,7 @@
     "property-added": "Property added",
     "property-modified": "Property modified",
     "add-renter": "Add a renter",
+    "add-renter-tooltip": "Check this option if you want to add a renter for this property (you can also do it at a later date). This will send an invitation by email for the renter, which is valid for three days. After accepting it, your newly added property will have its first renter!",
     "name-surname": "Name/surname",
     "name-required": "Renter's name is required",
     "email": "Email",
@@ -13,6 +14,8 @@
     "due-date": "Due date",
     "due-date_the": "The due date",
     "due-date-required": "Due date is required",
+    "start-date": "Contract starting date",
+    "start-date-required": "Contract starting date is required",
     "expiration-date": "Contract expiration date",
     "expiration-date-required": "Contract expiration date is required"
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Form, Input, Checkbox, InputNumber } from 'antd'
+import { Form, Input, Checkbox, InputNumber, Tooltip } from 'antd'
+import { QuestionCircleOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import DatePicker from 'components/misc/antd-overwrites/DatePicker'
 import dayjs from 'dayjs'
@@ -20,7 +21,12 @@ const AddRenter = () => {
     return (
         <>
             <Form.Item name="addRenter" valuePropName="checked">
-                <Checkbox onChange={toggleShowRenterInputs}>{t('add-edit-property:add-renter')}</Checkbox>
+                <Checkbox onChange={toggleShowRenterInputs}>
+                    {t('add-edit-property:add-renter')}
+                    <Tooltip title={t('add-edit-property:add-renter-tooltip')}>
+                        <QuestionCircleOutlined style={{ marginLeft: 8 }} />
+                    </Tooltip>
+                </Checkbox>
             </Form.Item>
             <Form.Item
                 name="renterName"
@@ -56,31 +62,48 @@ const AddRenter = () => {
                 className={renterInputsClassName}
                 rules={showRenterInputs
                     ? [
-                        { 
-                            required: true, 
-                            message: t('add-edit-property:due-date-required') 
+                        {
+                            required: true,
+                            message: t('add-edit-property:due-date-required')
                         },
-                        { 
-                            min: dueDateMin, 
-                            type: 'number', 
-                            message: t(
-                                'common:cannot-be-less-than', 
-                                { item: t('add-edit-property:due-date', { context: 'the'}), number: dueDateMin }
-                            ) 
-                        },
-                        { 
-                            max: dueDateMax, 
+                        {
+                            min: dueDateMin,
                             type: 'number',
                             message: t(
-                                'common:cannot-be-greater-than', 
-                                { item: t('add-edit-property:due-date', { context: 'the'}), number: dueDateMax }
-                            ) 
+                                'common:cannot-be-less-than',
+                                { item: t('add-edit-property:due-date', { context: 'the' }), number: dueDateMin }
+                            )
+                        },
+                        {
+                            max: dueDateMax,
+                            type: 'number',
+                            message: t(
+                                'common:cannot-be-greater-than',
+                                { item: t('add-edit-property:due-date', { context: 'the' }), number: dueDateMax }
+                            )
                         }
                     ]
                     : undefined
                 }
             >
                 <InputNumber style={{ width: '100%' }} />
+            </Form.Item>
+            <Form.Item
+                name="startDate"
+                label={t('add-edit-property:start-date')}
+                className={renterInputsClassName}
+                initialValue={dayjs()}
+                rules={showRenterInputs
+                    ? [
+                        {
+                            required: true,
+                            message: t('add-edit-property:start-date-required')
+                        }
+                    ]
+                    : undefined
+                }
+            >
+                <DatePicker style={{ width: '100%' }} />
             </Form.Item>
             <Form.Item
                 name="expirationDate"

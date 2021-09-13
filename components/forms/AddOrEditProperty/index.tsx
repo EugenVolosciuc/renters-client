@@ -48,20 +48,21 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
             const property = await createProperty(dataToSend).unwrap()
 
             if (values.addRenter) {
-                const { renterEmail, renterName, dueDate, expirationDate } = values
+                const { renterEmail, renterName, dueDate, startDate, expirationDate } = values
+
+                const contract = await createContract({
+                    propertyId: property.id,
+                    dueDate: dueDate as number,
+                    startDate: (startDate as Dayjs).toDate(),
+                    expirationDate: (expirationDate as Dayjs).toDate()
+                }).unwrap()
 
                 await sendSignupInvitationToRenter({ 
                     renterEmail: renterEmail as string, 
                     renterName: renterName as string, 
-                    propertyId: property.id,
+                    contractId: contract.id,
                     propertyTitle: property.title,
                     propertyType: PROPERTY_LABELS[property.type]
-                })
-
-                await createContract({
-                    propertyId: property.id,
-                    dueDate: dueDate as number,
-                    expirationDate: (expirationDate as Dayjs).toDate()
                 })
             }
 

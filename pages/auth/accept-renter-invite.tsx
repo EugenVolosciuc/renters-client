@@ -56,12 +56,12 @@ const AcceptRenterInvite = ({ inviteId }: InferGetServerSidePropsType<typeof get
         },
     ]
 
-    const propType = t(`properties-common:property-types.${PROPERTY_LABELS[data?.property.type as PROPERTY_TYPES]}`, { context: 'a' })
-    const propTitle = data?.property.title
-    const propAddress = data?.property.address
+    const propType = t(`properties-common:property-types.${PROPERTY_LABELS[data?.contract.property.type as PROPERTY_TYPES]}`, { context: 'a' })
+    const propTitle = data?.contract.property.title
+    const propAddress = data?.contract.property.address
     const propAdmin = gettingInvitationData
         ? ''
-        : `${data?.property.administrator.firstName} ${data?.property.administrator.lastName}`
+        : `${data?.contract.property.administrator.firstName} ${data?.contract.property.administrator.lastName}`
 
     const rightColumnContent = (
         <Row className={styles['property-description-container']} justify="center" align="middle">
@@ -85,7 +85,7 @@ const AcceptRenterInvite = ({ inviteId }: InferGetServerSidePropsType<typeof get
                             )}
                         </Paragraph>
                         <EntityInfoDisplay
-                            entity={data?.property as Property}
+                            entity={data?.contract.property as Property}
                             entityInfoStructureList={propertyInfoStructureList}
                             showUndefinedValues={false}
                         />
