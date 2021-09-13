@@ -21,10 +21,28 @@ export const contractApi = createApi({
                     expirationDate: data.expirationDate
                 }
             })
+        }),
+        modifyContract: builder.mutation<Contract, { contract: Partial<Contract>, id: Contract['id'] }>({
+            query: ({ contract, id }) => ({
+                url: `/${id}`,
+                method: 'PATCH',
+                credentials: "include",
+                body: contract
+            })
+        }),
+        signContract: builder.mutation<Contract, { renter: User, id: Contract['id'] }>({
+            query: ({ renter, id }) => ({
+                url: `/${id}/sign`,
+                method: 'PATCH',
+                credentials: "include",
+                body: renter
+            })
         })
     })
 })
 
 export const {
-    useCreateContractMutation
+    useCreateContractMutation,
+    useModifyContractMutation,
+    useSignContractMutation
 } = contractApi

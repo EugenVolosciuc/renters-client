@@ -5,23 +5,28 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
 import { useSignupMutation } from 'store/auth/service'
+import { useSignContractMutation } from 'store/contract/service'
 import { SignupFormData, USER_ROLES } from 'types/User'
 import { splitName } from 'utils/splitName'
 import { handleError } from 'utils/handleError'
 
 type Props = {
     userRole: USER_ROLES,
-    initialValues?: Partial<SignupFormData>
+    initialValues?: Partial<SignupFormData>,
+    contractId?: number
 }
 
 const { Link: AntLink } = Typography
 
-const SignupForm: FC<Props> = ({ userRole, initialValues }) => {
+const SignupForm: FC<Props> = ({ userRole, initialValues, contractId }) => {
     const [form] = Form.useForm()
     const router = useRouter()
     const { t } = useTranslation()
-    const [signupUser, { isLoading }] = useSignupMutation()
+    const [signupUser, { isLoading: signingUpUser }] = useSignupMutation()
+    const [signContract, { isLoading: signingContract }] = useSignContractMutation()
     const [redirecting, setRedirecting] = useState(false)
+
+    if (userRole === USER_ROLES.RENTER && !contractId) throw Error('Need contract Id for signup form if user role is renter')
 
     const handleSubmit = async ({ name, email, phone, password }: SignupFormData) => {
         try {
@@ -39,7 +44,7 @@ const SignupForm: FC<Props> = ({ userRole, initialValues }) => {
             const user = await signupUser(dataToSend).unwrap()
 
             if (userRole === USER_ROLES.RENTER) {
-                
+                await signContract({ id: contractId as number, renter: user })
             }
 
             setRedirecting(true)
@@ -124,16 +129,21 @@ const SignupForm: FC<Props> = ({ userRole, initialValues }) => {
                 ]}
             >
                 <Checkbox>
-                    {t('auth:i-read')} 
+                    {t('auth:i-read')}
                     <Link href="/docs/terms-and-conditions" passHref><AntLink> {t('auth:terms-and-conditions')}</AntLink></Link>
                     {' '}
                     {t('auth:and')}
-                    {' '} 
+                    {' '}
                     <Link href="/docs/privacy-policy" passHref><AntLink>{t('auth:privacy-policy')}</AntLink></Link>
                 </Checkbox>
             </Form.Item>
             <Form.Item>
-                <Button type="primary" htmlType="submit" loading={isLoading || redirecting} style={{ width: '100%' }}>
+                <Button
+                    type="primary"
+                    htmlType="submit"
+                    loading={signingUpUser || signingContract || redirecting}
+                    style={{ width: '100%' }}
+                >
                     {t('auth:submit')}
                 </Button>
             </Form.Item>
