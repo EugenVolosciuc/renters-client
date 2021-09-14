@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Form, FormInstance, Row, Col, Button, message } from 'antd'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +20,7 @@ import {
 import { useCreatePropertyMutation, useModifyPropertyMutation } from 'store/property/service'
 import { useSendSignupInvitationToRenterMutation } from 'store/auth/service'
 import { useCreateContractMutation } from 'store/contract/service'
-import { Property, PropertyFormData, PROPERTY_LABELS } from 'types/Property'
+import { Property, PropertyFormData, PROPERTY_LABELS, PROPERTY_TYPES } from 'types/Property'
 import { handleError } from 'utils/handleError'
 import { propertyFormDataToReqData } from 'utils/parsers/propertyFormDataToReqData'
 import { parseDBArray } from 'utils/parsers/string-manipulation'
@@ -41,6 +41,12 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
     const [modifyProperty, { isLoading: modifyingProperty }] = useModifyPropertyMutation()
     const [sendSignupInvitationToRenter, { isLoading: sendingInvitation }] = useSendSignupInvitationToRenterMutation()
     const [createContract, { isLoading: contractLoading }] = useCreateContractMutation()
+
+    const [showFloorInput, setShowFloorInput] = useState(
+        property 
+            ? property.type !== PROPERTY_TYPES.HOUSE 
+            : true
+    )
 
     const handleAddProperty = async (values: PropertyFormData) => {
         try {
@@ -85,6 +91,16 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
         }
     }
 
+    const handleTypeInputChange = (newType: PROPERTY_TYPES) => {
+        if (newType === PROPERTY_TYPES.HOUSE) {
+            setShowFloorInput(false)
+        } else setShowFloorInput(true)
+    }
+
+    const handleFormValuesChange = (changedValues: any, _allValues: PropertyFormData) => {
+        if (changedValues.type) handleTypeInputChange(changedValues.type as PROPERTY_TYPES)
+    }
+
     const formClassName = `${styles['add-edit-property-form']} add-edit-property-form`
 
     const initialValues = !!property
@@ -119,6 +135,7 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
             className={formClassName}
             onFinish={!!property ? handleUpdateProperty : handleAddProperty}
             initialValues={initialValues}
+            onValuesChange={handleFormValuesChange}
         >
             <Row gutter={8}>
                 <Col xs={24} md={18} lg={12} xl={6} xxl={5}>
@@ -129,7 +146,7 @@ const AddOrEditProperty: FC<Props> = ({ form, property }) => {
                     <NumberOfRooms />
                     <Description />
                     <FloorArea />
-                    <Floor />
+                    {showFloorInput && <Floor />}
                     {/* TODO: Remove Rent component from here, it should be set in the "Add a renter" section, */}
                     {/* as that's where the contract will be instantiated. */}
                     <Rent />
