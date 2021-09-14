@@ -14,8 +14,6 @@ const AdminMenu = () => {
                 return <PropertyAdministratorMenu />
             case USER_ROLES.SUPER_ADMIN:
                 return <SuperAdminMenu />
-            case USER_ROLES.RENTER:
-                return null
             default:
                 return null
         }

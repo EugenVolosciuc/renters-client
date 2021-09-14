@@ -9,20 +9,22 @@ const { Title, Link: AntLink } = Typography
 
 type Props = {
     shortLogo?: boolean,
-    withPageLoader?: boolean
+    withPageLoader?: boolean,
+    dark?: boolean
 }
 
-const Logo: FC<Props> = ({ shortLogo = false, withPageLoader = false }) => {
+const Logo: FC<Props> = ({ shortLogo = false, withPageLoader = false, dark = false }) => {
     const bigLogoStyles = `${styles['big-logo']} ${shortLogo ? '' : styles.show}`
+    const logoStyles = `${styles.logo} ${dark ? styles.dark : '' }`
 
     return (
         <Link href="/" passHref>
             <AntLink className={styles.link}>
-                <Title level={3} className={styles.logo}>
+                <Title level={3} className={logoStyles}>
                     <span>R</span>
                     <span className={bigLogoStyles}>enters</span>
                 </Title>
-                {withPageLoader && <PageLoader />}
+                {withPageLoader && <PageLoader dark={dark} />}
             </AntLink>
         </Link>
     )
