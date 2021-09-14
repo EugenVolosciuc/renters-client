@@ -3,7 +3,7 @@ import {
     useDispatch,
     useSelector,
 } from 'react-redux'
-import { configureStore, Action, ThunkAction } from "@reduxjs/toolkit"
+import { configureStore, combineReducers, Action, AnyAction, Reducer, ThunkAction } from "@reduxjs/toolkit"
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import authReducer from 'store/auth/slice'
 
@@ -14,15 +14,26 @@ import { cronApi } from 'store/cron/service'
 import { contractApi } from 'store/contract/service'
 import { errorHandlerMiddleware } from 'store/middleware/errorHandlerMiddleware'
 
+export const STORE_RESET_ACTION_TYPE = 'RESET_STORE'
+
+const combinedReducer = combineReducers({
+    [photoApi.reducerPath]: photoApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
+    [propertyApi.reducerPath]: propertyApi.reducer,
+    [cronApi.reducerPath]: cronApi.reducer,
+    [contractApi.reducerPath]: contractApi.reducer,
+    auth: authReducer
+})
+
+const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
+    if (action.type === STORE_RESET_ACTION_TYPE) {
+        state = {} as RootState
+    }
+    return combinedReducer(state, action)
+}
+
 export const store = configureStore({
-    reducer: {
-        [photoApi.reducerPath]: photoApi.reducer,
-        [authApi.reducerPath]: authApi.reducer,
-        [propertyApi.reducerPath]: propertyApi.reducer,
-        [cronApi.reducerPath]: cronApi.reducer,
-        [contractApi.reducerPath]: contractApi.reducer,
-        auth: authReducer
-    },
+    reducer: rootReducer,
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat([
             photoApi.middleware,

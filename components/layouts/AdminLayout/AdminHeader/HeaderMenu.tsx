@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 import { useLogoutMutation } from 'store/auth/service'
 import styles from 'components/layouts/AdminLayout/AdminLayout.module.less'
-import { useAppDispatch } from 'store'
+import { STORE_RESET_ACTION_TYPE, useAppDispatch } from 'store'
 import { setUser } from 'store/auth/slice'
 import { locales } from 'next-i18next.config'
 
@@ -22,6 +22,7 @@ const HeaderMenu = () => {
     const handleLogout = async () => {
         await logout()
         dispatch(setUser({ user: null }))
+        dispatch({ type: STORE_RESET_ACTION_TYPE })
 
         router.push('/')
     }
