@@ -4,6 +4,7 @@ import { BILL_TYPES } from "types/Bill"
 import { User } from "types/User"
 import { Photo } from "types/Photo"
 import { Pagination, ALL_TAB } from "types/misc"
+import { Contract } from "types/Contract"
 
 export enum PROPERTY_TYPES {
     HOUSE = "HOUSE",
@@ -59,6 +60,7 @@ export interface Property extends PropertyBaseData {
     renter: User | null;
     renterId: number | null;
     photos?: Photo[] | null;
+    contracts?: Contract[] | null;
 }
 
 export interface PaginatedProperties extends Pagination {

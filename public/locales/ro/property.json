@@ -1,4 +1,16 @@
 {
     "details": "Detalii",
-    "bills": "Facturi"
+    "bills": "Facturi",
+    "rental-history": "Istoric inchirieri",
+    "current-renter-info": "Informatii chirias curent",
+    "owner-info": "Informatii proprietar",
+    "name-surname": "Prenume/nume",
+    "email": "Email",
+    "phone": "Numar de telefon",
+    "contract": "contract",
+    "signed-at": "Semnat la data",
+    "expires-at": "Expira la data",
+    "due-date": "Ziua de plata a chiriei",
+    "download-contract": "Descarca contractul"
+
 }

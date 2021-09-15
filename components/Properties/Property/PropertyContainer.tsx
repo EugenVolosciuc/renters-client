@@ -3,16 +3,16 @@ import { Row, Col } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { capitalize } from 'utils/parsers/string-manipulation'
-import Tabs from 'components/layouts/AdminLayout/Tabs'
-import { usePageQuery } from 'components/layouts/AdminLayout/usePageQuery'
 import { PageQuery } from 'types/misc'
 import { Property } from 'types/Property'
 import {
     DetailsTab,
-    RenterTab,
+    RentalHistory,
     BillsTab
 } from 'components/Properties/Property/tabs'
 import ListLoader from 'components/misc/loaders/ListLoader'
+import Tabs from 'components/layouts/AdminLayout/Tabs'
+import { usePageQuery } from 'components/layouts/AdminLayout/usePageQuery'
 
 type Props = {
     query: {
@@ -29,24 +29,17 @@ const PropertyContainer: FC<Props> = ({ query: initialQuery, property }) => {
         {
             tab: t('property:details'),
             key: 'DETAILS',
-            content: (
-                <>
-                    {property
-                        ? <DetailsTab property={property} />
-                        : <ListLoader />
-                    }
-                </>
-            )
-        },
-        {
-            tab: capitalize(t('common:renter')),
-            key: 'RENTER',
-            content: <RenterTab />
+            content: property ? <DetailsTab property={property} /> : <ListLoader />
         },
         {
             tab: t('property:bills'),
             key: 'BILLS',
             content: <BillsTab />
+        },
+        {
+            tab: t('property:rental-history'),
+            key: 'RENTER',
+            content: property ? <RentalHistory property={property} /> : <ListLoader />
         }
     ]
 

@@ -8,6 +8,7 @@ export interface Contract {
     property: Property;
     propertyId: number;
     dueDate: number;
+    startDate: string;
     expirationDate: string;
     url?: string;
 }

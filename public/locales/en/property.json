@@ -1,4 +1,15 @@
 {
     "details": "Details",
-    "bills": "Bills"
+    "bills": "Bills",
+    "rental-history": "Rental history",
+    "current-renter-info": "Current renter info",
+    "owner-info": "Owner info",
+    "name-surname": "Name/surname",
+    "email": "Email",
+    "phone": "Phone number",
+    "contract": "contract",
+    "signed-at": "Signed at",
+    "expires-at": "Expires at",
+    "due-date": "Due date",
+    "download-contract": "Download contract"
 }
