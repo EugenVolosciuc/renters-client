@@ -2,8 +2,5 @@
     "no-properties": "No properties found",
     "no-photo-available": "No photo available",
     "view-property": "View property",
-    "send-bill-notification": "Send bill notification to renter",
-    "no-contracts": "It doesn't seem you rented this property before.",
-    "can-add-renter": "You can add a renter",
-    "here": "here"
+    "send-bill-notification": "Send bill notification to renter"
 }

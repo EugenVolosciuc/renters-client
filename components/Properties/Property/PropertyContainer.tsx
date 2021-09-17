@@ -2,9 +2,9 @@ import React, { FC } from 'react'
 import { Row, Col } from 'antd'
 import { useTranslation } from 'react-i18next'
 
-import { capitalize } from 'utils/parsers/string-manipulation'
 import { PageQuery } from 'types/misc'
 import { Property } from 'types/Property'
+import { User, USER_ROLES } from 'types/User'
 import {
     DetailsTab,
     RentalHistory,
@@ -13,6 +13,8 @@ import {
 import ListLoader from 'components/misc/loaders/ListLoader'
 import Tabs from 'components/layouts/AdminLayout/Tabs'
 import { usePageQuery } from 'components/layouts/AdminLayout/usePageQuery'
+import { useAuthedUser } from 'store/auth/slice'
+import { capitalize } from 'utils/parsers/string-manipulation'
 
 type Props = {
     query: {
@@ -24,6 +26,10 @@ type Props = {
 const PropertyContainer: FC<Props> = ({ query: initialQuery, property }) => {
     const { t } = useTranslation()
     const query = usePageQuery(initialQuery) as PageQuery
+
+    const authedUser = useAuthedUser()
+
+    const authedUserIsRenter = authedUser?.role === USER_ROLES.RENTER
 
     const tabsData = [
         {
@@ -37,7 +43,7 @@ const PropertyContainer: FC<Props> = ({ query: initialQuery, property }) => {
             content: <BillsTab />
         },
         {
-            tab: t('property:rental-history'),
+            tab: capitalize(t(`property:${authedUserIsRenter ? 'contract' : 'rental-history'}`)),
             key: 'RENTER',
             content: property ? <RentalHistory property={property} /> : <ListLoader />
         }

@@ -11,6 +11,12 @@
     "signed-at": "Semnat la data",
     "expires-at": "Expira la data",
     "due-date": "Ziua de plata a chiriei",
-    "download-contract": "Descarca contractul"
-
+    "download-contract": "Descarca contractul",
+    "history": "Istoric",
+    "signing-date": "Semnare contract",
+    "expiration-date": "Expirare contract",
+    "no-current-contract": "Acest imobil nu este inchiriat de nimeni in prezent.",
+    "no-contracts": "Se pare ca nu ai mai adaugat chiriasi pentru acest imobil.",
+    "can-add-renter": "Poti adauga un chirias nou",
+    "here": "aici."
 }

@@ -10,6 +10,7 @@ import History from 'components/Properties/Property/tabs/RentalHistory/History'
 import { getCurrentContractFromAllContracts } from 'utils/getCurrentContractFromAllContracts'
 import { useAuthedUser } from 'store/auth/slice'
 import { User, USER_ROLES } from 'types/User'
+import { getRenterContract } from 'utils/getRenterContract'
 
 type Props = {
     property: Property
@@ -19,31 +20,44 @@ const { Link: AntLink } = Typography
 
 const RentalHistory: FC<Props> = ({ property }) => {
     const { t } = useTranslation()
-
     const authedUser = useAuthedUser()
 
-    const authedUserIsRenter = authedUser.role === USER_ROLES.RENTER
+    const authedUserIsRenter = authedUser?.role === USER_ROLES.RENTER
+
+    const addRenterHere = (
+        <>
+            {t('property:can-add-renter')}
+            {' '}
+            <Link href="/" passHref>
+                <AntLink>
+                    {/* TODO: add link */}
+                    {t('property:here')}
+                </AntLink>
+            </Link>
+        </>
+    )
 
     if (!property.contracts || property.contracts.length < 1) {
-        return <Empty description={t('properties:no-properties')} />
+        return <Empty description={
+            <>
+                {t('property:no-contracts')}
+                {' '}
+                {addRenterHere}
+            </>
+        } />
     }
 
-    const currentContract = getCurrentContractFromAllContracts(property.contracts)
+    const mainContractToDisplay = authedUserIsRenter
+        ? getRenterContract(authedUser, property.contracts)
+        : getCurrentContractFromAllContracts(property.contracts)
 
     const noCurrentContractContent = (
         <Col span={24}>
             <Empty description={
                 <>
-                    {t('properties:no-contracts')}
+                    {t('property:no-current-contract')}
                     {' '}
-                    {t('properties:can-add-renter')}
-                    {' '}
-                    <Link href="/" passHref>
-                        <AntLink>
-                            {/* TODO: add link */}
-                            {t('')}
-                        </AntLink>
-                    </Link>
+                    {addRenterHere}
                 </>
             } />
         </Col>
@@ -51,29 +65,31 @@ const RentalHistory: FC<Props> = ({ property }) => {
 
     return (
         <Row gutter={[16, 16]}>
-            {currentContract
+            {mainContractToDisplay
                 ? (
                     <>
                         <Col xs={24} md={12} xxl={6}>
-                            <RenterOrAdminInfo 
+                            <RenterOrAdminInfo
                                 user={
                                     authedUserIsRenter
                                         ? property.administrator
-                                        : currentContract.renter as User
-                                } 
-                                isRenterInfo={!authedUserIsRenter} 
+                                        : mainContractToDisplay.renter as User
+                                }
+                                isRenterInfo={!authedUserIsRenter}
                             />
                         </Col>
                         <Col xs={24} md={12} xxl={6}>
-                            <ContractInfo contract={currentContract} />
+                            <ContractInfo contract={mainContractToDisplay} />
                         </Col>
                     </>
                 )
                 : noCurrentContractContent
             }
-            <Col xs={24} xxl={12}>
-                <History />
-            </Col>
+            {!authedUserIsRenter &&
+                <Col span={24}>
+                    <History contracts={property.contracts} />
+                </Col>
+            }
         </Row>
 
     )

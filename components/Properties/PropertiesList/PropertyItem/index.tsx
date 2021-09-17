@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next'
 
 import { Property } from 'types/Property'
 import { Photo } from 'types/Photo'
-import PropertyItemDescription from 'components/Properties/PropertyItem/PropertyItemDescription'
-import styles from 'components/Properties/PropertyItem/PropertyItem.module.less'
+import PropertyItemDescription from 'components/Properties/PropertiesList/PropertyItem/PropertyItemDescription'
+import styles from 'components/Properties/PropertiesList/PropertyItem/PropertyItem.module.less'
 import emptyCover from 'public/images/empty.jpg'
 
 type Props = {

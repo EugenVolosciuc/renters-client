@@ -3,7 +3,7 @@ import { Row, Col, Typography } from 'antd'
 import { Property } from 'types/Property'
 import { useTranslation } from 'react-i18next'
 
-import styles from 'components/Properties/PropertyItem/PropertyItem.module.less'
+import styles from 'components/Properties/PropertiesList/PropertyItem/PropertyItem.module.less'
 
 type Props = {
     property: Property

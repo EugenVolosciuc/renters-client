@@ -11,5 +11,14 @@
     "signed-at": "Signed at",
     "expires-at": "Expires at",
     "due-date": "Due date",
-    "download-contract": "Download contract"
+    "download-contract": "Download contract",
+    "history": "History",
+    "signing-date": "Signing date",
+    "expiration-date": "Expiration date",
+    "no-current-contract": "This property is not rented by anyone currently.",
+    "no-contracts": "It doesn't seem you rented this property before.",
+    "can-add-renter": "You can add a renter",
+    "here": "here.",
+    "renter-email": "Renter's email",
+    "renter-phone": "Renter's phone"
 }

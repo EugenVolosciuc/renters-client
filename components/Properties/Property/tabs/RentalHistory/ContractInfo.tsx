@@ -1,5 +1,6 @@
 import { FC } from 'react'
-import { Card } from "antd"
+import Link from 'next/link'
+import { Card, Typography } from "antd"
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
 
@@ -8,6 +9,7 @@ import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityIn
 import { Contract } from 'types/Contract'
 
 const { Meta } = Card
+const { Link: AntLink } = Typography
 
 type Props = {
     contract: Contract
@@ -24,11 +26,13 @@ const ContractInfo: FC<Props> = ({ contract }) => {
         {
             key: 'startDate',
             label: t('property:signed-at'),
+            // eslint-disable-next-line react/display-name
             render: (value) => dayjs(value as string).format('YYYY-MM-DD')
         },
         {
             key: 'expirationDate',
             label: t('property:expires-at'),
+            // eslint-disable-next-line react/display-name
             render: (value) => dayjs(value as string).format('YYYY-MM-DD')
         }
     ]
@@ -36,7 +40,14 @@ const ContractInfo: FC<Props> = ({ contract }) => {
     if (contract.url) {
         contractInfoStructureList.push({
             key: 'url',
-            label: t('property:download-contract'),
+            label: '',
+            valueAsLabel: true,
+            // eslint-disable-next-line react/display-name
+            render: (value) => (
+                <Link href="/" passHref>
+                    <AntLink>{t('property:download-contract')}</AntLink>
+            </Link>
+            )
         })
     }
 

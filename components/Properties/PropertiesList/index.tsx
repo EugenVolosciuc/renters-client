@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { Property } from 'types/Property'
 import ListLoader from 'components/misc/loaders/ListLoader'
-import PropertyItem from 'components/Properties/PropertyItem'
+import PropertyItem from 'components/Properties/PropertiesList/PropertyItem'
 import styles from 'components/Properties/PropertiesList/PropertiesList.module.less'
 
 type Props = {
