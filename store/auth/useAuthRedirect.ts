@@ -34,4 +34,6 @@ export const useAuthRedirect = (authRule: AuthRule ) => {
                 break
         }
     }
+
+    if (!userNotAuthed && authRule === false) redirectUserBasedOnRole(user)
 }

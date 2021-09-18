@@ -21,9 +21,9 @@ const History: FC<Props> = ({ contracts }) => {
             title: capitalize(t('common:renter')),
             dataIndex: 'renter-name',
             // eslint-disable-next-line react/display-name
-            render: (_value: unknown, contract: Contract) => (
-                `${contract.renter?.firstName} ${contract.renter?.lastName}`
-            )
+            render: (_value: unknown, contract: Contract) => {
+                return contract.renter ? `${contract.renter?.firstName} ${contract.renter?.lastName}` : '-'
+            }
         },
         {
             title: capitalize(t('property:renter-email')),
@@ -32,7 +32,7 @@ const History: FC<Props> = ({ contracts }) => {
             render: (_value: unknown, contract: Contract) => {
                 const email = contract.renter?.email
                 
-                return <a href={`mailto:${email}`}>{email}</a>
+                return email ? <a href={`mailto:${email}`}>{email}</a> : '-'
             }
         },
         {
@@ -41,10 +41,8 @@ const History: FC<Props> = ({ contracts }) => {
             // eslint-disable-next-line react/display-name
             render: (_value: unknown, contract: Contract) => {
                 const phone = contract.renter?.phone
-
-                if (phone) return <a href={`tel:${phone}`}>{phone}</a>
-
-                return '-'
+                
+                return phone ? <a href={`tel:${phone}`}>{phone}</a> : '-'
             }
         },
         {

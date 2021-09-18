@@ -4,9 +4,9 @@ import { Card, Typography } from "antd"
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
 
-import { capitalize } from "utils/parsers/string-manipulation"
 import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityInfoDisplay'
 import { Contract } from 'types/Contract'
+import styles from 'components/Properties/Property/tabs/RentalHistory/RentalHistory.module.less'
 
 const { Meta } = Card
 const { Link: AntLink } = Typography
@@ -43,7 +43,7 @@ const ContractInfo: FC<Props> = ({ contract }) => {
             label: '',
             valueAsLabel: true,
             // eslint-disable-next-line react/display-name
-            render: (value) => (
+            render: (_value) => (
                 <Link href="/" passHref>
                     <AntLink>{t('property:download-contract')}</AntLink>
             </Link>
@@ -52,9 +52,9 @@ const ContractInfo: FC<Props> = ({ contract }) => {
     }
 
     return (
-        <Card>
+        <Card className={styles.card}>
             <Meta
-                title={capitalize(t('property:contract'))}
+                title={t('property:current-contract-info')}
                 description={
                     <EntityInfoDisplay
                         entity={contract}

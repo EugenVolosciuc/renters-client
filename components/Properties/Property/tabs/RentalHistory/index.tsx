@@ -28,9 +28,12 @@ const RentalHistory: FC<Props> = ({ property }) => {
         <>
             {t('property:can-add-renter')}
             {' '}
-            <Link href="/" passHref>
+            <Link 
+                href="/app/properties/[id]/add-renter" 
+                as={`/app/properties/${property.id}/add-renter`} 
+                passHref
+            >
                 <AntLink>
-                    {/* TODO: add link */}
                     {t('property:here')}
                 </AntLink>
             </Link>
@@ -68,17 +71,19 @@ const RentalHistory: FC<Props> = ({ property }) => {
             {mainContractToDisplay
                 ? (
                     <>
-                        <Col xs={24} md={12} xxl={6}>
+                        <Col xs={24} md={12}>
                             <RenterOrAdminInfo
                                 user={
                                     authedUserIsRenter
                                         ? property.administrator
-                                        : mainContractToDisplay.renter as User
+                                        : mainContractToDisplay.renter
                                 }
                                 isRenterInfo={!authedUserIsRenter}
+                                propertyId={property.id}
+                                contractId={mainContractToDisplay.id}
                             />
                         </Col>
-                        <Col xs={24} md={12} xxl={6}>
+                        <Col xs={24} md={12}>
                             <ContractInfo contract={mainContractToDisplay} />
                         </Col>
                     </>
@@ -86,7 +91,7 @@ const RentalHistory: FC<Props> = ({ property }) => {
                 : noCurrentContractContent
             }
             {!authedUserIsRenter &&
-                <Col span={24}>
+                <Col xs={24}>
                     <History contracts={property.contracts} />
                 </Col>
             }

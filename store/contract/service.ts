@@ -8,7 +8,7 @@ import { User } from 'types/User'
 export const contractApi = createApi({
     reducerPath: 'contractApi',
     baseQuery: fetchBaseQuery({ baseUrl: `${API_BASE_URL}/contracts` }),
-    tagTypes: ['Contracts'],
+    tagTypes: ['Contracts', 'Properties'],
     endpoints: builder => ({
         createContract: builder.mutation<Contract, { propertyId: Property['id'], dueDate: number, startDate: Date, expirationDate: Date }>({
             query: data => ({
@@ -20,7 +20,8 @@ export const contractApi = createApi({
                     startDate: data.startDate,
                     expirationDate: data.expirationDate
                 }
-            })
+            }),
+            invalidatesTags: (_res, _err, data) => [{ type: 'Properties', id: data.propertyId }, 'Contracts']
         }),
         modifyContract: builder.mutation<Contract, { contract: Partial<Contract>, id: Contract['id'] }>({
             query: ({ contract, id }) => ({
@@ -28,7 +29,8 @@ export const contractApi = createApi({
                 method: 'PATCH',
                 credentials: "include",
                 body: contract
-            })
+            }),
+            invalidatesTags: ['Properties', 'Contracts']
         }),
         signContract: builder.mutation<Contract, { renter: User, id: Contract['id'] }>({
             query: ({ renter, id }) => ({

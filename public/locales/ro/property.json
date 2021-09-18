@@ -3,11 +3,11 @@
     "bills": "Facturi",
     "rental-history": "Istoric inchirieri",
     "current-renter-info": "Informatii chirias curent",
+    "current-contract-info": "Informatii contract curent",
     "owner-info": "Informatii proprietar",
     "name-surname": "Prenume/nume",
     "email": "Email",
     "phone": "Numar de telefon",
-    "contract": "contract",
     "signed-at": "Semnat la data",
     "expires-at": "Expira la data",
     "due-date": "Ziua de plata a chiriei",
@@ -18,5 +18,10 @@
     "no-current-contract": "Acest imobil nu este inchiriat de nimeni in prezent.",
     "no-contracts": "Se pare ca nu ai mai adaugat chiriasi pentru acest imobil.",
     "can-add-renter": "Poti adauga un chirias nou",
-    "here": "aici."
+    "here": "aici.",
+    "renter-email": "Email-ul chiriasului",
+    "renter-phone": "Nr. de telefon al chiriasului",
+    "invitation-not-accepted-yet": "Invitatia de inchiriere nu a fost inca acceptata.",
+    "want-to-send": "Doresti sa trimiti ",
+    "another-invitation": "o alta invitatie?"
 }

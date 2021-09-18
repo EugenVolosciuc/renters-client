@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, FC } from 'react'
 import { Form, Input, Checkbox, InputNumber, Tooltip } from 'antd'
 import { QuestionCircleOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
@@ -7,11 +7,15 @@ import dayjs from 'dayjs'
 
 import styles from 'components/forms/AddOrEditProperty/AddOrEditProperty.module.less'
 
+type Props = {
+    withAddCheckbox?: boolean
+}
+
 const dueDateMin = 1
 const dueDateMax = 31
 
-const AddRenter = () => {
-    const [showRenterInputs, setShowRenterInputs] = useState(false)
+const AddRenter: FC<Props> = ({ withAddCheckbox = true }) => {
+    const [showRenterInputs, setShowRenterInputs] = useState(!withAddCheckbox)
     const { t } = useTranslation()
 
     const renterInputsClassName = `${styles['renter-input']} ${showRenterInputs ? styles.show : ''}`
@@ -20,14 +24,16 @@ const AddRenter = () => {
 
     return (
         <>
-            <Form.Item name="addRenter" valuePropName="checked">
-                <Checkbox onChange={toggleShowRenterInputs}>
-                    {t('add-edit-property:add-renter')}
-                    <Tooltip title={t('add-edit-property:add-renter-tooltip')}>
-                        <QuestionCircleOutlined style={{ marginLeft: 8 }} />
-                    </Tooltip>
-                </Checkbox>
-            </Form.Item>
+            {withAddCheckbox &&
+                <Form.Item name="addRenter" valuePropName="checked">
+                    <Checkbox onChange={toggleShowRenterInputs}>
+                        {t('add-edit-property:add-renter')}
+                        <Tooltip title={t('add-edit-property:add-renter-tooltip')}>
+                            <QuestionCircleOutlined style={{ marginLeft: 8 }} />
+                        </Tooltip>
+                    </Checkbox>
+                </Form.Item>
+            }
             <Form.Item
                 name="renterName"
                 label={t('add-edit-property:name-surname')}

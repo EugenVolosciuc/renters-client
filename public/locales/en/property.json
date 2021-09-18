@@ -3,11 +3,11 @@
     "bills": "Bills",
     "rental-history": "Rental history",
     "current-renter-info": "Current renter info",
+    "current-contract-info": "Current contract info",
     "owner-info": "Owner info",
     "name-surname": "Name/surname",
     "email": "Email",
     "phone": "Phone number",
-    "contract": "contract",
     "signed-at": "Signed at",
     "expires-at": "Expires at",
     "due-date": "Due date",
@@ -20,5 +20,8 @@
     "can-add-renter": "You can add a renter",
     "here": "here.",
     "renter-email": "Renter's email",
-    "renter-phone": "Renter's phone"
+    "renter-phone": "Renter's phone",
+    "invitation-not-accepted-yet": "The rental invitation you sent was not accepted yet.",
+    "want-to-send": "Do you want to send ",
+    "another-invitation": "another invitation?"
 }
