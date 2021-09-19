@@ -8,7 +8,10 @@ export const usePageLoading = () => {
     const checkIfDefaultLocale = (url: string) => {
         const locale = url.split('/')[1]
 
-        return [locale === router.defaultLocale, locale]
+        return [
+            !(router.locales as string[]).includes(locale), 
+            locale
+        ]
     }
 
     useEffect(() => {
