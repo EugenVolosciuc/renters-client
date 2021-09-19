@@ -5,9 +5,23 @@ export const usePageLoading = () => {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
 
+    const checkIfDefaultLocale = (url: string) => {
+        const locale = url.split('/')[1]
+
+        return [locale === router.defaultLocale, locale]
+    }
+
     useEffect(() => {
-        const handleStart = (url: string) => (url !== router.asPath) && setLoading(true);
-        const handleComplete = (url: string) => (url === router.asPath) && setLoading(false);
+        const handleStart = (url: string) => (url !== router.asPath) && setLoading(true)
+        const handleComplete = (url: string) => {
+            const [isDefaultLocale, locale] = checkIfDefaultLocale(url)
+
+            const urlsAreTheSame = isDefaultLocale
+                ? url === router.asPath
+                : url === `/${locale}${router.asPath}`
+
+            return urlsAreTheSame && setLoading(false)
+        }
 
         router.events.on('routeChangeStart', handleStart)
         router.events.on('routeChangeComplete', handleComplete)

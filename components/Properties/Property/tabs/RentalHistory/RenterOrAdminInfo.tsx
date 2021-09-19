@@ -26,17 +26,35 @@ const RenterOrAdminInfo: FC<Props> = ({ user, isRenterInfo, propertyId, contract
         {
             key: 'name',
             label: t('property:name-surname'),
-            render: (_value) => (
+            render: _value => (
                 `${user?.firstName} ${user?.lastName}`
             )
         },
         {
             key: 'email',
             label: t('property:email'),
+            // eslint-disable-next-line react/display-name
+            render: value => (
+                <a 
+                    className={styles['contract-contact']} 
+                    href={`mailto:${value}`}
+                >
+                    {value as string}
+                </a>
+            )
         },
         {
             key: 'phone',
             label: t('property:phone'),
+            // eslint-disable-next-line react/display-name
+            render: value => (
+                <a 
+                    className={styles['contract-contact']} 
+                    href={`tel:${value}`}
+                >
+                    {value as string}
+                </a>
+            )
         }
     ]
 
