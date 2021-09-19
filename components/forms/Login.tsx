@@ -48,7 +48,7 @@ const LoginForm = () => {
                 <Input autoComplete="username" />
             </Form.Item>
             <Form.Item
-                label="Password"
+                label={t('auth:password')}
                 name="password"
                 rules={[{ required: true, message: t('auth:password-required') }]}
             >

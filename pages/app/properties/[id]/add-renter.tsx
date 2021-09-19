@@ -11,7 +11,7 @@ import { AddRenter } from 'components/forms/AddOrEditProperty/inputs'
 import { useAuthRedirect } from 'store/auth/useAuthRedirect'
 import { useGetPropertyQuery } from 'store/property/service'
 import { useSendSignupInvitationToRenterMutation } from 'store/auth/service'
-import { useCreateContractMutation } from 'store/contract/service'
+import { useCreateContractMutation, useModifyContractMutation } from 'store/contract/service'
 import { useNotFoundRedirect } from 'utils/userRedirects'
 import { USER_ROLES } from 'types/User'
 import { EntityTypes } from 'types/misc'
@@ -23,8 +23,8 @@ const AddRenterForProperty = ({ propertyId, contractId }: InferGetServerSideProp
     const router = useRouter()
     const { data: property, isError, isLoading } = useGetPropertyQuery(propertyId)
     const [sendSignupInvitationToRenter, { isLoading: sendingInvitation }] = useSendSignupInvitationToRenterMutation()
-    const [createContract, { isLoading: contractLoading }] = useCreateContractMutation()
-    // TODO: add modify contract mutation hook to update contract
+    const [createContract, { isLoading: contractCreationLoading }] = useCreateContractMutation()
+    const [modifyContract, { isLoading: contractUpdateLoading }] = useModifyContractMutation()
 
     useNotFoundRedirect(isError, EntityTypes.PROPERTY)
     useAuthRedirect([USER_ROLES.PROPERTY_ADMIN])
@@ -36,21 +36,22 @@ const AddRenterForProperty = ({ propertyId, contractId }: InferGetServerSideProp
             const { renterEmail, renterName, dueDate, startDate, expirationDate } = values
 
             let contractIdToUse: number
-
             const haveContractId = !!contractId
+            const contractDataToSend = {
+                dueDate: dueDate as number,
+                startDate: (startDate as Dayjs).toDate(),
+                expirationDate: (expirationDate as Dayjs).toDate()
+            }
 
             if (haveContractId) {
+                await modifyContract({ contract: contractDataToSend, id: contractId })
                 contractIdToUse = contractId
-
-                // TODO: update contract
             } else {
                 const contract = await createContract({
                     propertyId: (property as Property).id,
-                    dueDate: dueDate as number,
-                    startDate: (startDate as Dayjs).toDate(),
-                    expirationDate: (expirationDate as Dayjs).toDate()
+                    ...contractDataToSend
                 }).unwrap()
-                
+
                 contractIdToUse = contract.id
             }
 
@@ -88,7 +89,11 @@ const AddRenterForProperty = ({ propertyId, contractId }: InferGetServerSideProp
                                     <Button
                                         type="primary"
                                         htmlType="submit"
-                                        loading={sendingInvitation || contractLoading}
+                                        loading={
+                                            sendingInvitation 
+                                            || contractCreationLoading
+                                            || contractUpdateLoading
+                                        }
                                     >
                                         {t('add-edit-property:add-renter')}
                                     </Button>

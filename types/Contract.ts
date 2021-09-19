@@ -12,3 +12,15 @@ export interface Contract {
     expirationDate: string;
     url?: string;
 }
+
+export interface ContractDto {
+    id: number;
+    createdAt: string;
+    renter?: User;
+    property: Property;
+    propertyId: number;
+    dueDate: number;
+    startDate: Date;
+    expirationDate: Date;
+    url?: string;
+}
