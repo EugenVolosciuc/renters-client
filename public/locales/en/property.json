@@ -23,5 +23,20 @@
     "renter-phone": "Renter's phone",
     "invitation-not-accepted-yet": "The rental invitation you sent was not accepted yet.",
     "want-to-send": "Do you want to send ",
-    "another-invitation": "another invitation?"
+    "another-invitation": "another invitation?",
+    "terminate-contract": "Terminate contract",
+    "extend-contract": "Extend contract",
+    "delete-contract": "Delete contract",
+    "terminate": "Terminate",
+    "extend": "Extend",
+    "choose-new-expiration-date": "Select a new expiration date to extend the duration of your current contract.",
+    "contract-extended-successfully": "Contract extended successfully",
+    "want-terminate-contract-title": "Are you sure you want to terminate this contract?",
+    "want-terminate-contract-with-renter-content": "This will remove the current renter from the property and set the expiration date of the contract to today's date.",
+    "want-terminate-contract-without-renter-content": "Because this contract wasn't signed by any potential renter, it will be deleted entirely.",
+    "contract-terminated-successfully": "Contract terminated successfully",
+    "want-delete-contract-title": "Are you sure you want to delete this contract?",
+    "want-delete-contract-with-renter-content": "This will terminate the contract and delete it entirely from the platform, including from the rental history (the current renter will be removed from this property).",
+    "want-delete-contract-without-renter-content": "This will delete the contract entirely from the platform, including from the rental history.",
+    "contract-deleted-successfully": "Contract deleted successfully"
 }

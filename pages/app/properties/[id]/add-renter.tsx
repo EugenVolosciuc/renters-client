@@ -44,11 +44,11 @@ const AddRenterForProperty = ({ propertyId, contractId }: InferGetServerSideProp
             }
 
             if (haveContractId) {
-                await modifyContract({ contract: contractDataToSend, id: contractId })
+                await modifyContract({ contract: contractDataToSend, contractId, propertyId })
                 contractIdToUse = contractId
             } else {
                 const contract = await createContract({
-                    propertyId: (property as Property).id,
+                    propertyId: propertyId,
                     ...contractDataToSend
                 }).unwrap()
 

@@ -56,7 +56,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
             },
             ...(await serverSideTranslations(
                 locale as string,
-                ['common', 'properties-common', 'property']
+                ['common', 'properties-common', 'property', 'add-edit-property']
             ))
         }
     }

@@ -77,7 +77,7 @@ const RenterOrAdminInfo: FC<Props> = ({ user, isRenterInfo, propertyId, contract
     )
 
     return (
-        <Card>
+        <Card className={styles.card}>
             <Meta
                 title={t(`property:${isRenterInfo ? 'current-renter-info' : 'owner-info'}`)}
                 description={

@@ -18,6 +18,7 @@
     "start-date-required": "Contract starting date is required",
     "expiration-date": "Contract expiration date",
     "expiration-date-required": "Contract expiration date is required",
+    "expiration-date-is-before-today": "New expiration date should be later than current date",
     "add-a-renter-for": "Add a renter for {{propertyTitle}}",
     "rental-invitation-sent": "Rental invitation sent"
 }

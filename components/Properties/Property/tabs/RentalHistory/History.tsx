@@ -1,20 +1,72 @@
 import { FC } from "react"
-import Link from 'next/link'
-import { Card, Table, Row, Col, Button } from "antd"
+import { useRouter } from "next/router"
+import { Card, Table, Row, Col, Button, Modal, message } from "antd"
+import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
+import dayjs from "dayjs"
 
 import { Contract } from 'types/Contract'
-import dayjs from "dayjs"
 import { capitalize } from "utils/parsers/string-manipulation"
+import { handleError } from "utils/handleError"
+import { useModifyPropertyMutation } from "store/property/service"
+import { useDeleteContractMutation } from "store/contract/service"
 
 type Props = {
     contracts: Contract[]
 }
 
 const { Meta } = Card
+const { confirm } = Modal
 
 const History: FC<Props> = ({ contracts }) => {
     const { t } = useTranslation()
+    const router = useRouter()
+    const [modifyProperty] = useModifyPropertyMutation()
+    const [deleteContract] = useDeleteContractMutation()
+
+    const handleDeleteContract = (contract: Contract) => {
+        return new Promise<void>(async resolve => {
+            const contractHasRenter = !!contract.renter
+
+            try {
+                if (contractHasRenter) {
+                    await modifyProperty({
+                        id: contract.propertyId,
+                        property: { renter: null }
+                    })
+                }
+
+                await deleteContract(contract.id)
+
+                // TODO: needs same fix as written in ExtendContract component
+                router.reload()
+
+                message.success(t('property:contract-deleted-successfully'))
+            } catch (error) {
+                handleError(error)
+            }
+
+            resolve()
+        })
+    }
+
+    const showDeleteContractModal = (contract: Contract) => {
+        const contractHasRenter = !!contract.renter
+
+        const content = `${contractHasRenter 
+            ? t('property:want-delete-contract-with-renter-content') 
+            : t('property:want-delete-contract-without-renter-content')} ${t('common:this-action-cannot-be-reversed')}`
+
+        confirm({
+            title: t('property:want-delete-contract-title'),
+            icon: <ExclamationCircleOutlined />,
+            content,
+            okText: t('common:delete'),
+            cancelText: t('common:cancel'),
+            okButtonProps: { danger: true },
+            onOk() { handleDeleteContract(contract) }
+        })
+    }
 
     const columns = [
         {
@@ -31,7 +83,7 @@ const History: FC<Props> = ({ contracts }) => {
             // eslint-disable-next-line react/display-name
             render: (_value: unknown, contract: Contract) => {
                 const email = contract.renter?.email
-                
+
                 return email ? <a href={`mailto:${email}`}>{email}</a> : '-'
             }
         },
@@ -41,7 +93,7 @@ const History: FC<Props> = ({ contracts }) => {
             // eslint-disable-next-line react/display-name
             render: (_value: unknown, contract: Contract) => {
                 const phone = contract.renter?.phone
-                
+
                 return phone ? <a href={`tel:${phone}`}>{phone}</a> : '-'
             }
         },
@@ -70,9 +122,18 @@ const History: FC<Props> = ({ contracts }) => {
                     <Row gutter={[8, 8]}>
                         {contract.url &&
                             <Col>
-                                <Button>{t('property:download-contract')}</Button>
+                                <Button type="link">{t('property:download-contract')}</Button>
                             </Col>
                         }
+                        <Col>
+                            <Button
+                                onClick={() => showDeleteContractModal(contract)}
+                                type="link"
+                                danger
+                            >
+                                {t('common:delete')}
+                            </Button>
+                        </Col>
                     </Row>
                 )
             }

@@ -29,8 +29,10 @@
     "logout": "Delogare",
     "settings": "Setari",
     "cancel": "Anuleaza",
+    "delete": "Sterge",
     "not-specified": "Nespecificat",
     "cannot-be-less-than": "{{item}} nu poate fi mai mic de {{number}}",
     "cannot-be-greater-than": "{{item}} nu poate fi mai mare de {{number}}",
-    "actions": "Actiuni"
+    "actions": "Actiuni",
+    "this-action-cannot-be-reversed": "Aceasta actiune este ireversibila."
 }

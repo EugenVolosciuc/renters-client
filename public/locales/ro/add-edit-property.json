@@ -18,6 +18,7 @@
     "start-date-required": "Data de incepere a contractului este obligatorie",
     "expiration-date": "Data expirare contract",
     "expiration-date-required": "Data expirarii contractului este obligatorie",
+    "expiration-date-is-before-today": "Data de expirare a contractului nu poate fi mai devreme decat data curenta",
     "add-a-renter-for": "Adauga un chirias pentru {{propertyTitle}}",
     "rental-invitation-sent": "Invitatia de inchiriere a fost trimisa"
 }

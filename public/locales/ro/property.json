@@ -23,5 +23,20 @@
     "renter-phone": "Nr. de telefon al chiriasului",
     "invitation-not-accepted-yet": "Invitatia de inchiriere nu a fost inca acceptata.",
     "want-to-send": "Doresti sa trimiti ",
-    "another-invitation": "o alta invitatie?"
+    "another-invitation": "o alta invitatie?",
+    "terminate-contract": "Reziliere contract",
+    "extend-contract": "Prelungire contract",
+    "delete-contract": "Stergere contract",
+    "terminate": "Reziliaza",
+    "extend": "Prelungeste",
+    "choose-new-expiration-date": "Selecteaza o data noua de expirare a contractului pentru a extinde perioada acestuia.",
+    "contract-extended-successfully": "Contractul a fost prelungit cu succes",
+    "want-terminate-contract-title": "Esti sigur ca doresti sa reziliezi acest contract?",
+    "want-terminate-contract-with-renter-content": "Confirmand, vei scoate chiriasul curent din imobilul dat, setand data de expirare a contractului ca fiind data de astazi.",
+    "want-terminate-contract-without-renter-content": "Deoarece acest contract nu a fost semnat de catre nici un potential chirias, acesta va fi sters in intregime din aplicatie.",
+    "contract-terminated-successfully": "Contractul a fost reziliat cu succes",
+    "want-delete-contract-title": "Esti sigur ca doresti sa stergi acest contract?",
+    "want-delete-contract-with-renter-content": "Confirmand, acest contract va fi reziliat si sters in intregime din platforma, inclusiv din istoricul inchirierilor (chiriasul curent va fi scos din imobil).",
+    "want-delete-contract-without-renter-content": "Confirmand, acest contract va fi sters in intregime din platforma, inclusiv din istoricul inchirierilor.",
+    "contract-deleted-successfully": "Contractul a fost sters cu succes"
 }

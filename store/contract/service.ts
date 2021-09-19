@@ -21,16 +21,18 @@ export const contractApi = createApi({
                     expirationDate: data.expirationDate
                 }
             }),
-            invalidatesTags: (_res, _err, data) => [{ type: 'Properties', id: data.propertyId }, 'Contracts']
+            invalidatesTags: (_res, _err, data) => [{ type: 'Properties', id: data.propertyId }, 'Contracts', 'Properties']
         }),
-        modifyContract: builder.mutation<Contract, { contract: Partial<ContractDto>, id: Contract['id'] }>({
-            query: ({ contract, id }) => ({
-                url: `/${id}`,
-                method: 'PATCH',
-                credentials: "include",
-                body: contract
-            }),
-            invalidatesTags: ['Properties', 'Contracts']
+        modifyContract: builder.mutation<Contract, { contract: Partial<ContractDto>, contractId: Contract['id'], propertyId: Property['id'] }>({
+            query: ({ contract, contractId }) => {
+                return {
+                    url: `/${contractId}`,
+                    method: 'PATCH',
+                    credentials: "include",
+                    body: contract
+                }
+            },
+            invalidatesTags: (_res, _err, { propertyId }) => ['Properties', 'Contracts', { type: 'Properties', id: propertyId }]
         }),
         signContract: builder.mutation<Contract, { renter: User, id: Contract['id'] }>({
             query: ({ renter, id }) => ({
@@ -39,6 +41,13 @@ export const contractApi = createApi({
                 credentials: "include",
                 body: renter
             })
+        }),
+        deleteContract: builder.mutation<void, Contract['id']>({
+            query: (id) => ({
+                url: `/${id}`,
+                method: 'DELETE',
+                credentials: "include"
+            })
         })
     })
 })
@@ -46,5 +55,6 @@ export const contractApi = createApi({
 export const {
     useCreateContractMutation,
     useModifyContractMutation,
-    useSignContractMutation
+    useSignContractMutation,
+    useDeleteContractMutation
 } = contractApi
