@@ -1,6 +1,6 @@
 import { useState, FC } from 'react'
 import Link from 'next/link'
-import { Card, Typography, Row, Col, Button, Modal, message } from "antd"
+import { Card, Typography, Modal, Menu, message } from "antd"
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
@@ -14,6 +14,7 @@ import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityIn
 import styles from 'components/Properties/Property/tabs/RentalHistory/RentalHistory.module.less'
 import ExtendContract from 'components/Properties/Property/tabs/RentalHistory/modals/ExtendContract'
 import CardTitle from 'components/misc/CardTitle'
+import KebabMenu from 'components/misc/KebabMenu'
 import { handleError } from 'utils/handleError'
 
 type Props = {
@@ -28,7 +29,7 @@ enum ModalTypes {
 type ModalType = ModalTypes | null
 
 const { Meta } = Card
-const { Link: AntLink } = Typography
+const { Link: AntLink, Text } = Typography
 const { confirm } = Modal
 
 const ContractInfo: FC<Props> = ({ contract }) => {
@@ -72,12 +73,12 @@ const ContractInfo: FC<Props> = ({ contract }) => {
 
     const showTerminateContractModal = () => {
         confirm({
-            title: contractHasRenter 
+            title: contractHasRenter
                 ? t('property:want-terminate-contract-title')
                 : t('property:want-delete-contract-title'),
             icon: <ExclamationCircleOutlined />,
-            content: contractHasRenter 
-                ? t('property:want-terminate-contract-with-renter-content') 
+            content: contractHasRenter
+                ? t('property:want-terminate-contract-with-renter-content')
                 : t('property:want-terminate-contract-without-renter-content'),
             okText: contractHasRenter ? t('property:terminate') : t('common:delete'),
             cancelText: t('common:cancel'),
@@ -130,56 +131,46 @@ const ContractInfo: FC<Props> = ({ contract }) => {
         })
     }
 
-    const cardContent = (
-        <>
-            <EntityInfoDisplay
-                entity={contract}
-                entityInfoStructureList={contractInfoStructureList}
-            />
-            {isPropertyAdmin &&
-                <Row gutter={[8, 8]} className={styles['action-container']} justify="end">
-                    <Col>
-                        <Button
-                            onClick={() => toggleModal(ModalTypes.TERMINATE)}
-                            size="small"
-                            danger
-                        >
-                            {contractHasRenter 
-                                ? t('property:terminate-contract')
-                                : t('property:delete-contract')
-                            }
-                        </Button>
-                    </Col>
-                    <Col>
-                        <Button
-                            onClick={() => toggleModal(ModalTypes.EXTEND)}
-                            size="small"
-                            type="primary"
-                        >
-                            {t('property:extend-contract')}
-                        </Button>
-                        <ExtendContract
-                            visible={modalIsOpen === ModalTypes.EXTEND}
-                            handleCancel={() => toggleModal(null)}
-                            contractId={contract.id}
-                            propertyId={contract.propertyId}
-                            currentExpirationDate={dayjs(contract.expirationDate)}
-                        />
-                    </Col>
-                </Row>
-            }
-        </>
+    const menu = (
+        <Menu>
+            <Menu.Item onClick={() => toggleModal(ModalTypes.EXTEND)}>
+                <Text>
+                    {t('property:extend-contract')}
+                </Text>
+            </Menu.Item>
+            <Menu.Item>
+                <Text onClick={() => toggleModal(ModalTypes.TERMINATE)}>
+                    {contractHasRenter
+                        ? t('property:terminate-contract')
+                        : t('property:delete-contract')
+                    }
+                </Text>
+            </Menu.Item>
+        </Menu>
     )
 
     return (
         <Card className={styles.card}>
-            <Meta 
+            <ExtendContract
+                visible={modalIsOpen === ModalTypes.EXTEND}
+                handleCancel={() => toggleModal(null)}
+                contractId={contract.id}
+                propertyId={contract.propertyId}
+                currentExpirationDate={dayjs(contract.expirationDate)}
+            />
+            <Meta
                 title={
-                    <CardTitle 
+                    <CardTitle
                         title={t('property:current-contract-info')}
+                        extra={isPropertyAdmin ? <KebabMenu menu={menu} /> : undefined}
                     />
                 }
-                description={cardContent}
+                description={
+                    <EntityInfoDisplay
+                        entity={contract}
+                        entityInfoStructureList={contractInfoStructureList}
+                    />
+                }
             />
         </Card>
     )
