@@ -4,10 +4,11 @@ import { Card, Empty, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { User } from 'types/User'
-import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityInfoDisplay'
-import { Property } from 'types/Property'
-import styles from 'components/Properties/Property/tabs/RentalHistory/RentalHistory.module.less'
 import { Contract } from 'types/Contract'
+import { Property } from 'types/Property'
+import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityInfoDisplay'
+import CardTitle from 'components/misc/CardTitle'
+import styles from 'components/Properties/Property/tabs/RentalHistory/RentalHistory.module.less'
 
 type Props = {
     user: User | undefined,
@@ -79,7 +80,7 @@ const RenterOrAdminInfo: FC<Props> = ({ user, isRenterInfo, propertyId, contract
     return (
         <Card className={styles.card}>
             <Meta
-                title={t(`property:${isRenterInfo ? 'current-renter-info' : 'owner-info'}`)}
+                title={<CardTitle title={t(`property:${isRenterInfo ? 'current-renter-info' : 'owner-info'}`)} />}
                 description={
                     user
                         ? <EntityInfoDisplay

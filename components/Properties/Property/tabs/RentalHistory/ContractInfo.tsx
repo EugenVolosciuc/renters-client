@@ -13,6 +13,7 @@ import { useModifyContractMutation, useDeleteContractMutation } from 'store/cont
 import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityInfoDisplay'
 import styles from 'components/Properties/Property/tabs/RentalHistory/RentalHistory.module.less'
 import ExtendContract from 'components/Properties/Property/tabs/RentalHistory/modals/ExtendContract'
+import CardTitle from 'components/misc/CardTitle'
 import { handleError } from 'utils/handleError'
 
 type Props = {
@@ -172,7 +173,14 @@ const ContractInfo: FC<Props> = ({ contract }) => {
 
     return (
         <Card className={styles.card}>
-            <Meta title={t('property:current-contract-info')} description={cardContent} />
+            <Meta 
+                title={
+                    <CardTitle 
+                        title={t('property:current-contract-info')}
+                    />
+                }
+                description={cardContent}
+            />
         </Card>
     )
 }

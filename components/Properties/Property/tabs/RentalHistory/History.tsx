@@ -10,6 +10,7 @@ import { capitalize } from "utils/parsers/string-manipulation"
 import { handleError } from "utils/handleError"
 import { useModifyPropertyMutation } from "store/property/service"
 import { useDeleteContractMutation } from "store/contract/service"
+import CardTitle from 'components/misc/CardTitle'
 
 type Props = {
     contracts: Contract[]
@@ -143,7 +144,7 @@ const History: FC<Props> = ({ contracts }) => {
     return (
         <Card>
             <Meta
-                title={t('property:history')}
+                title={<CardTitle title={t('property:history')} />}
                 description={
                     <Table
                         dataSource={contracts}
