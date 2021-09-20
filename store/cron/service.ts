@@ -1,16 +1,11 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API_BASE_URL } from 'constants/API_BASE_URL'
-
+import { baseApi } from 'store/baseApi'
 import { CronJob } from 'types/CronJob'
 
-export const cronApi = createApi({
-    reducerPath: 'cronApi',
-    baseQuery: fetchBaseQuery({ baseUrl: `${API_BASE_URL}/admin/cron-jobs`}),
-    tagTypes: ['CronJobs'],
+export const cronApi = baseApi.injectEndpoints({
     endpoints: builder => ({
         getCronJobs: builder.query<CronJob[], void>({
             query: () => ({
-                url: '/',
+                url: '/admin/cron-jobs',
                 credentials: "include"
             }),
             providesTags: result => result
@@ -22,7 +17,7 @@ export const cronApi = createApi({
         }),
         modifyCronJob: builder.mutation<CronJob, Partial<CronJob> & Pick<CronJob, 'id'>>({
             query: ({ id, ...body }) => ({
-                url: `/${id}`,
+                url: `/admin/cron-jobs/${id}`,
                 method: 'PATCH',
                 credentials: "include",
                 body
@@ -31,7 +26,7 @@ export const cronApi = createApi({
         }),
         cancelNextCronJobInvocation: builder.mutation<void, CronJob['id']>({
             query: (id) => ({
-                url: `/${id}/cancel-next`,
+                url: `/admin/cron-jobs/${id}/cancel-next`,
                 method: 'POST',
                 credentials: "include"
             }),

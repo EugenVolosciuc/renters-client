@@ -1,14 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-import { API_BASE_URL } from 'constants/API_BASE_URL'
+import { baseApi } from 'store/baseApi'
 import { Property, PaginatedProperties, PropertyQueryOptions } from 'types/Property'
 import { removeProp } from 'utils/removeProp'
 import { serializePagination } from 'utils/serializePagination'
 
-export const propertyApi = createApi({
-    reducerPath: 'propertyApi',
-    baseQuery: fetchBaseQuery({ baseUrl: `${API_BASE_URL}/properties` }),
-    tagTypes: ['Properties'],
+export const propertyApi = baseApi.injectEndpoints({
     endpoints: builder => ({
         getProperties: builder.query<PaginatedProperties, PropertyQueryOptions>({
             query: (params) => {
@@ -19,7 +14,7 @@ export const propertyApi = createApi({
                 const serializedParams = serializePagination(filteredParams)
 
                 return {
-                    url: '',
+                    url: '/properties',
                     params: serializedParams,
                     credentials: "include",
                 }
@@ -33,14 +28,14 @@ export const propertyApi = createApi({
         }),
         getProperty: builder.query<Property, number>({
             query: (id) => ({
-                url: `/${id}`,
+                url: `/properties/${id}`,
                 credentials: "include"
             }),
             providesTags: (_result, _error, id) => [{ type: 'Properties', id }]
         }),
         createProperty: builder.mutation<Property, Partial<Property>>({
             query: property => ({
-                url: '/',
+                url: '/properties',
                 method: 'POST',
                 credentials: "include",
                 body: property
@@ -49,7 +44,7 @@ export const propertyApi = createApi({
         }),
         modifyProperty: builder.mutation<Property, { property: Partial<Property>, id: Property['id'] }>({
             query: ({ property, id }) => ({
-                url: `/${id}`,
+                url: `/properties/${id}`,
                 method: 'PATCH',
                 credentials: "include",
                 body: property

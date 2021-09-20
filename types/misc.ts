@@ -33,7 +33,9 @@ export interface ALL_TAB {
 }
 
 export enum EntityTypes {
-    PROPERTY = "PROPERTY"
+    PROPERTY = "PROPERTY",
+    CONTRACT = "CONTRACT",
+    USER = "USER"
 }
 
 export type AnyEntity = User | Property | Photo | Bill

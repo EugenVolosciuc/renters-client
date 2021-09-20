@@ -12,6 +12,8 @@ import styles from 'styles/pages/AuthPages.module.less'
 import { Property, PROPERTY_LABELS, PROPERTY_TYPES } from 'types/Property'
 import { capitalize } from 'utils/parsers/string-manipulation'
 import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityInfoDisplay'
+import { useNotFoundRedirect } from 'utils/userRedirects'
+import { EntityTypes } from 'types/misc'
 
 const { Title, Paragraph } = Typography
 
@@ -19,6 +21,7 @@ const AcceptRenterInvite = ({ inviteId }: InferGetServerSidePropsType<typeof get
     useAuthRedirect(false)
     const { t } = useTranslation()
     const { data, isLoading: gettingInvitationData } = useGetInvitationDataQuery(inviteId)
+    useNotFoundRedirect(!data?.contract, EntityTypes.CONTRACT)
 
     const propertyInfoStructureList: EntityInfoStructure[] = [
         {

@@ -7,21 +7,13 @@ import { configureStore, combineReducers, Action, AnyAction, Reducer, ThunkActio
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import authReducer from 'store/auth/slice'
 
-import { authApi } from 'store/auth/service'
-import { photoApi } from 'store/photos/service'
-import { propertyApi } from 'store/property/service'
-import { cronApi } from 'store/cron/service'
-import { contractApi } from 'store/contract/service'
+import { baseApi } from 'store/baseApi'
 import { errorHandlerMiddleware } from 'store/middleware/errorHandlerMiddleware'
 
 export const STORE_RESET_ACTION_TYPE = 'RESET_STORE'
 
 const combinedReducer = combineReducers({
-    [photoApi.reducerPath]: photoApi.reducer,
-    [authApi.reducerPath]: authApi.reducer,
-    [propertyApi.reducerPath]: propertyApi.reducer,
-    [cronApi.reducerPath]: cronApi.reducer,
-    [contractApi.reducerPath]: contractApi.reducer,
+    [baseApi.reducerPath]: baseApi.reducer,
     auth: authReducer
 })
 
@@ -36,11 +28,7 @@ export const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat([
-            photoApi.middleware,
-            authApi.middleware,
-            propertyApi.middleware,
-            cronApi.middleware,
-            contractApi.middleware,
+            baseApi.middleware,
             errorHandlerMiddleware
         ])
     }

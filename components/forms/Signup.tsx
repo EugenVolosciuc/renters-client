@@ -47,7 +47,7 @@ const SignupForm: FC<Props> = ({ userRole, initialValues, contractId }) => {
             const user = await signupUser(dataToSend).unwrap()
 
             if (shouldSignContract) {
-                await signContract({ id: contractId as number, renter: user })
+                await signContract({ contractId: contractId as number, renter: user })
             }
 
             setRedirecting(true)

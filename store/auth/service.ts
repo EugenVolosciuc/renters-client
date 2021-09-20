@@ -1,23 +1,20 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API_BASE_URL } from 'constants/API_BASE_URL'
+import { baseApi } from 'store/baseApi'
 import { Contract } from 'types/Contract'
 import { PROPERTY_LABELS } from 'types/Property'
 import { User, LoginFormData, SignupFormData } from 'types/User'
 
-export const authApi = createApi({
-    reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({ baseUrl: `${API_BASE_URL}/users` }),
+export const authApi = baseApi.injectEndpoints({
     endpoints: builder => ({
         signup: builder.mutation<User, Partial<User>>({
             query: (userData) => ({
-                url: '/',
+                url: '/users',
                 method: 'POST',
                 body: userData
             })
         }),
         login: builder.mutation<User, LoginFormData>({
             query: ({ email, password }) => ({
-                url: '/login',
+                url: '/users/login',
                 method: 'POST',
                 credentials: "include",
                 body: { email, password }
@@ -25,20 +22,20 @@ export const authApi = createApi({
         }),
         logout: builder.mutation<void, void>({
             query: () => ({
-                url: '/logout',
+                url: '/users/logout',
                 method: 'POST',
                 credentials: "include"
             })
         }),
         checkAuth: builder.query<User, void>({
             query: () => ({
-                url: '/me',
+                url: '/users/me',
                 credentials: "include"
             })
         }),
         modifyAuthedUser: builder.mutation<User, Partial<SignupFormData>>({
             query: (body) => ({
-                url: '/me',
+                url: '/users/me',
                 method: 'PATCH',
                 credentials: "include",
                 body
@@ -55,7 +52,7 @@ export const authApi = createApi({
             }
         >({
             query: (body) => ({
-                url: '/renter-invite',
+                url: '/users/renter-invite',
                 method: 'POST',
                 credentials: "include",
                 body
@@ -63,7 +60,7 @@ export const authApi = createApi({
         }),
         getInvitationData: builder.query<{ contract: Contract, renterEmail: string, renterName: string }, string>({
             query: inviteId => ({
-                url: `/invitation-data/${inviteId}`
+                url: `/users/invitation-data/${inviteId}`
             })
         })
     })

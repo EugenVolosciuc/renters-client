@@ -59,9 +59,11 @@ const ContractInfo: FC<Props> = ({ contract }) => {
                         propertyId: contract.propertyId,
                         contract: { expirationDate: new Date() }
                     })
-                } else await deleteContract(contract.id)
+                } else await deleteContract({
+                    contractId: contract.id,
+                    propertyId: contract.propertyId
+                })
 
-                // TODO: needs same fix as written in ExtendContract component
                 message.success(t('property:contract-terminated-successfully'))
             } catch (error) {
                 handleError(error)

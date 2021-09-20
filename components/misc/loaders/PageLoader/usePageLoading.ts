@@ -35,7 +35,7 @@ export const usePageLoading = () => {
             router.events.off('routeChangeComplete', handleComplete)
             router.events.off('routeChangeError', handleComplete)
         }
-    }, [router, setLoading])
+    }, [router, setLoading, checkIfDefaultLocale])
 
     return loading
 }

@@ -37,10 +37,7 @@ const History: FC<Props> = ({ contracts }) => {
                     })
                 }
 
-                await deleteContract(contract.id)
-
-                // TODO: needs same fix as written in ExtendContract component
-                router.reload()
+                await deleteContract({ contractId: contract.id, propertyId: contract.propertyId })
 
                 message.success(t('property:contract-deleted-successfully'))
             } catch (error) {

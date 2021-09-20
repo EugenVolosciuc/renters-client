@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { Modal, Form, Typography, message } from "antd"
-import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import DatePicker from 'components/misc/antd-overwrites/DatePicker'
 import dayjs, { Dayjs } from 'dayjs'
@@ -22,7 +21,6 @@ const { Paragraph } = Typography
 
 const ExtendContract: FC<Props> = ({ visible, handleCancel, contractId, propertyId, currentExpirationDate }) => {
     const { t } = useTranslation()
-    const router = useRouter()
     const [form] = Form.useForm()
     const [modifyContract, { isLoading: contractUpdateLoading }] = useModifyContractMutation()
 
@@ -39,11 +37,7 @@ const ExtendContract: FC<Props> = ({ visible, handleCancel, contractId, property
 
                     message.success(t('property:contract-extended-successfully'))
 
-                    // TODO: fix cache not being invalidated, asked question here:
-                    // https://stackoverflow.com/questions/69243083/rtk-query-invalidate-cache-of-an-api-service-from-another-api-service
-                    // until then - reload page
-                    router.reload()
-                    // handleCancel()
+                    handleCancel()
                 } catch (error) {
                     handleError(error)
                 }
