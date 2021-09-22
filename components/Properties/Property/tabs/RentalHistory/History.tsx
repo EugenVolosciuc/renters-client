@@ -1,5 +1,4 @@
 import { FC } from "react"
-import { useRouter } from "next/router"
 import { Card, Table, Row, Col, Button, Modal, message } from "antd"
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
@@ -21,7 +20,6 @@ const { confirm } = Modal
 
 const History: FC<Props> = ({ contracts }) => {
     const { t } = useTranslation()
-    const router = useRouter()
     const [modifyProperty] = useModifyPropertyMutation()
     const [deleteContract] = useDeleteContractMutation()
 

@@ -1,5 +1,6 @@
 import { baseApi } from 'store/baseApi'
-import { Contract } from 'types/Contract'
+import { Contract, PaginatedContracts } from 'types/Contract'
+import { PaginatedPageQuery } from 'types/misc'
 import { PROPERTY_LABELS } from 'types/Property'
 import { User, LoginFormData, SignupFormData } from 'types/User'
 
@@ -62,6 +63,12 @@ export const userApi = baseApi.injectEndpoints({
             query: inviteId => ({
                 url: `/users/invitation-data/${inviteId}`
             })
+        }),
+        getPropertyAdminRenters: builder.query<PaginatedContracts, Partial<PaginatedPageQuery>>({
+            query: query => ({
+                url: '/users/renters',
+                credentials: "include"
+            })
         })
     })
 })
@@ -73,5 +80,6 @@ export const {
     useCheckAuthQuery,
     useModifyAuthedUserMutation,
     useSendSignupInvitationToRenterMutation,
-    useGetInvitationDataQuery
+    useGetInvitationDataQuery,
+    useGetPropertyAdminRentersQuery
 } = userApi

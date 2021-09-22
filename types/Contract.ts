@@ -1,5 +1,6 @@
 import { User } from "types/User";
-import { Property } from "./Property";
+import { Property } from "types/Property";
+import { Pagination } from "types/misc"
 
 export interface Contract {
     id: number;
@@ -23,4 +24,8 @@ export interface ContractDto {
     startDate: Date;
     expirationDate: Date;
     url?: string;
+}
+
+export interface PaginatedContracts extends Pagination {
+    data: Contract[];
 }

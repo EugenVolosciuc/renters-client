@@ -38,5 +38,7 @@
     "want-delete-contract-title": "Esti sigur ca doresti sa stergi acest contract?",
     "want-delete-contract-with-renter-content": "Confirmand, acest contract va fi reziliat si sters in intregime din platforma, inclusiv din istoricul inchirierilor (chiriasul curent va fi scos din imobil).",
     "want-delete-contract-without-renter-content": "Confirmand, acest contract va fi sters in intregime din platforma, inclusiv din istoricul inchirierilor.",
-    "contract-deleted-successfully": "Contractul a fost sters cu succes"
+    "contract-deleted-successfully": "Contractul a fost sters cu succes",
+    "currently-renting": "Inchiriaza in prezent",
+    "rents-until": "Inchiriaza pana la"
 }

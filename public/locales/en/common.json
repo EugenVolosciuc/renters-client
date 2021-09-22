@@ -34,5 +34,7 @@
     "cannot-be-less-than": "{{item}} cannot be less than {{number}}",
     "cannot-be-greater-than": "{{item}} cannot be greater than {{number}}",
     "actions": "Actions",
-    "this-action-cannot-be-reversed": "This action cannot be reversed."
+    "this-action-cannot-be-reversed": "This action cannot be reversed.",
+    "yes": "yes",
+    "no": "no"
 }

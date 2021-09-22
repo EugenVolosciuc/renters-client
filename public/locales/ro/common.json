@@ -34,5 +34,7 @@
     "cannot-be-less-than": "{{item}} nu poate fi mai mic de {{number}}",
     "cannot-be-greater-than": "{{item}} nu poate fi mai mare de {{number}}",
     "actions": "Actiuni",
-    "this-action-cannot-be-reversed": "Aceasta actiune este ireversibila."
+    "this-action-cannot-be-reversed": "Aceasta actiune este ireversibila.",
+    "yes": "da",
+    "no": "nu"
 }

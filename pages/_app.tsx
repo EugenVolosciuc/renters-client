@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { appWithTranslation } from 'next-i18next'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 
 import AuthChecker from 'store/user/AuthChecker'
 import { store } from 'store'
@@ -11,6 +12,7 @@ import 'styles/fonts.css'
 require('styles/antd-overrides.less')
 
 dayjs.extend(relativeTime)
+dayjs.extend(isSameOrAfter)
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
