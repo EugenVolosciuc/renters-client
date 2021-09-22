@@ -21,7 +21,7 @@ const AcceptRenterInvite = ({ inviteId }: InferGetServerSidePropsType<typeof get
     useAuthRedirect(false)
     const { t } = useTranslation()
     const { data, isLoading: gettingInvitationData } = useGetInvitationDataQuery(inviteId)
-    useNotFoundRedirect(!data?.contract, EntityTypes.CONTRACT)
+    useNotFoundRedirect(!data?.contract && !gettingInvitationData, EntityTypes.CONTRACT)
 
     const propertyInfoStructureList: EntityInfoStructure[] = [
         {

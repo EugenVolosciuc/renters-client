@@ -19,9 +19,12 @@ export const usePageLoading = () => {
         const handleComplete = (url: string) => {
             const [isDefaultLocale, locale] = checkIfDefaultLocale(url)
 
+            const urlWithoutQuery = url.split('?')[0]
+            const asPathWithoutQuery = router.asPath.split('?')[0]
+
             const urlsAreTheSame = isDefaultLocale
-                ? url === router.asPath
-                : url === `/${locale}${router.asPath}`
+                ? urlWithoutQuery === asPathWithoutQuery
+                : urlWithoutQuery === `/${locale}${asPathWithoutQuery}`
 
             return urlsAreTheSame && setLoading(false)
         }

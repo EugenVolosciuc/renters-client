@@ -1,11 +1,10 @@
 
 import { baseApi } from 'store/baseApi'
-import { API_BASE_URL } from 'constants/API_BASE_URL'
 import { Photo } from 'types/Photo'
 
 export const photoApi = baseApi.injectEndpoints({
     endpoints: builder => ({
-        upload: builder.mutation<Photo, FormData>({
+        uploadPhoto: builder.mutation<Photo, FormData>({
             query: (photoData) => ({
                 url: '/photos',
                 method: 'POST',
@@ -13,7 +12,7 @@ export const photoApi = baseApi.injectEndpoints({
                 body: photoData
             })
         }),
-        delete: builder.mutation<void, Photo['public_id']>({
+        deletePhoto: builder.mutation<void, Photo['public_id']>({
             query: (public_id) => ({
                 url: `/photos/${public_id}`,
                 method: 'DELETE',
@@ -24,6 +23,6 @@ export const photoApi = baseApi.injectEndpoints({
 })
 
 export const {
-    useUploadMutation,
-    useDeleteMutation
+    useUploadPhotoMutation,
+    useDeletePhotoMutation
 } = photoApi

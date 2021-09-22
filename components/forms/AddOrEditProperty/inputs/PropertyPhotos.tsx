@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { Form, Upload, Button, FormInstance, Input, message } from 'antd'
 import { useTranslation } from 'react-i18next'
 
-import { useUploadMutation, useDeleteMutation } from 'store/photos/service'
+import { useUploadPhotoMutation, useDeletePhotoMutation } from 'store/photos/service'
 import { Photo, PHOTO_TYPE } from 'types/Photo'
 import { handleError } from 'utils/handleError'
 
@@ -16,8 +16,8 @@ const maxFileSize = 1 * 1024 * 1024 // 8MB
 
 const PropertyPhotos: FC<Props> = ({ form }) => {
     const { t } = useTranslation()
-    const [uploadPhoto] = useUploadMutation()
-    const [deletePhoto] = useDeleteMutation()
+    const [uploadPhoto] = useUploadPhotoMutation()
+    const [deletePhoto] = useDeletePhotoMutation()
 
     const normFile = (e: any) => {
         if (Array.isArray(e)) {

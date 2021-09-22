@@ -57,9 +57,7 @@ const HeaderMenu = () => {
 
     return (
         <Dropdown overlay={menu}>
-            <AntLink>
-                <UserOutlined className={styles['menu-icon']} />
-            </AntLink>
+            <UserOutlined className={styles['menu-icon']} />
         </Dropdown>
     )
 }
