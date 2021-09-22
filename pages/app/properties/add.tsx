@@ -4,7 +4,7 @@ import { Form } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { USER_ROLES } from 'types/User'
-import { useAuthRedirect } from 'store/auth/useAuthRedirect'
+import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import AdminLayout from 'components/layouts/AdminLayout'
 import AddOrEditProperty from 'components/forms/AddOrEditProperty'
 

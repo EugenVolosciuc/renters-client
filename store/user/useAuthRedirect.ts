@@ -1,11 +1,11 @@
 import { USER_ROLES } from 'types/User'
-import { useAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/user/slice'
 import { 
     redirectIfNotAuthed, 
     redirectUserBasedOnRole, 
     redirectUserBasedOnRequiredRole 
 } from 'utils/userRedirects'
-import { useCheckAuthQuery } from 'store/auth/service'
+import { useCheckAuthQuery } from 'store/user/service'
 
 type AuthRule = USER_ROLES[] | boolean
 

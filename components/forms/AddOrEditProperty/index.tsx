@@ -18,7 +18,7 @@ import {
     PropertyPhotos
 } from 'components/forms/AddOrEditProperty/inputs'
 import { useCreatePropertyMutation, useModifyPropertyMutation } from 'store/property/service'
-import { useSendSignupInvitationToRenterMutation } from 'store/auth/service'
+import { useSendSignupInvitationToRenterMutation } from 'store/user/service'
 import { useCreateContractMutation } from 'store/contract/service'
 import { Property, PropertyFormData, PROPERTY_LABELS, PROPERTY_TYPES } from 'types/Property'
 import { handleError } from 'utils/handleError'

@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
 
-import { useCheckAuthQuery } from 'store/auth/service'
+import { useCheckAuthQuery } from 'store/user/service'
 import { User } from 'types/User'
-import { redirectUserBasedOnRole } from 'utils/userRedirects'
 import { useAppDispatch } from 'store'
-import { setUser } from 'store/auth/slice'
+import { setUser } from 'store/user/slice'
 
 export const useCheckAuthCookie = () => {
     const dispatch = useAppDispatch()
@@ -12,6 +11,5 @@ export const useCheckAuthCookie = () => {
 
     useEffect(() => {
         if (user) dispatch(setUser({ user: user as User }))
-        // redirectUserBasedOnRole(user as User | null)
     }, [user])
 }

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { USER_ROLES } from 'types/User'
 import AdminLayout from 'components/layouts/AdminLayout'
-import { useAuthRedirect } from 'store/auth/useAuthRedirect'
+import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import SettingsContainer from 'components/Settings/SettingsContainer'
 
 const Profile = ({ query }: InferGetServerSidePropsType<typeof getServerSideProps>) => {

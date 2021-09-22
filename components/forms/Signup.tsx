@@ -4,7 +4,7 @@ import { Form, Input, Button, Checkbox, Typography, message } from 'antd'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
-import { useSignupMutation } from 'store/auth/service'
+import { useSignupMutation } from 'store/user/service'
 import { useSignContractMutation } from 'store/contract/service'
 import { SignupFormData, User, USER_ROLES } from 'types/User'
 import { splitName } from 'utils/splitName'

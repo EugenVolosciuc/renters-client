@@ -8,7 +8,7 @@ import RenterOrAdminInfo from 'components/Properties/Property/tabs/RentalHistory
 import ContractInfo from 'components/Properties/Property/tabs/RentalHistory/ContractInfo'
 import History from 'components/Properties/Property/tabs/RentalHistory/History'
 import { getCurrentContractFromAllContracts } from 'utils/getCurrentContractFromAllContracts'
-import { useAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/user/slice'
 import { User, USER_ROLES } from 'types/User'
 import { getRenterContract } from 'utils/getRenterContract'
 

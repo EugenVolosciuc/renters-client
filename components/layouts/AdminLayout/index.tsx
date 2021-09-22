@@ -6,7 +6,7 @@ import AdminMenu from 'components/layouts/AdminLayout/AdminMenu'
 import AdminHeader from 'components/layouts/AdminLayout/AdminHeader'
 import styles from 'components/layouts/AdminLayout/AdminLayout.module.less'
 import Logo from 'components/misc/Logo'
-import { useAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/user/slice'
 import { USER_ROLES } from 'types/User'
 
 const { Content, Sider } = Layout

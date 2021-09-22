@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Skeleton, SkeletonProps } from 'antd'
 
-import { useAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/user/slice'
 
 type Props = {
     loaderProps?: SkeletonProps

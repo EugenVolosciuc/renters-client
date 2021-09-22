@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useTranslation } from 'next-i18next'
 
-import { useLoginMutation } from 'store/auth/service'
+import { useLoginMutation } from 'store/user/service'
 import { LoginFormData } from 'types/User'
 import { handleError } from 'utils/handleError'
 import { redirectUserBasedOnRole } from 'utils/userRedirects'
 import { useAppDispatch } from 'store'
-import { setUser } from 'store/auth/slice'
+import { setUser } from 'store/user/slice'
 
 const LoginForm = () => {
     const [form] = Form.useForm()

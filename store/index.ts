@@ -5,7 +5,7 @@ import {
 } from 'react-redux'
 import { configureStore, combineReducers, Action, AnyAction, Reducer, ThunkAction } from "@reduxjs/toolkit"
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
-import authReducer from 'store/auth/slice'
+import authReducer from 'store/user/slice'
 
 import { baseApi } from 'store/baseApi'
 import { errorHandlerMiddleware } from 'store/middleware/errorHandlerMiddleware'

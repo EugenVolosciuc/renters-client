@@ -6,7 +6,7 @@ import { Row, Col, Typography } from 'antd'
 
 import LoginForm from 'components/forms/Login'
 import AuthLayout from 'components/layouts/AuthLayout'
-import { useAuthRedirect } from 'store/auth/useAuthRedirect'
+import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import styles from 'styles/pages/AuthPages.module.less'
 
 const { Title, Text, Link: AntLink } = Typography

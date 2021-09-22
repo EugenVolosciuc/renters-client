@@ -4,7 +4,7 @@ import { appWithTranslation } from 'next-i18next'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
-import AuthChecker from 'store/auth/AuthChecker'
+import AuthChecker from 'store/user/AuthChecker'
 import { store } from 'store'
 import 'styles/fonts.css'
 

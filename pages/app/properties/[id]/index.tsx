@@ -7,7 +7,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { USER_ROLES } from 'types/User'
 import { EntityTypes } from 'types/misc'
-import { useAuthRedirect } from 'store/auth/useAuthRedirect'
+import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import { useGetPropertyQuery } from 'store/property/service'
 import AdminLayout from 'components/layouts/AdminLayout'
 import PropertyContainer from 'components/Properties/Property/PropertyContainer'

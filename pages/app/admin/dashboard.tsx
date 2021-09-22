@@ -3,7 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { USER_ROLES } from 'types/User'
 import AdminLayout from 'components/layouts/AdminLayout'
-import { useAuthRedirect } from 'store/auth/useAuthRedirect'
+import { useAuthRedirect } from 'store/user/useAuthRedirect'
 
 const Dashboard = (_props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     useAuthRedirect([USER_ROLES.SUPER_ADMIN])

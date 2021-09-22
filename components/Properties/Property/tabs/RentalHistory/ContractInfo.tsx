@@ -7,7 +7,7 @@ import dayjs from 'dayjs'
 
 import { Contract } from 'types/Contract'
 import { USER_ROLES } from 'types/User'
-import { useAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/user/slice'
 import { useModifyPropertyMutation } from 'store/property/service'
 import { useModifyContractMutation, useDeleteContractMutation } from 'store/contract/service'
 import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityInfoDisplay'

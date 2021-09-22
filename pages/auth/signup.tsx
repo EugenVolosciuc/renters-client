@@ -5,7 +5,7 @@ import { Row, Col, Typography } from 'antd'
 import { useTranslation } from 'next-i18next'
 
 import AuthLayout from 'components/layouts/AuthLayout'
-import { useAuthRedirect } from 'store/auth/useAuthRedirect'
+import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import SignupForm from 'components/forms/Signup'
 import styles from 'styles/pages/AuthPages.module.less'
 import { USER_ROLES } from 'types/User'

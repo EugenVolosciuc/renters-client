@@ -2,7 +2,7 @@ import React from 'react'
 
 import PropertyAdministratorMenu from 'components/layouts/AdminLayout/AdminMenu/PropertyAdministratorMenu'
 import SuperAdminMenu from 'components/layouts/AdminLayout/AdminMenu/SuperAdminMenu'
-import { useAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/user/slice'
 import { USER_ROLES } from 'types/User'
 
 const AdminMenu = () => {

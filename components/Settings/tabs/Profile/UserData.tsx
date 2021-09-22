@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 
 import EntityInfoDisplay, { EntityInfoStructure } from 'components/misc/EntityInfoDisplay'
 import UserLoader from 'components/misc/loaders/UserLoader'
-import { useAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/user/slice'
 import { User } from 'types/User'
 
 type Props = {

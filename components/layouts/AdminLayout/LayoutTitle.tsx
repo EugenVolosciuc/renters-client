@@ -7,7 +7,7 @@ import { useSider } from 'components/layouts/SiderContext'
 import styles from 'components/layouts/AdminLayout/AdminLayout.module.less'
 import UserLoader from 'components/misc/loaders/UserLoader'
 import Logo from 'components/misc/Logo'
-import { useAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/user/slice'
 import { getTodaysGreeting } from 'utils/getTodaysGreeting'
 import { USER_ROLES } from 'types/User'
 

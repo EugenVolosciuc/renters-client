@@ -3,7 +3,7 @@ import { Contract } from 'types/Contract'
 import { PROPERTY_LABELS } from 'types/Property'
 import { User, LoginFormData, SignupFormData } from 'types/User'
 
-export const authApi = baseApi.injectEndpoints({
+export const userApi = baseApi.injectEndpoints({
     endpoints: builder => ({
         signup: builder.mutation<User, Partial<User>>({
             query: (userData) => ({
@@ -74,4 +74,4 @@ export const {
     useModifyAuthedUserMutation,
     useSendSignupInvitationToRenterMutation,
     useGetInvitationDataQuery
-} = authApi
+} = userApi

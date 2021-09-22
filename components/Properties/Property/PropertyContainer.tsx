@@ -13,7 +13,7 @@ import {
 import ListLoader from 'components/misc/loaders/ListLoader'
 import Tabs from 'components/layouts/AdminLayout/Tabs'
 import { usePageQuery } from 'components/layouts/AdminLayout/usePageQuery'
-import { useAuthedUser } from 'store/auth/slice'
+import { useAuthedUser } from 'store/user/slice'
 import { capitalize } from 'utils/parsers/string-manipulation'
 
 type Props = {

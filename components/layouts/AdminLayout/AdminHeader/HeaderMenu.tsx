@@ -5,10 +5,10 @@ import { Menu, Dropdown, Typography } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 
-import { useLogoutMutation } from 'store/auth/service'
+import { useLogoutMutation } from 'store/user/service'
 import styles from 'components/layouts/AdminLayout/AdminLayout.module.less'
 import { STORE_RESET_ACTION_TYPE, useAppDispatch } from 'store'
-import { setUser } from 'store/auth/slice'
+import { setUser } from 'store/user/slice'
 import { locales } from 'next-i18next.config'
 
 const { Link: AntLink } = Typography

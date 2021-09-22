@@ -3,7 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Form } from 'antd'
 import { useTranslation } from 'react-i18next'
 
-import { useAuthRedirect } from 'store/auth/useAuthRedirect'
+import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import AdminLayout from 'components/layouts/AdminLayout'
 import AddOrEditProperty from 'components/forms/AddOrEditProperty'
 import ListLoader from 'components/misc/loaders/ListLoader'
