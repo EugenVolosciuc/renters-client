@@ -7,7 +7,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { USER_ROLES } from 'types/User'
 import { EntityTypes } from 'types/misc'
-import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import { useGetPropertyQuery } from 'store/property/service'
 import AdminLayout from 'components/layouts/AdminLayout'
 import PropertyContainer from 'components/Properties/Property/PropertyContainer'
@@ -17,7 +16,6 @@ const Property = ({ id, query }: InferGetServerSidePropsType<typeof getServerSid
     const { data: property, isError } = useGetPropertyQuery(id)
     const { t } = useTranslation()
 
-    useAuthRedirect([USER_ROLES.PROPERTY_ADMIN])
     useNotFoundRedirect(isError, EntityTypes.PROPERTY)
 
     const editPropertyButton = (
@@ -37,6 +35,7 @@ const Property = ({ id, query }: InferGetServerSidePropsType<typeof getServerSid
                 title: property?.title,
                 extra: [editPropertyButton]
             }}
+            allowedUsersSetting={[USER_ROLES.PROPERTY_ADMIN]}
         >
             <PropertyContainer query={query} property={property} />
         </AdminLayout>

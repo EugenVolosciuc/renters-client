@@ -6,6 +6,7 @@ import AdminMenu from 'components/layouts/AdminLayout/AdminMenu'
 import AdminHeader from 'components/layouts/AdminLayout/AdminHeader'
 import styles from 'components/layouts/AdminLayout/AdminLayout.module.less'
 import Logo from 'components/misc/Logo'
+import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import { useAuthedUser } from 'store/user/slice'
 import { USER_ROLES } from 'types/User'
 
@@ -16,11 +17,13 @@ type Props = {
     header: {
         title: string | undefined,
         extra?: ReactNode[]
-    }
+    },
+    allowedUsersSetting: USER_ROLES[] | boolean
 }
 
-const AdminLayout: FC<Props> = ({ children, header }) => {
+const AdminLayout: FC<Props> = ({ children, header, allowedUsersSetting }) => {
     const user = useAuthedUser()
+    useAuthRedirect(allowedUsersSetting)
     const showSider = user?.role !== USER_ROLES.RENTER
 
     const [siderIsOpen, setSiderIsOpen] = useState(showSider)

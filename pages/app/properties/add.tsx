@@ -4,17 +4,18 @@ import { Form } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 import { USER_ROLES } from 'types/User'
-import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import AdminLayout from 'components/layouts/AdminLayout'
 import AddOrEditProperty from 'components/forms/AddOrEditProperty'
 
 const AddProperty = (_props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-    useAuthRedirect([USER_ROLES.PROPERTY_ADMIN])
     const { t } = useTranslation()
     const [form] = Form.useForm()
 
     return (
-        <AdminLayout header={{ title: t('properties-common:add-property') }}>
+        <AdminLayout 
+            header={{ title: t('properties-common:add-property') }}
+            allowedUsersSetting={[USER_ROLES.PROPERTY_ADMIN]}    
+        >
             <AddOrEditProperty form={form} />
         </AdminLayout>
     )

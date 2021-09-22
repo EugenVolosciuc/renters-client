@@ -8,7 +8,6 @@ import { Dayjs } from 'dayjs'
 import AdminLayout from 'components/layouts/AdminLayout'
 import ListLoader from 'components/misc/loaders/ListLoader'
 import { AddRenter } from 'components/forms/AddOrEditProperty/inputs'
-import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import { useGetPropertyQuery } from 'store/property/service'
 import { useSendSignupInvitationToRenterMutation } from 'store/user/service'
 import { useCreateContractMutation, useModifyContractMutation } from 'store/contract/service'
@@ -27,7 +26,6 @@ const AddRenterForProperty = ({ propertyId, contractId }: InferGetServerSideProp
     const [modifyContract, { isLoading: contractUpdateLoading }] = useModifyContractMutation()
 
     useNotFoundRedirect(isError, EntityTypes.PROPERTY)
-    useAuthRedirect([USER_ROLES.PROPERTY_ADMIN])
 
     const [form] = Form.useForm()
 
@@ -71,7 +69,10 @@ const AddRenterForProperty = ({ propertyId, contractId }: InferGetServerSideProp
     }
 
     return (
-        <AdminLayout header={{ title: t('add-edit-property:add-a-renter-for', { propertyTitle: property?.title }) }}>
+        <AdminLayout 
+            header={{ title: t('add-edit-property:add-a-renter-for', { propertyTitle: property?.title }) }}
+            allowedUsersSetting={[USER_ROLES.PROPERTY_ADMIN]}
+        >
             {isLoading
                 ? <ListLoader />
                 : (

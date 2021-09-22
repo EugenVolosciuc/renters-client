@@ -3,7 +3,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Form } from 'antd'
 import { useTranslation } from 'react-i18next'
 
-import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import AdminLayout from 'components/layouts/AdminLayout'
 import AddOrEditProperty from 'components/forms/AddOrEditProperty'
 import ListLoader from 'components/misc/loaders/ListLoader'
@@ -18,13 +17,13 @@ const EditProperty = ({ id }: InferGetServerSidePropsType<typeof getServerSidePr
     const { data: property, isError, isLoading } = useGetPropertyQuery(id)
 
     useNotFoundRedirect(isError, EntityTypes.PROPERTY)
-    useAuthRedirect([USER_ROLES.PROPERTY_ADMIN])
 
     return (
         <AdminLayout 
             header={{ 
                 title: `${t('properties-common:edit-property')}${!!property ? ` - ${property.title}` : ''}` 
             }}
+            allowedUsersSetting={[USER_ROLES.PROPERTY_ADMIN]}
         >
             {isLoading
                 ? <ListLoader />

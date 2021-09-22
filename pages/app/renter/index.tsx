@@ -7,7 +7,6 @@ import { useNotFoundRedirect } from 'utils/userRedirects'
 import AdminLayout from 'components/layouts/AdminLayout'
 import PropertyContainer from 'components/Properties/Property/PropertyContainer'
 import { useGetPropertyQuery } from 'store/property/service'
-import { useAuthRedirect } from 'store/user/useAuthRedirect'
 import { useAuthedUser } from 'store/user/slice'
 import { EntityTypes } from 'types/misc'
 import { USER_ROLES } from 'types/User'
@@ -17,11 +16,13 @@ const Renter = ({ query }: InferGetServerSidePropsType<typeof getServerSideProps
     const user = useAuthedUser()
     const { data: property, isError } = useGetPropertyQuery(user?.rentContract?.propertyId ?? skipToken)
 
-    useAuthRedirect([USER_ROLES.PROPERTY_ADMIN])
     useNotFoundRedirect(isError, EntityTypes.PROPERTY)
 
     return (
-        <AdminLayout header={{ title: property?.title }}>
+        <AdminLayout 
+            header={{ title: property?.title }}
+            allowedUsersSetting={[USER_ROLES.PROPERTY_ADMIN]}
+        >
             <PropertyContainer query={query} property={property} />
         </AdminLayout>
     )
